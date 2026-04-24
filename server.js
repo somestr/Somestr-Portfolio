@@ -706,6 +706,7 @@ function createApp() {
     const rateLimitViolationStore = createExpiringCounterStore(SUSPICIOUS_ACTIVITY_WINDOW_MS);
     const quarantineStore = createQuarantineStore(QUARANTINE_WINDOW_MS);
     let visitorCount = 0;
+    const serverStartedAt = Date.now();
 
     async function quarantineIp(req, details) {
         const ip = getClientIp(req) || 'unknown';
@@ -891,7 +892,10 @@ function createApp() {
             return sendApiError(res, 429, 'Too many requests. Please wait.');
         }
         visitorCount += 1;
-        res.json({ visitors: visitorCount });
+        res.json({
+            visitors: visitorCount,
+            uptime: Math.floor((Date.now() - serverStartedAt) / 1000),
+        });
     });
 
     app.use('/api', (req, res) => {

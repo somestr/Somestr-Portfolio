@@ -9,8 +9,8 @@
   "scripts": {
     "start": "node server.js",
     "dev": "node --watch server.js",
-    "check": "node --check server.js && node --check public/app-utils.js && node --check public/feature-command-palette.js && node --check public/feature-contact.js && node --check public/feature-theme.js && node --check public/script.js && node --check public/i18n.js && node --check app-utils.test.js && node --check server.test.js && node --check security-events-report.test.js && node --check scripts/security-events-report.js",
-    "test": "node --test app-utils.test.js server.test.js security-events-report.test.js",
+    "check": "node scripts/check-js-syntax.js",
+    "test": "node --test app-utils.test.js server.test.js security-events-report.test.js static-assets.test.js",
     "security:report": "node scripts/security-events-report.js",
     "audit": "npm audit --audit-level=high"
   },

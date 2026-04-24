@@ -175,8 +175,11 @@ test('GET /api/stats sends hardened headers for browser clients', async () => {
 
     try {
         const response = await fetch(`${server.baseUrl}/api/stats`);
+        const payload = await response.json();
 
         assert.equal(response.status, 200);
+        assert.equal(typeof payload.visitors, 'number');
+        assert.equal(typeof payload.uptime, 'number');
         assert.equal(response.headers.get('x-powered-by'), null);
         assert.match(response.headers.get('content-security-policy') || '', /default-src 'self'/);
         assert.match(response.headers.get('cache-control') || '', /no-store/i);

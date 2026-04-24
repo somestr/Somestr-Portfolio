@@ -8,23 +8,13 @@
 'use strict';
 
 const AppUtils = window.OBAUtils || {};
-const THEME_OPTIONS = AppUtils.THEME_OPTIONS || [];
 const applySiteTheme = AppUtils.applySiteTheme || ((themeName) => ({ name: themeName, icon: '' }));
 const clearElementContent = AppUtils.clearElementContent || ((element) => {
     if (element) {
         element.textContent = '';
     }
 });
-const formatUptimeSeconds = AppUtils.formatUptimeSeconds || ((totalSeconds) => {
-    const seconds = Math.max(0, Math.floor(Number(totalSeconds) || 0));
-    const hours = Math.floor(seconds / 3600);
-    const minutes = Math.floor((seconds % 3600) / 60);
-    const remainingSeconds = seconds % 60;
-    return `${hours}h ${minutes}m ${remainingSeconds}s`;
-});
-const getStoredThemeName = AppUtils.getStoredThemeName || (() => 'kali');
 const isSupportedThemeName = AppUtils.isSupportedThemeName || ((themeName) => ['kali', 'green', 'red'].includes(themeName));
-const isValidEmail = AppUtils.isValidEmail || ((value) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(value || '').trim()));
 const scrollElementToBottom = AppUtils.scrollElementToBottom || ((element) => {
     if (element) {
         element.scrollTop = element.scrollHeight;
@@ -1336,101 +1326,6 @@ function initProjectFilters() {
 }
 
 
-// ─── Back to Top ─────────────────────────────────────────────────────────────
-function initBackToTop() {
-    const btn = document.getElementById('back-to-top');
-    if (!btn) return;
-
-    window.addEventListener('scroll', () => {
-        if (window.scrollY > 500) {
-            btn.classList.add('visible');
-        } else {
-            btn.classList.remove('visible');
-        }
-    });
-
-    btn.addEventListener('click', () => {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
-}
-
-
-// ─── Nav Scroll Effect ───────────────────────────────────────────────────────
-function initNavScroll() {
-    const nav = document.getElementById('main-nav');
-    if (!nav) return;
-
-    window.addEventListener('scroll', () => {
-        nav.classList.toggle('scrolled', window.scrollY > 50);
-    });
-}
-
-
-// ─── Server Stats ────────────────────────────────────────────────────────────
-function initServerStats() {
-    const statusEl = document.getElementById('server-status');
-    const uptimeEl = document.getElementById('server-uptime');
-    const visitorEl = document.getElementById('visitor-count');
-
-    if (!statusEl) return;
-
-    const hostname = (window.location && window.location.hostname) || '';
-    const isStaticHost = window.location && (
-        window.location.protocol === 'file:'
-        || /\.github\.io$/i.test(hostname)
-    );
-
-    function setStaticMode() {
-        if (uptimeEl) {
-            uptimeEl.textContent = 'GitHub Pages';
-        }
-        if (visitorEl) {
-            visitorEl.textContent = '--';
-        }
-        if (statusEl) {
-            statusEl.textContent = '● STATIC';
-            statusEl.className = 'val success';
-        }
-    }
-
-    if (isStaticHost || typeof fetch !== 'function') {
-        setStaticMode();
-        return;
-    }
-
-    function fetchStats() {
-        fetch('/api/stats')
-            .then(res => {
-                if (!res.ok) {
-                    throw new Error('Stats endpoint unavailable');
-                }
-                return res.json();
-            })
-            .then(data => {
-                if (uptimeEl) {
-                    uptimeEl.textContent = formatUptimeSeconds(data.uptime);
-                }
-                if (visitorEl) {
-                    visitorEl.textContent = data.visitors;
-                }
-                if (statusEl) {
-                    statusEl.textContent = '● ONLINE';
-                    statusEl.className = 'val success';
-                }
-            })
-            .catch(() => {
-                if (statusEl) {
-                    statusEl.textContent = '● OFFLINE';
-                    statusEl.className = 'val warn';
-                }
-            });
-    }
-
-    fetchStats();
-    setInterval(fetchStats, 30000);
-}
-
-
 // ─── Staggered Timeline Animation ───────────────────────────────────────────
 function initTimelineAnim() {
     const items = document.querySelectorAll('.timeline-item');
@@ -1508,19 +1403,6 @@ function initSectionTypewriter() {
 }
 
 
-// ─── Scroll Progress Bar ────────────────────────────────────────────────────
-function initScrollProgress() {
-    const bar = document.getElementById('scroll-progress');
-    if (!bar) return;
-
-    window.addEventListener('scroll', () => {
-        const h = document.documentElement.scrollHeight - window.innerHeight;
-        const pct = h > 0 ? (window.scrollY / h) * 100 : 0;
-        bar.style.width = pct + '%';
-    }, { passive: true });
-}
-
-
 // ─── Section Content Reveal ─────────────────────────────────────────────────
 function initSectionReveal() {
     const sections = document.querySelectorAll('.section');
@@ -1573,15 +1455,15 @@ document.addEventListener('DOMContentLoaded', () => {
     initKeyboardEasterEgg();
     initMobileNav();
     initProjectFilters();
-    initBackToTop();
-    initNavScroll();
-    initServerStats();
+    runIfReady('initBackToTop');
+    runIfReady('initNavScroll');
+    runIfReady('initServerStats');
     initTimelineAnim();
     initSectionTypewriter();
     initSectionReveal();
-    initScrollProgress();
+    runIfReady('initScrollProgress');
     runIfReady('initThemeSwitcher');
-    initToastSystem();
+    runIfReady('initToastSystem');
     runIfReady('initCommandPalette');
     initLiveTerminal();
     initSkillRadar();
@@ -1601,25 +1483,9 @@ document.addEventListener('DOMContentLoaded', () => {
 //   v4.0 — New Feature Modules
 // ═══════════════════════════════════════════════════════════════════════════════
 
-// ─── Toast Notification System ──────────────────────────────────────────────
-function showToast(msg, type = 'info') {
-    const container = document.getElementById('toast-container');
-    if (!container) return;
-    const toast = document.createElement('div');
-    toast.className = `toast ${type}`;
-    toast.textContent = msg;
-    container.appendChild(toast);
-    setTimeout(() => toast.remove(), 3500);
-}
-
-function initToastSystem() {
-    // Toast is globally available via showToast()
-    window.showToast = showToast;
-}
-
-// ─── Theme Switcher ─────────────────────────────────────────────────────────
-// ─── Theme + Command Palette features moved to feature-theme.js and feature-command-palette.js
-// initThemeSwitcher and initCommandPalette are now defined in feature modules.
+// ─── Feature modules moved out of script.js ─────────────────────────────────
+// Theme, command palette, contact form, scroll UI, server stats and toast are
+// initialized through feature-*.js files loaded before this bundle.
 function initLiveTerminal() {
     const input  = document.getElementById('live-term-input');
     const output = document.getElementById('live-term-output');
