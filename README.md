@@ -1,4 +1,4 @@
-# OBA Portfolio - Sam Novak
+# Somestr Portfolio
 
 Interactive IT and cybersecurity portfolio with a CLI-style frontend, contact form, security event logging, and a hardened Node.js/Express backend.
 
