@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>[ SEC_PORT ] :: Portfolio</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛡️</text></svg>">
+</head>
+<body>
+
+    <!-- Matrix Rain Canvas -->
+    <canvas id="matrix-canvas"></canvas>
+
+    <!-- Scanline overlay -->
+    <div class="scanlines"></div>
+
+    <!-- Navigation -->
+    <nav class="terminal-nav">
+        <div class="nav-logo">
+            <span class="bracket">[</span>
+            <span class="logo-text" id="logo-type"></span>
+            <span class="cursor-blink">_</span>
+            <span class="bracket">]</span>
+        </div>
+        <ul class="nav-links">
+            <li><a href="#home"     class="nav-link">~</a></li>
+            <li><a href="#about"    class="nav-link" data-i18n="nav_about"></a></li>
+            <li><a href="#skills"   class="nav-link" data-i18n="nav_skills"></a></li>
+            <li><a href="#projects" class="nav-link" data-i18n="nav_projects"></a></li>
+            <li><a href="#contact"  class="nav-link" data-i18n="nav_contact"></a></li>
+        </ul>
+        <div class="nav-right">
+            <div class="lang-toggle" id="lang-toggle" title="Switch Language">
+                <span class="lang-opt" id="lang-tr">TR</span>
+                <span class="lang-sep">/</span>
+                <span class="lang-opt" id="lang-en">EN</span>
+            </div>
+            <div class="nav-status">
+                <span class="status-dot"></span>
+                <span class="status-text" data-i18n="status_active"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <div class="terminal-window">
+                <div class="terminal-titlebar">
+                    <span class="tb-btn tb-close"></span>
+                    <span class="tb-btn tb-min"></span>
+                    <span class="tb-btn tb-max"></span>
+                    <span class="tb-title">root@portfolio:~$ <span class="tb-cursor">▋</span></span>
+                </div>
+                <div class="terminal-body">
+                    <div class="term-line">
+                        <span class="prompt">root@kali:~$</span>
+                        <span class="cmd" id="cmd1"></span>
+                    </div>
+                    <div class="term-output" id="output1" style="display:none">
+                        <div class="output-block">
+                            <p><span class="key" data-i18n="hero_name_label"></span> <span class="val" id="hero-name">[ YOUR NAME ]</span></p>
+                            <p><span class="key" data-i18n="hero_role_label"></span> <span class="val" data-i18n="hero_role_val"></span></p>
+                            <p><span class="key" data-i18n="hero_status_label"></span> <span class="val success" data-i18n="hero_status_val"></span></p>
+                            <p><span class="key" data-i18n="hero_location_label"></span> <span class="val" data-i18n="hero_location_val"></span></p>
+                        </div>
+                    </div>
+                    <div class="term-line" id="line2" style="display:none">
+                        <span class="prompt">root@kali:~$</span>
+                        <span class="cmd" id="cmd2"></span>
+                    </div>
+                    <div class="term-output" id="output2" style="display:none">
+                        <p class="warn"    data-i18n="hero_warn"></p>
+                        <p class="success" data-i18n="hero_auth"></p>
+                        <p class="info"    data-i18n="hero_load"></p>
+                        <div class="progress-bar-wrap">
+                            <div class="progress-bar" id="hero-progress"></div>
+                            <span class="progress-pct" id="hero-pct">0%</span>
+                        </div>
+                    </div>
+                    <div class="term-line" id="line3" style="display:none">
+                        <span class="prompt">root@kali:~$</span>
+                        <span class="blink-cursor">▋</span>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-cta" id="hero-cta" style="display:none">
+                <a href="#about"   class="btn-primary"   data-i18n="cta_enter"></a>
+                <a href="#contact" class="btn-secondary" data-i18n="cta_contact"></a>
+            </div>
+        </div>
+        <div class="scroll-hint">
+            <span class="scroll-arrow">▼</span>
+            <span data-i18n="scroll_hint"></span>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-num">01.</span>
+                <h2 class="section-title"><span data-i18n="sec_about"></span><span class="cursor-blink">_</span></h2>
+                <div class="section-line"></div>
+            </div>
+            <div class="about-grid">
+                <div class="about-text">
+                    <div class="terminal-card">
+                        <div class="card-header">
+                            <span class="card-icon">$</span> cat /etc/profile.txt
+                        </div>
+                        <div class="card-body">
+                            <p data-i18n="about_p1"></p>
+                            <br>
+                            <p data-i18n="about_p2"></p>
+                            <br>
+                            <p data-i18n="about_p3"></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-stats">
+                    <div class="stat-card">
+                        <span class="stat-num" data-target="50">0</span>
+                        <span class="stat-label" data-i18n="stat_projects"></span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-num" data-target="120">0</span>
+                        <span class="stat-label" data-i18n="stat_cve"></span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-num" data-target="3">0</span>
+                        <span class="stat-label" data-i18n="stat_exp"></span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-num" data-target="15">0</span>
+                        <span class="stat-label" data-i18n="stat_certs"></span>
+                    </div>
+                    <div class="cert-list">
+                        <p class="cert-title">// <span data-i18n="certs_title"></span></p>
+                        <span class="cert-badge">CEH</span>
+                        <span class="cert-badge">OSCP</span>
+                        <span class="cert-badge">CompTIA Sec+</span>
+                        <span class="cert-badge">CISSP</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="section section-dark">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-num">02.</span>
+                <h2 class="section-title"><span data-i18n="sec_skills"></span><span class="cursor-blink">_</span></h2>
+                <div class="section-line"></div>
+            </div>
+            <div class="skills-grid">
+
+                <div class="skill-category">
+                    <h3 class="skill-cat-title">
+                        <span class="cat-icon">⚔</span> <span data-i18n="skills_offense"></span>
+                    </h3>
+                    <div class="skill-item">
+                        <div class="skill-info"><span data-i18n="skill_pentest"></span><span class="skill-pct">95%</span></div>
+                        <div class="skill-bar"><div class="skill-fill" data-width="95"></div></div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-info"><span data-i18n="skill_webapp"></span><span class="skill-pct">90%</span></div>
+                        <div class="skill-bar"><div class="skill-fill" data-width="90"></div></div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-info"><span data-i18n="skill_se"></span><span class="skill-pct">80%</span></div>
+                        <div class="skill-bar"><div class="skill-fill" data-width="80"></div></div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-info"><span data-i18n="skill_exploit"></span><span class="skill-pct">75%</span></div>
+                        <div class="skill-bar"><div class="skill-fill" data-width="75"></div></div>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <h3 class="skill-cat-title">
+                        <span class="cat-icon">🛡</span> <span data-i18n="skills_defense"></span>
+                    </h3>
+                    <div class="skill-item">
+                        <div class="skill-info"><span data-i18n="skill_netsec"></span><span class="skill-pct">92%</span></div>
+                        <div class="skill-bar"><div class="skill-fill" data-width="92"></div></div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-info"><span data-i18n="skill_malware"></span><span class="skill-pct">85%</span></div>
+                        <div class="skill-bar"><div class="skill-fill" data-width="85"></div></div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-info"><span data-i18n="skill_forensic"></span><span class="skill-pct">78%</span></div>
+                        <div class="skill-bar"><div class="skill-fill" data-width="78"></div></div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-info"><span data-i18n="skill_ir"></span><span class="skill-pct">88%</span></div>
+                        <div class="skill-bar"><div class="skill-fill" data-width="88"></div></div>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <h3 class="skill-cat-title">
+                        <span class="cat-icon">&lt;/&gt;</span> <span data-i18n="skills_tools"></span>
+                    </h3>
+                    <div class="tools-grid">
+                        <span class="tool-tag">Kali Linux</span>
+                        <span class="tool-tag">Metasploit</span>
+                        <span class="tool-tag">Burp Suite</span>
+                        <span class="tool-tag">Wireshark</span>
+                        <span class="tool-tag">Nmap</span>
+                        <span class="tool-tag">Python</span>
+                        <span class="tool-tag">Bash</span>
+                        <span class="tool-tag">C / C++</span>
+                        <span class="tool-tag">SQLMap</span>
+                        <span class="tool-tag">John the Ripper</span>
+                        <span class="tool-tag">Aircrack-ng</span>
+                        <span class="tool-tag">Ghidra</span>
+                        <span class="tool-tag">IDA Pro</span>
+                        <span class="tool-tag">Docker</span>
+                        <span class="tool-tag">Git</span>
+                        <span class="tool-tag">PowerShell</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-num">03.</span>
+                <h2 class="section-title"><span data-i18n="sec_projects"></span><span class="cursor-blink">_</span></h2>
+                <div class="section-line"></div>
+            </div>
+            <div class="projects-grid">
+
+                <div class="project-card">
+                    <div class="project-header">
+                        <span class="project-icon">🔍</span>
+                        <div class="project-links">
+                            <a href="#" class="proj-link">[ gh ]</a>
+                            <a href="#" class="proj-link">[ demo ]</a>
+                        </div>
+                    </div>
+                    <h3 class="project-title">NetSweep Scanner</h3>
+                    <p class="project-desc" data-i18n="proj1_desc"></p>
+                    <div class="project-tags">
+                        <span class="p-tag">Python</span><span class="p-tag">Nmap</span><span class="p-tag">CVE-DB</span>
+                    </div>
+                    <div class="project-severity">
+                        <span class="sev-label" data-i18n="found_vulns"></span>
+                        <span class="sev critical">CRITICAL: 3</span>
+                        <span class="sev high">HIGH: 12</span>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-header">
+                        <span class="project-icon">🕷️</span>
+                        <div class="project-links">
+                            <a href="#" class="proj-link">[ gh ]</a>
+                            <a href="#" class="proj-link">[ demo ]</a>
+                        </div>
+                    </div>
+                    <h3 class="project-title">WebCrawl Pro</h3>
+                    <p class="project-desc" data-i18n="proj2_desc"></p>
+                    <div class="project-tags">
+                        <span class="p-tag">Python</span><span class="p-tag">Selenium</span><span class="p-tag">OWASP</span>
+                    </div>
+                    <div class="project-severity">
+                        <span class="sev-label" data-i18n="found_vulns"></span>
+                        <span class="sev critical">CRITICAL: 7</span>
+                        <span class="sev high">HIGH: 24</span>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-header">
+                        <span class="project-icon">🔐</span>
+                        <div class="project-links">
+                            <a href="#" class="proj-link">[ gh ]</a>
+                            <a href="#" class="proj-link">[ demo ]</a>
+                        </div>
+                    </div>
+                    <h3 class="project-title">CryptoVault</h3>
+                    <p class="project-desc" data-i18n="proj3_desc"></p>
+                    <div class="project-tags">
+                        <span class="p-tag">C++</span><span class="p-tag">OpenSSL</span><span class="p-tag">Crypto</span>
+                    </div>
+                    <div class="project-severity">
+                        <span class="sev-label" data-i18n="found_vulns"></span>
+                        <span class="sev high">HIGH: 8</span>
+                        <span class="sev medium">MEDIUM: 31</span>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-header">
+                        <span class="project-icon">🔬</span>
+                        <div class="project-links">
+                            <a href="#" class="proj-link">[ gh ]</a>
+                            <a href="#" class="proj-link">[ demo ]</a>
+                        </div>
+                    </div>
+                    <h3 class="project-title">MalSandbox</h3>
+                    <p class="project-desc" data-i18n="proj4_desc"></p>
+                    <div class="project-tags">
+                        <span class="p-tag">Docker</span><span class="p-tag">Python</span><span class="p-tag">YARA</span>
+                    </div>
+                    <div class="project-severity">
+                        <span class="sev-label" data-i18n="analyzed"></span>
+                        <span class="sev critical">Malware: 500+</span>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-header">
+                        <span class="project-icon">📡</span>
+                        <div class="project-links">
+                            <a href="#" class="proj-link">[ gh ]</a>
+                        </div>
+                    </div>
+                    <h3 class="project-title">PacketProwler</h3>
+                    <p class="project-desc" data-i18n="proj5_desc"></p>
+                    <div class="project-tags">
+                        <span class="p-tag">Python</span><span class="p-tag">Scapy</span><span class="p-tag">ML</span>
+                    </div>
+                    <div class="project-severity">
+                        <span class="sev-label" data-i18n="detection_rate"></span>
+                        <span class="sev high">%98.7</span>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-header">
+                        <span class="project-icon">🧩</span>
+                        <div class="project-links">
+                            <a href="#" class="proj-link">[ gh ]</a>
+                            <a href="#" class="proj-link">[ demo ]</a>
+                        </div>
+                    </div>
+                    <h3 class="project-title">CTF Writeups</h3>
+                    <p class="project-desc" data-i18n="proj6_desc"></p>
+                    <div class="project-tags">
+                        <span class="p-tag">HackTheBox</span><span class="p-tag">CTF</span><span class="p-tag">Writeup</span>
+                    </div>
+                    <div class="project-severity">
+                        <span class="sev-label" data-i18n="solved"></span>
+                        <span class="sev high">200+ Challenge</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section section-dark">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-num">04.</span>
+                <h2 class="section-title"><span data-i18n="sec_contact"></span><span class="cursor-blink">_</span></h2>
+                <div class="section-line"></div>
+            </div>
+            <div class="contact-grid">
+                <div class="contact-info">
+                    <div class="terminal-card">
+                        <div class="card-header">
+                            <span class="card-icon">$</span> cat contact.json
+                        </div>
+                        <div class="card-body contact-json">
+                            <p><span class="json-brace">{</span></p>
+                            <p class="json-indent">
+                                <span class="json-key">"email"</span>:
+                                <span class="json-val">"<a href="mailto:email@example.com">email@example.com</a>"</span>,
+                            </p>
+                            <p class="json-indent">
+                                <span class="json-key">"github"</span>:
+                                <span class="json-val">"<a href="#" target="_blank" rel="noopener noreferrer">github.com/kullanici</a>"</span>,
+                            </p>
+                            <p class="json-indent">
+                                <span class="json-key">"linkedin"</span>:
+                                <span class="json-val">"<a href="#" target="_blank" rel="noopener noreferrer">linkedin.com/in/kullanici</a>"</span>,
+                            </p>
+                            <p class="json-indent">
+                                <span class="json-key">"hackerrank"</span>:
+                                <span class="json-val">"<a href="#" target="_blank" rel="noopener noreferrer">hackerrank.com/kullanici</a>"</span>,
+                            </p>
+                            <p class="json-indent">
+                                <span class="json-key">"status"</span>:
+                                <span class="json-val success" data-i18n="contact_status"></span>
+                            </p>
+                            <p><span class="json-brace">}</span></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="contact-form">
+                    <div class="terminal-card">
+                        <div class="card-header">
+                            <span class="card-icon">$</span> ./send_message.sh
+                        </div>
+                        <div class="card-body">
+                            <form id="contact-form" novalidate>
+                                <div class="form-group">
+                                    <label class="form-label" for="form-name">
+                                        <span class="prompt-mini">input@user:~$</span> <span data-i18n="form_name"></span>
+                                    </label>
+                                    <input
+                                        type="text"
+                                        class="form-input"
+                                        id="form-name"
+                                        data-i18n-ph="ph_name"
+                                        placeholder=""
+                                        autocomplete="name"
+                                        required
+                                        maxlength="100"
+                                    >
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label" for="form-email">
+                                        <span class="prompt-mini">input@user:~$</span> <span data-i18n="form_email"></span>
+                                    </label>
+                                    <input
+                                        type="email"
+                                        class="form-input"
+                                        id="form-email"
+                                        data-i18n-ph="ph_email"
+                                        placeholder=""
+                                        autocomplete="email"
+                                        required
+                                        maxlength="200"
+                                    >
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label" for="form-message">
+                                        <span class="prompt-mini">input@user:~$</span> <span data-i18n="form_message"></span>
+                                    </label>
+                                    <textarea
+                                        class="form-input form-textarea"
+                                        id="form-message"
+                                        data-i18n-ph="ph_message"
+                                        placeholder=""
+                                        required
+                                        maxlength="2000"
+                                    ></textarea>
+                                </div>
+                                <button type="submit" class="btn-submit" id="form-submit">
+                                    <span id="submit-text" data-i18n="form_send"></span>
+                                </button>
+                                <div id="form-status" class="form-status" style="display:none"></div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <p class="footer-text">
+                <span class="prompt">root@portfolio:~$</span>
+                echo "<span data-i18n="footer_echo"></span>"
+            </p>
+            <p class="footer-copy">© 2026 | <span data-i18n="footer_title"></span> | v2.4.1</p>
+        </div>
+        <div class="footer-ascii">
+<pre>
+ _____ _____ _____
+|   __|   __|     |___
+|__   |   __|   --| . |
+|_____|_____|_____|___|
+</pre>
+        </div>
+    </footer>
+
+    <script src="i18n.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

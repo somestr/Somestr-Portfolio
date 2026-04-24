@@ -1,0 +1,42 @@
+[
+  {
+    "id": 1776498696326,
+    "name": "Test User",
+    "email": "test@example.com",
+    "message": "Security rate limit regression test.",
+    "date": "2026-04-18T07:51:36.326Z",
+    "ip": "127.0.0.1"
+  },
+  {
+    "id": 1776498696330,
+    "name": "Test User",
+    "email": "test@example.com",
+    "message": "Security rate limit regression test.",
+    "date": "2026-04-18T07:51:36.330Z",
+    "ip": "127.0.0.1"
+  },
+  {
+    "id": 1776498696334,
+    "name": "Test User",
+    "email": "test@example.com",
+    "message": "Security rate limit regression test.",
+    "date": "2026-04-18T07:51:36.334Z",
+    "ip": "127.0.0.1"
+  },
+  {
+    "id": 1776498696336,
+    "name": "Test User",
+    "email": "test@example.com",
+    "message": "Security rate limit regression test.",
+    "date": "2026-04-18T07:51:36.336Z",
+    "ip": "127.0.0.1"
+  },
+  {
+    "id": 1776498696339,
+    "name": "Test User",
+    "email": "test@example.com",
+    "message": "Security rate limit regression test.",
+    "date": "2026-04-18T07:51:36.339Z",
+    "ip": "127.0.0.1"
+  }
+]
