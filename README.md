@@ -35,8 +35,8 @@ Interactive IT and cybersecurity portfolio with a CLI-style frontend, contact fo
 ### Local development
 
 ```bash
-git clone https://github.com/somestr/somestr-portfolio.git
-cd somestr-portfolio
+git clone https://github.com/somestr/Somestr-Portfolio.git
+cd Somestr-Portfolio
 npm install
 cp .env.example .env
 npm run dev
