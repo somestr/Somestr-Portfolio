@@ -828,6 +828,7 @@ function initFullscreenTerminal() {
         } else {
             // File/dir autocomplete
             const partial = argPart;
+            if (!partial) return;
             const dir = FILESYSTEM[cwd];
             if (!dir) return;
             const matches = dir.children.filter(c => {
