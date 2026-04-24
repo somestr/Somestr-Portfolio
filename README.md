@@ -1,142 +1,129 @@
-# OBA Portfolio — Sam Novak
+# OBA Portfolio - Sam Novak
 
-> IT & Cybersecurity Portfolio — interactive CLI terminal, radar chart, dark-mode GUI, contact form, and a hardened Node.js/Express backend.
-
----
+Interactive IT and cybersecurity portfolio with a CLI-style frontend, contact form, security event logging, and a hardened Node.js/Express backend.
 
 ## Features
 
-- **Fullscreen CLI terminal** — simulated filesystem, `ls`, `cd`, `cat`, `tree`, tab autocomplete, command history (↑/↓), Ctrl+L
-- **GUI mode** — visual portfolio with skill radar chart, project cards, and contact form
-- **i18n** — Turkish / English language toggle
-- **Theme switcher** — Kali (default), Green, Red
-- **Hardened backend**
-  - Rate limiting (contact: 5 req/min, stats: 20 req/min)
+- Fullscreen CLI terminal with simulated filesystem commands, tab autocomplete, command history, and shortcuts
+- GUI portfolio mode with skill radar chart, project cards, themes, and contact form
+- Turkish / English language toggle
+- Theme switcher: Kali, Green, and Red
+- Hardened backend:
+  - Contact and stats rate limiting
   - IP quarantine after repeated suspicious activity
-  - Honeypot/decoy routes for scanners & bots
-  - Prototype pollution guard, request body inspection
-  - CSP, HSTS, COEP, COOP, CORP, Permissions-Policy, and more
+  - Decoy routes for scanners and automated probes
+  - Prototype pollution guard and request body inspection
+  - CSP, HSTS, COEP, COOP, CORP, Permissions-Policy, and related security headers
   - Security event logging to `security-events.jsonl`
-  - Optional webhook alerts (Discord / Slack)
-
----
+  - Optional webhook alerts for security events
 
 ## Tech Stack
 
 | Layer | Technology |
 |---|---|
-| Runtime | Node.js ≥ 20 |
+| Runtime | Node.js >= 20 |
 | Framework | Express 5 |
-| Frontend | Vanilla JS, CSS custom properties |
-| Tests | Node built-in test runner (21 tests) |
-
----
+| Frontend | Vanilla JavaScript, HTML, CSS custom properties |
+| Tests | Node built-in test runner |
 
 ## Getting Started
 
 ### Prerequisites
 
-- Node.js **≥ 20.0.0**
+- Node.js >= 20.0.0
 
 ### Local development
 
 ```bash
-# 1. Clone the repo
-git clone https://github.com/som_sec/portfolio.git
+git clone https://github.com/somestr/Web_Server.git
 cd Web_Server
-
-# 2. Install dependencies
 npm install
-
-# 3. Copy env template and edit if needed
 cp .env.example .env
-
-# 4. Start dev server (auto-restarts on file change)
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000).
+Open `http://localhost:3000`.
 
-### Run tests
+### Checks
 
 ```bash
+npm run check
 npm test
+npm run audit
 ```
-
----
 
 ## Environment Variables
 
 | Variable | Default | Description |
 |---|---|---|
-| `PORT` | `3000` | HTTP port (set automatically on most platforms) |
-| `NODE_ENV` | `development` | Set to `production` when deploying |
-| `TRUST_PROXY` | _(empty)_ | `loopback` / `1` / `2` for platforms behind a reverse proxy |
-| `SECURITY_ALERT_WEBHOOK_URL` | _(empty)_ | Discord or Slack webhook for real-time security alerts |
-| `CONTACT_MESSAGES_FILE` | `./messages.json` | Override storage path for contact form submissions |
-| `SECURITY_EVENTS_FILE` | `./security-events.jsonl` | Override storage path for security events |
+| `PORT` | `3000` | HTTP port. Most platforms set this automatically. |
+| `NODE_ENV` | `development` | Set to `production` when deploying. |
+| `TRUST_PROXY` | empty | Use `loopback`, `1`, or `2` when deployed behind a trusted reverse proxy. |
+| `SECURITY_ALERT_WEBHOOK_URL` | empty | Optional Discord/Slack-compatible webhook for security event alerts. |
+| `CONTACT_MESSAGES_FILE` | `./messages.json` | Storage path for contact form submissions. Do not commit this file. |
+| `SECURITY_EVENTS_FILE` | `./security-events.jsonl` | Storage path for security events. Do not commit this file. |
 
----
+## Public Release Checklist
+
+Before making the repository public:
+
+- Confirm `git status --short` does not show accidental runtime data, `.env` files, logs, or backup files.
+- Confirm `messages.json`, `security-events.jsonl`, `.env`, and `node_modules/` are not tracked by Git.
+- Review Git history for previously committed secrets or private data. If any real secret was committed, rotate it first, then clean history.
+- Enable GitHub secret scanning and push protection in the repository security settings.
+- Keep contact messages and security logs outside the repository. Use platform storage, a mounted volume, or a database for production.
+- Review visible personal details in `public/index.html` before publishing.
+- Run `npm run check`, `npm test`, and `npm run audit` before pushing a release.
 
 ## Deployment
 
-The app reads `PORT` and `NODE_ENV` from environment variables and works on any platform that runs Node.js.
+This is a Node.js/Express app. GitHub Pages can host only the static frontend and will not run `/api/contact`, security event logging, or decoy routes. Use a Node-capable host such as Render, Railway, Fly.io, Heroku, or a VPS.
 
 ### Render
 
-1. New → **Web Service** → connect your GitHub repo
+1. Create a new Web Service and connect this GitHub repository.
 2. Build command: `npm install`
 3. Start command: `npm start`
-4. Add env var: `NODE_ENV=production`, `TRUST_PROXY=1`
+4. Environment variables: `NODE_ENV=production`, `TRUST_PROXY=1`
 
 ### Railway
 
-1. New Project → **Deploy from GitHub repo**
-2. Railway auto-detects `npm start` via `Procfile`
-3. Add env var: `NODE_ENV=production`, `TRUST_PROXY=1`
-
-### Heroku
-
-```bash
-heroku create
-heroku config:set NODE_ENV=production TRUST_PROXY=1
-git push heroku main
-```
+1. Create a new project from this GitHub repository.
+2. Railway can use the included `Procfile`.
+3. Environment variables: `NODE_ENV=production`, `TRUST_PROXY=1`
 
 ### Fly.io
 
 ```bash
-fly launch        # follow prompts, select Node
+fly launch
 fly secrets set NODE_ENV=production TRUST_PROXY=1
 fly deploy
 ```
 
-### VPS / Docker (generic)
+### VPS / Generic Node Host
 
 ```bash
-NODE_ENV=production PORT=8080 node server.js
+NODE_ENV=production PORT=8080 TRUST_PROXY=loopback npm start
 ```
 
-> **Note:** On platforms that sit behind a reverse proxy (Render, Railway, Heroku, Fly), always set `TRUST_PROXY=1` so that client IPs are read correctly from `X-Forwarded-For`.
+When the app is behind a reverse proxy, set `TRUST_PROXY` to match the proxy topology. Do not set it blindly if the proxy does not overwrite `X-Forwarded-*` headers.
 
----
-
-## Security Report CLI
+## Security Event Report
 
 ```bash
 npm run security:report
 ```
 
-Prints a summary of logged security events from `security-events.jsonl`.
+This prints a local summary of logged security events from `security-events.jsonl`.
 
----
+## Security Policy
+
+See [SECURITY.md](./SECURITY.md) for vulnerability reporting and public repository safety notes.
 
 ## License
 
-[MIT](./LICENSE) © 2026 Sam Novak
-
----
+[MIT](./LICENSE) (c) 2026 Sam Novak
 
 ## AI Assistance Disclosure
 
-This project was built with the assistance of **GitHub Copilot** (powered by Claude Sonnet). AI was used to help design and implement the security middleware, write tests, debug encoding issues, and refine UI interactions. All code has been reviewed and is understood by the author.
+This project was built and refined with assistance from GitHub Copilot and OpenAI Codex. AI was used to help design and implement security middleware, tests, refactors, documentation, and UI interactions. All code has been reviewed and is understood by the author.

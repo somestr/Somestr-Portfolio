@@ -11,11 +11,17 @@ public/*.bak
 # Logs
 *.log
 npm-debug.log*
+coverage/
 
 # Environment variables
 .env
 .env.*
 !.env.example
+
+# Local deployment/tool state
+.vercel/
+.netlify/
+.railway/
 
 # OS
 .DS_Store
