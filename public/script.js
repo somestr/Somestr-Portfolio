@@ -293,7 +293,7 @@ function initFullscreenTerminal() {
         },
         '~/education': {
             type: 'dir',
-            children: ['01_griffith_college.txt', '02_sdu_university.txt']
+            children: ['01_college_1.txt', '02_university_1.txt']
         },
         '~/projects': {
             type: 'dir',
@@ -303,7 +303,7 @@ function initFullscreenTerminal() {
 
     const FILES = {
         '~/README.md': [
-            { text: '# Ömer Burak Akçınar — IT & Cybersecurity Portfolio', cls: 'success' },
+            { text: '# YOUR_NAME — IT & Cybersecurity Portfolio', cls: 'success' },
             { text: '', cls: '' },
             { text: '  Welcome to my terminal portfolio.', cls: '' },
             { text: '  Navigate my files to learn about me.', cls: '' },
@@ -314,9 +314,9 @@ function initFullscreenTerminal() {
         '~/about.txt': [
             { text: '┌─ About ───────────────────────────────────────────────────────┐', cls: 'success' },
             { text: '│                                                               │', cls: '' },
-            { text: '│  Name     : Ömer Burak Akçınar                               │', cls: '' },
+            { text: '│  Name     : YOUR_NAME                               │', cls: '' },
             { text: '│  Role     : IT & Cybersecurity Professional                   │', cls: '' },
-            { text: '│  Location : Dublin, Ireland                                   │', cls: '' },
+            { text: '│  Location : Your City, Country                                │', cls: '' },
             { text: '│  Status   : Open to new opportunities                         │', cls: 'info' },
             { text: '│                                                               │', cls: '' },
             { text: '├─ Summary ────────────────────────────────────────────────────  │', cls: 'success' },
@@ -335,11 +335,11 @@ function initFullscreenTerminal() {
         ],
         '~/contact.json': [
             { text: '  {', cls: '' },
-            { text: '    "email"     : "omerburaka95@gmail.com",', cls: 'info' },
-            { text: '    "github"    : "github.com/somestr",', cls: '' },
-            { text: '    "linkedin"  : "linkedin.com/in/omerburaka",', cls: '' },
-            { text: '    "tryhackme" : "tryhackme.com/p/somestr",', cls: 'success' },
-            { text: '    "location"  : "Dublin, Ireland",', cls: '' },
+            { text: '    "email"     : "your.email@example.com",', cls: 'info' },
+            { text: '    "github"    : "github.com/yourusername",', cls: '' },
+            { text: '    "linkedin"  : "linkedin.com/in/yourusername",', cls: '' },
+            { text: '    "tryhackme" : "tryhackme.com/p/yourusername",', cls: 'success' },
+            { text: '    "location"  : "Your City, Country",', cls: '' },
             { text: '    "status"    : "Open to new opportunities"', cls: 'info' },
             { text: '  }', cls: '' },
         ],
@@ -377,7 +377,7 @@ function initFullscreenTerminal() {
         '~/experience/01_barista.log': [
             { text: '  ┌─ Barista ──────────────────────────────────────┐', cls: 'success' },
             { text: '  │  Period  : Jun 2025 — Present                  │', cls: '' },
-            { text: '  │  Company : Starbucks — Dublin, Ireland         │', cls: '' },
+            { text: '  │  Company : Company Name — City, Country         │', cls: '' },
             { text: '  ├────────────────────────────────────────────────┤', cls: 'success' },
             { text: '  │  Delivering efficient service in a high-volume │', cls: '' },
             { text: '  │  environment serving 100+ customers per shift. │', cls: '' },
@@ -390,7 +390,7 @@ function initFullscreenTerminal() {
         '~/experience/02_team_leader.log': [
             { text: '  ┌─ Team Leader ──────────────────────────────────┐', cls: 'success' },
             { text: '  │  Period  : May 2023 — Apr 2025                 │', cls: '' },
-            { text: '  │  Company : Superdrug — Dublin, Ireland         │', cls: '' },
+            { text: '  │  Company : Company Name — City, Country         │', cls: '' },
             { text: '  ├────────────────────────────────────────────────┤', cls: 'success' },
             { text: '  │  Led a team of 10+ staff, acted as duty        │', cls: '' },
             { text: '  │  manager during absences. Oversaw scheduling,  │', cls: '' },
@@ -403,7 +403,7 @@ function initFullscreenTerminal() {
         '~/experience/03_cyber_intern.log': [
             { text: '  ┌─ Cybersecurity Intern ─────────────────────────┐', cls: 'success' },
             { text: '  │  Period  : Sep 2021 — Feb 2022                 │', cls: '' },
-            { text: '  │  Company : Isparta University — Turkey         │', cls: '' },
+            { text: '  │  Company : University Name — City, Country    │', cls: '' },
             { text: '  ├────────────────────────────────────────────────┤', cls: 'success' },
             { text: '  │  Assisted with incident response and           │', cls: '' },
             { text: '  │  vulnerability assessments. Co-organized       │', cls: '' },
@@ -416,7 +416,7 @@ function initFullscreenTerminal() {
         '~/experience/04_tech_support.log': [
             { text: '  ┌─ Technical Support ────────────────────────────┐', cls: 'success' },
             { text: '  │  Period  : Jan 2017 — Feb 2018                 │', cls: '' },
-            { text: '  │  Company : Maxi Computer Systems — Turkey      │', cls: '' },
+            { text: '  │  Company : Company Name — City, Country       │', cls: '' },
             { text: '  ├────────────────────────────────────────────────┤', cls: 'success' },
             { text: '  │  Installed, configured and maintained client    │', cls: '' },
             { text: '  │  systems. Diagnosed and resolved technical      │', cls: '' },
@@ -426,17 +426,17 @@ function initFullscreenTerminal() {
             { text: '  │  #Hardware  #Networking  #EndUserSupport       │', cls: 'info' },
             { text: '  └────────────────────────────────────────────────┘', cls: 'success' },
         ],
-        '~/education/01_griffith_college.txt': [
+        '~/education/01_college_1.txt': [
             { text: '  ┌─ Higher Diploma in Computing ──────────────────┐', cls: 'success' },
             { text: '  │  Year   : 2025                                 │', cls: '' },
-            { text: '  │  School : Griffith College — Dublin, Ireland   │', cls: '' },
+            { text: '  │  School : College Name — City, Country        │', cls: '' },
             { text: '  │  Desc   : Higher Diploma in Computing          │', cls: '' },
             { text: '  └────────────────────────────────────────────────┘', cls: 'success' },
         ],
-        '~/education/02_sdu_university.txt': [
+        '~/education/02_university_1.txt': [
             { text: '  ┌─ B.Sc. Mechatronic Engineering ────────────────┐', cls: 'success' },
             { text: '  │  Year   : Turkey                               │', cls: '' },
-            { text: '  │  School : Süleyman Demirel University — Turkey │', cls: '' },
+            { text: '  │  School : University Name — City, Country     │', cls: '' },
             { text: '  │  Desc   : B.Sc. in Mechatronic Engineering     │', cls: '' },
             { text: '  └────────────────────────────────────────────────┘', cls: 'success' },
         ],
@@ -541,7 +541,7 @@ function initFullscreenTerminal() {
     addOutput([
         { text: FS_BANNER, cls: 'ascii-art' },
         { text: '', cls: '' },
-        { text: '  ██ Ömer Burak Akçınar — IT & Cybersecurity Portfolio ██', cls: 'success' },
+        { text: '  ██ YOUR_NAME — IT & Cybersecurity Portfolio ██', cls: 'success' },
         { text: '  CLI Mode — Navigate my files to learn about me.', cls: 'info' },
         { text: '', cls: '' },
         { text: '  Type "help" for available commands.', cls: 'info' },
@@ -587,9 +587,9 @@ function initFullscreenTerminal() {
             { text: '       ;:;:;\';     OS    : Kali GNU/Linux Rolling', cls: '' },
             { text: '      \';:;:\';\'    Kernel: 6.8.0-kali1-amd64', cls: '' },
             { text: '     \';:;:;:\';    Shell : zsh 5.9', cls: '' },
-            { text: '    \';:;:;:;\';    User  : Ömer Burak Akçınar', cls: '' },
+            { text: '    \';:;:;:;\';    User  : YOUR_NAME', cls: '' },
             { text: '      \'\';:\';\'     Role  : IT & Cybersecurity', cls: '' },
-            { text: '       \',:;\'      Loc   : Dublin, Ireland', cls: '' },
+            { text: '       \',:;\'      Loc   : Your City, Country', cls: '' },
             { text: '         \'        Certs : CompTIA A+, Cisco Cyber', cls: '' },
             { text: '                  Uptime: Always learning', cls: 'success' },
             { text: '', cls: '' },
@@ -608,8 +608,8 @@ function initFullscreenTerminal() {
                 { text: '  │   ├── 03_cyber_intern.log', cls: '' },
                 { text: '  │   └── 04_tech_support.log', cls: '' },
                 { text: '  ├── education/', cls: 'info' },
-                { text: '  │   ├── 01_griffith_college.txt', cls: '' },
-                { text: '  │   └── 02_sdu_university.txt', cls: '' },
+                { text: '  │   ├── 01_college_1.txt', cls: '' },
+                { text: '  │   └── 02_university_1.txt', cls: '' },
                 { text: '  └── projects/', cls: 'info' },
                 { text: '      ├── netsweep_scanner.sh', cls: '' },
                 { text: '      ├── webcrawl_pro.py', cls: '' },
@@ -1633,10 +1633,10 @@ function initLiveTerminal() {
         ],
         about: () => [
             { text: '┌─ About ──────────────────────────────────────┐', cls: 'success' },
-            { text: '│ Ömer Burak Akçınar                          │', cls: '' },
+            { text: '│ YOUR_NAME                          │', cls: '' },
             { text: '│ IT & Cybersecurity Professional              │', cls: '' },
             { text: '│ Incident Response, Threat Detection, IT Ops  │', cls: '' },
-            { text: '│ Based in Dublin, Ireland                     │', cls: '' },
+            { text: '│ Based in Your City, Country                  │', cls: '' },
             { text: '└──────────────────────────────────────────────┘', cls: 'success' },
         ],
         skills: () => [
@@ -1658,11 +1658,11 @@ function initLiveTerminal() {
             { text: '  [06] SecAudit Framework   — Automated auditing', cls: '' },
         ],
         contact: () => [
-            { text: '  📧 Email      : omerburaka95@gmail.com', cls: 'info' },
-            { text: '  🐙 GitHub     : github.com/somestr', cls: '' },
-            { text: '  💼 LinkedIn   : linkedin.com/in/omerburaka', cls: '' },
-            { text: '  🔓 TryHackMe : tryhackme.com/p/somestr  [Top 5% | Mage]', cls: 'success' },
-            { text: '  📍 Location   : Dublin, Ireland', cls: '' },
+            { text: '  📧 Email      : your.email@example.com', cls: 'info' },
+            { text: '  🐙 GitHub     : github.com/yourusername', cls: '' },
+            { text: '  💼 LinkedIn   : linkedin.com/in/yourusername', cls: '' },
+            { text: '  🔓 TryHackMe : tryhackme.com/p/yourusername', cls: 'success' },
+            { text: '  📍 Location   : Your City, Country', cls: '' },
         ],
         whoami: () => [
             { text: '  visitor — Viewing oba_portfolio from ' + window.location.hostname, cls: 'success' },

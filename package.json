@@ -1,7 +1,7 @@
 {
   "name": "oba-portfolio",
   "version": "1.0.0",
-  "description": "Ömer Burak Akçınar — IT & Cybersecurity Portfolio web server",
+  "description": "IT & Cybersecurity Portfolio — replace with your info",
   "main": "server.js",
   "engines": {
     "node": ">=20.0.0"
@@ -14,7 +14,7 @@
     "security:report": "node scripts/security-events-report.js"
   },
   "keywords": ["portfolio", "cybersecurity", "node", "express"],
-  "author": "Ömer Burak Akçınar",
+  "author": "YOUR_NAME",
   "license": "MIT",
   "type": "commonjs",
   "dependencies": {

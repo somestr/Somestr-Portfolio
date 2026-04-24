@@ -23,7 +23,7 @@ const translations = {
         hero_location_label: 'KONUM :',
         hero_role_val:       'BT & Siber Güvenlik Uzmanı',
         hero_status_val:     '● AKTİF',
-        hero_location_val:   'Dublin, İrlanda',
+        hero_location_val:   'Your City, Country',
         hero_warn:  '⚠  Yetkisiz erişim tespit edildi.',
         hero_auth:  '✔  Kimlik doğrulaması tamamlandı.',
         hero_load:  '→  Portfolyo yükleniyor...',
@@ -43,7 +43,7 @@ const translations = {
         sec_terminal:   'TERMİNAL',
 
         /* About */
-        about_p1: 'Merhaba! Ben <span class="highlight">Ömer Burak Akçınar</span> — analitik düşünen bir BT ve siber güvenlik uzmanıyım. Sorun giderme, son kullanıcı desteği ve olay müdahalesi konularında uygulamalı deneyime sahibim.',
+        about_p1: 'Merhaba! Ben <span class="highlight">YOUR_NAME</span> — analitik düşünen bir BT ve siber güvenlik uzmanıyım. Sorun giderme, son kullanıcı desteği ve olay müdahalesi konularında uygulamalı deneyime sahibim.',
         about_p2: 'Yüksek baskı altındaki ortamlarda 10+ kişilik ekiplere liderlik ederken operasyonel verimliliği ve müşteri memnuniyetini koruma konusunda tecrübeliyim. Teknik sorunları teşhis etme, kullanıcıları destekleme ve güvenli BT operasyonlarına katkıda bulunma yeteneğine sahibim.',
         about_p3: 'Sürekli öğrenmeye ve gelişime inanan biri olarak, yeni siber tehditleri ve BT operasyonlarını takip ediyor, güvenli sistem ortamlarına katkı sağlamaya hazır durumda bekliyorum.',
 
@@ -70,28 +70,28 @@ const translations = {
         /* Experience */
         exp1_date:    'Haz 2025 — Günümüz',
         exp1_title:   'Barista',
-        exp1_company: '@ Starbucks — Dublin, İrlanda',
+        exp1_company: '@ Company Name — City, Country',
         exp1_desc:    'Her vardiyada 100+ müşteriye verimli hizmet sunma. Günlük operasyonlar, kasa yönetimi ve ekip koordinasyonunu destekleme.',
         exp2_date:    'May 2023 — Nis 2025',
         exp2_title:   'Takım Lideri',
-        exp2_company: '@ Superdrug — Dublin, İrlanda',
+        exp2_company: '@ Company Name — City, Country',
         exp2_desc:    '10+ kişilik ekibe liderlik, müdür yokluğunda vardiya müdürlüğü. Envanter kontrolü, kasa yönetimi ve operasyonel uyumluluk.',
         exp3_date:    'Eyl 2021 — Şub 2022',
         exp3_title:   'Siber Güvenlik Stajyeri',
-        exp3_company: '@ Isparta Üniversitesi — Isparta, Türkiye',
+        exp3_company: '@ University Name — City, Country',
         exp3_desc:    'Olay müdahalesi ve zafiyet değerlendirmesi. Personelin oltalama tespit oranını %35 artıran farkındalık oturumlarının düzenlenmesi.',
         exp4_date:    'Oca 2017 — Şub 2018',
         exp4_title:   'Teknik Destek Uzmanı',
-        exp4_company: '@ Maxi Bilgisayar Sistemleri — Isparta, Türkiye',
+        exp4_company: '@ Company Name — City, Country',
         exp4_desc:    'Donanım ve yazılım kurulumu, yapılandırma ve bakım. Son kullanıcı desteği, küçük işletme ağ kurulumları ve temel siber güvenlik uygulamaları.',
 
         /* Education */
         edu1_title:  'Higher Diploma in Computing',
-        edu1_school: '@ Griffith College — Dublin, İrlanda',
+        edu1_school: '@ College Name — City, Country',
         edu1_desc:   'Bilişim alanında yüksek lisans diploma programı (2025).',
         edu2_year:   'Türkiye',
         edu2_title:  'Mekatronik Mühendisliği Lisans',
-        edu2_school: '@ Süleyman Demirel Üniversitesi — Isparta, Türkiye',
+        edu2_school: '@ University Name — City, Country',
         edu2_desc:   'Mekatronik Mühendisliği bölümünden B.Sc. derecesi.',
 
         /* Projects */
@@ -139,7 +139,7 @@ const translations = {
 
         /* v4.0 */
         terminal_hint:      '"help" yazarak başlayın',
-        terminal_welcome:   '  ██ Ömer Burak Akçınar Portfolyo Terminaline Hoş Geldiniz ██',
+        terminal_welcome:   '  ██ YOUR_NAME Portfolyo Terminaline Hoş Geldiniz ██',
         terminal_help_hint: '  Komut listesi için "help" yazın.',
         radar_title:        'Yetenek Radarı',
     },
@@ -164,7 +164,7 @@ const translations = {
         hero_location_label: 'LOCATION :',
         hero_role_val:       'IT & Cybersecurity Professional',
         hero_status_val:     '● ACTIVE',
-        hero_location_val:   'Dublin, Ireland',
+        hero_location_val:   'Your City, Country',
         hero_warn:  '⚠  Unauthorized access detected.',
         hero_auth:  '✔  Authentication complete.',
         hero_load:  '→  Loading portfolio...',
@@ -184,7 +184,7 @@ const translations = {
         sec_terminal:   'TERMINAL',
 
         /* About */
-        about_p1: 'Hi! I\'m <span class="highlight">Ömer Burak Akçınar</span> — an analytical IT and cybersecurity professional with hands-on experience in troubleshooting, end-user support and incident response.',
+        about_p1: 'Hi! I\'m <span class="highlight">YOUR_NAME</span> — an analytical IT and cybersecurity professional with hands-on experience in troubleshooting, end-user support and incident response.',
         about_p2: 'Experienced in leading teams of 10+ staff in high-pressure environments while maintaining operational efficiency and customer satisfaction. Strong ability to diagnose technical issues, support users and contribute to secure, reliable IT operations.',
         about_p3: 'As a continuous learner committed to staying current with emerging cyber threats and IT operations, I\'m ready to add value to your organization\'s security and technology ecosystem.',
 
@@ -211,28 +211,28 @@ const translations = {
         /* Experience */
         exp1_date:    'Jun 2025 — Present',
         exp1_title:   'Barista',
-        exp1_company: '@ Starbucks — Dublin, Ireland',
+        exp1_company: '@ Company Name — City, Country',
         exp1_desc:    'Delivering efficient service in a high-volume environment serving 100+ customers per shift. Supporting daily operations, cash handling and team coordination.',
         exp2_date:    'May 2023 — Apr 2025',
         exp2_title:   'Team Leader',
-        exp2_company: '@ Superdrug — Dublin, Ireland',
+        exp2_company: '@ Company Name — City, Country',
         exp2_desc:    'Led a team of 10+ staff, acted as duty manager during absences. Oversaw scheduling, delegation, inventory control, cash management and operational compliance.',
         exp3_date:    'Sep 2021 — Feb 2022',
         exp3_title:   'Cybersecurity Intern',
-        exp3_company: '@ Isparta University — Isparta, Turkey',
+        exp3_company: '@ University Name — City, Country',
         exp3_desc:    'Assisted with incident response and vulnerability assessments. Co-organized phishing awareness sessions that improved staff detection rates by 35%.',
         exp4_date:    'Jan 2017 — Feb 2018',
         exp4_title:   'Technical Support',
-        exp4_company: '@ Maxi Computer Systems — Isparta, Turkey',
+        exp4_company: '@ Company Name — City, Country',
         exp4_desc:    'Installed, configured and maintained client systems. Diagnosed and resolved technical issues, provided end-user support, assisted with network setups and basic cybersecurity practices.',
 
         /* Education */
         edu1_title:  'Higher Diploma in Computing',
-        edu1_school: '@ Griffith College — Dublin, Ireland',
+        edu1_school: '@ College Name — City, Country',
         edu1_desc:   'Higher Diploma in Computing programme (2025).',
         edu2_year:   'Turkey',
         edu2_title:  'B.Sc. in Mechatronic Engineering',
-        edu2_school: '@ Süleyman Demirel University — Isparta, Turkey',
+        edu2_school: '@ University Name — City, Country',
         edu2_desc:   'Bachelor of Science degree in Mechatronic Engineering.',
 
         /* Projects */
@@ -280,7 +280,7 @@ const translations = {
 
         /* v4.0 */
         terminal_hint:      'Type "help" to get started',
-        terminal_welcome:   '  ██ Welcome to Ömer Burak Akçınar Portfolio Terminal ██',
+        terminal_welcome:   '  ██ Welcome to YOUR_NAME Portfolio Terminal ██',
         terminal_help_hint: '  Type "help" for available commands.',
         radar_title:        'Skill Radar',
     },
@@ -305,7 +305,7 @@ const translations = {
         hero_location_label: '위치   :',
         hero_role_val:       'IT & 사이버 보안 전문가',
         hero_status_val:     '● 활성',
-        hero_location_val:   '더블린, 아일랜드',
+        hero_location_val:   'Your City, Country',
         hero_warn:  '⚠  무단 접근이 감지되었습니다.',
         hero_auth:  '✔  인증이 완료되었습니다.',
         hero_load:  '→  포트폴리오 로딩 중...',
@@ -325,7 +325,7 @@ const translations = {
         sec_terminal:   '터미널',
 
         /* About */
-        about_p1: '안녕하세요! 저는 <span class="highlight">Ömer Burak Akçınar</span> — 문제 해결, 최종 사용자 지원 및 사고 대응에 실무 경험을 가진 분석적 IT 및 사이버 보안 전문가입니다.',
+        about_p1: '안녕하세요! 저는 <span class="highlight">YOUR_NAME</span> — 문제 해결, 최종 사용자 지원 및 사고 대응에 실무 경험을 가진 분석적 IT 및 사이버 보안 전문가입니다.',
         about_p2: '높은 압박 환경에서 10명 이상의 팀을 이끌며 운영 효율성과 고객 만족도를 유지한 경험이 있습니다. 기술적 문제 진단, 사용자 지원, 안전하고 신뢰할 수 있는 IT 운영에 기여할 수 있습니다.',
         about_p3: '새로운 사이버 위협과 IT 운영에 대한 지속적인 학습을 통해 조직의 보안 및 기술 생태계에 가치를 더할 준비가 되어 있습니다.',
 
@@ -352,28 +352,28 @@ const translations = {
         /* Experience */
         exp1_date:    '2025년 6월 — 현재',
         exp1_title:   '바리스타',
-        exp1_company: '@ Starbucks — 더블린, 아일랜드',
+        exp1_company: '@ Company Name — City, Country',
         exp1_desc:    '교대당 100명 이상의 고객에게 효율적인 서비스 제공. 일일 운영, 현금 관리 및 팀 조율 지원.',
         exp2_date:    '2023년 5월 — 2025년 4월',
         exp2_title:   '팀 리더',
-        exp2_company: '@ Superdrug — 더블린, 아일랜드',
+        exp2_company: '@ Company Name — City, Country',
         exp2_desc:    '10명 이상의 팀 리더십, 부재 시 당직 매니저 역할. 스케줄링, 재고 관리, 현금 관리 및 운영 준수 감독.',
         exp3_date:    '2021년 9월 — 2022년 2월',
         exp3_title:   '사이버 보안 인턴',
-        exp3_company: '@ 이스파르타 대학교 — 이스파르타, 터키',
+        exp3_company: '@ University Name — City, Country',
         exp3_desc:    '사고 대응 및 취약점 평가 지원. 직원 피싱 탐지율을 35% 향상시킨 인식 교육 공동 기획.',
         exp4_date:    '2017년 1월 — 2018년 2월',
         exp4_title:   '기술 지원',
-        exp4_company: '@ Maxi Computer Systems — 이스파르타, 터키',
+        exp4_company: '@ Company Name — City, Country',
         exp4_desc:    '클라이언트 시스템 설치, 구성 및 유지보수. 기술 문제 진단 및 해결, 최종 사용자 지원, 네트워크 설정 및 기본 사이버 보안 실무.',
 
         /* Education */
         edu1_title:  'Higher Diploma in Computing',
-        edu1_school: '@ Griffith College — 더블린, 아일랜드',
+        edu1_school: '@ College Name — City, Country',
         edu1_desc:   '컴퓨팅 분야 고등 디플로마 프로그램 (2025).',
         edu2_year:   '터키',
         edu2_title:  '메카트로닉 공학 학사',
-        edu2_school: '@ Süleyman Demirel University — 이스파르타, 터키',
+        edu2_school: '@ University Name — City, Country',
         edu2_desc:   '메카트로닉 공학과 이학사 학위.',
 
         /* Projects */
@@ -421,7 +421,7 @@ const translations = {
 
         /* v4.0 */
         terminal_hint:      '"help"를 입력하여 시작하세요',
-        terminal_welcome:   '  ██ Ömer Burak Akçınar 포트폴리오 터미널에 오신 것을 환영합니다 ██',
+        terminal_welcome:   '  ██ YOUR_NAME 포트폴리오 터미널에 오신 것을 환영합니다 ██',
         terminal_help_hint: '  사용 가능한 명령어를 보려면 "help"를 입력하세요.',
         radar_title:        '스킬 레이더',
     }

@@ -1,4 +1,4 @@
-# OBA Portfolio — Ömer Burak Akçınar
+# OBA Portfolio — YOUR_NAME
 
 > IT & Cybersecurity Portfolio — interactive CLI terminal, radar chart, dark-mode GUI, contact form, and a hardened Node.js/Express backend.
 
@@ -42,7 +42,7 @@
 
 ```bash
 # 1. Clone the repo
-git clone https://github.com/somestr/Web_Server.git
+git clone https://github.com/yourusername/your-repo.git
 cd Web_Server
 
 # 2. Install dependencies
@@ -133,7 +133,7 @@ Prints a summary of logged security events from `security-events.jsonl`.
 
 ## License
 
-[MIT](./LICENSE) © 2026 Ömer Burak Akçınar
+[MIT](./LICENSE) © 2026 YOUR_NAME
 
 ---
 
