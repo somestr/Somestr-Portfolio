@@ -48,6 +48,9 @@
 
         function render() {
             clearElementContent(results);
+            if (activeIdx >= filtered.length) {
+                activeIdx = 0;
+            }
             filtered.forEach((cmd, i) => {
                 const li = globalScope.document.createElement('li');
                 if (i === activeIdx) li.classList.add('active');
@@ -111,10 +114,12 @@
         input.addEventListener('keydown', (e) => {
             if (e.key === 'ArrowDown') {
                 e.preventDefault();
+                if (filtered.length === 0) return;
                 activeIdx = (activeIdx + 1) % filtered.length;
                 render();
             } else if (e.key === 'ArrowUp') {
                 e.preventDefault();
+                if (filtered.length === 0) return;
                 activeIdx = (activeIdx - 1 + filtered.length) % filtered.length;
                 render();
             } else if (e.key === 'Enter') {
@@ -129,4 +134,3 @@
 
     globalScope.initCommandPalette = initCommandPalette;
 })(typeof globalThis !== 'undefined' ? globalThis : this);
-
