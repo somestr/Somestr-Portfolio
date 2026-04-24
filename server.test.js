@@ -359,3 +359,84 @@ test('cross-site browser posts to contact are blocked and logged as suspicious',
         await server.stop();
     }
 });
+
+test('POST /api/contact with SQL injection in body is blocked and logged as a probe', async () => {
+    const server = await startServer();
+
+    try {
+        const response = await fetch(`${server.baseUrl}/api/contact`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                name: "' OR 1=1 --",
+                email: 'hacker@example.com',
+                message: 'union select * from users',
+            }),
+        });
+
+        const body = await response.json();
+        const events = await readJsonLines(server.tempPaths.securityEventsFile);
+        const probeEvent = events.find((e) => e.reason === 'sqli_probe');
+
+        assert.ok(probeEvent, 'sqli_probe event should be logged');
+        assert.equal(probeEvent.severity, 'high');
+        assert.notEqual(body.message, 'Message received successfully.');
+    } finally {
+        await server.stop();
+    }
+});
+
+test('POST /api/contact with prototype pollution keys returns 400', async () => {
+    const server = await startServer();
+
+    try {
+        const response = await fetch(`${server.baseUrl}/api/contact`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                constructor: { isAdmin: true },
+                name: 'Attacker',
+                email: 'attacker@example.com',
+                message: 'Prototype pollution test.',
+            }),
+        });
+
+        const payload = await response.json();
+
+        assert.equal(response.status, 400);
+        assert.equal(payload.ok, false);
+        assert.equal(payload.error, 'Invalid request.');
+    } finally {
+        await server.stop();
+    }
+});
+
+test('GET /api/stats is rate limited after exceeding the per-minute threshold', async () => {
+    const server = await startServer();
+
+    try {
+        let lastStatus;
+        for (let i = 0; i < 25; i += 1) {
+            const response = await fetch(`${server.baseUrl}/api/stats`);
+            lastStatus = response.status;
+            if (response.status === 429) break;
+        }
+
+        assert.equal(lastStatus, 429, '/api/stats should return 429 after rate limit is exceeded');
+    } finally {
+        await server.stop();
+    }
+});
+
+test('GET /api/stats includes Cross-Origin-Embedder-Policy header', async () => {
+    const server = await startServer();
+
+    try {
+        const response = await fetch(`${server.baseUrl}/api/stats`);
+
+        assert.equal(response.status, 200);
+        assert.equal(response.headers.get('cross-origin-embedder-policy'), 'require-corp');
+    } finally {
+        await server.stop();
+    }
+});

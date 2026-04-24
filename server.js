@@ -22,6 +22,8 @@ const RATE_LIMIT_ESCALATION_THRESHOLD = 2;
 const QUARANTINE_WINDOW_MS = 30 * 60 * 1000;
 const SUPPORTED_TRUST_PROXY_SETTINGS = new Set(['loopback', 'linklocal', 'uniquelocal']);
 const DECOY_ROUTE_PREFIX = '/__decoy__';
+const MAX_STORE_ENTRIES = 5_000;
+const FORBIDDEN_BODY_KEYS = new Set(['__proto__', 'constructor', 'prototype']);
 
 const SUSPICIOUS_REQUEST_PATTERNS = [
     { pattern: /(?:^|\/)\.env(?:$|[./])/i, reason: 'environment_file_probe', severity: 'high' },
@@ -96,6 +98,18 @@ function createExpiringCounterStore(windowMs) {
         }
     }
 
+    function evictOldest() {
+        let oldestKey = null;
+        let oldestStart = Infinity;
+        for (const [key, entry] of entries) {
+            if (entry.start < oldestStart) {
+                oldestStart = entry.start;
+                oldestKey = key;
+            }
+        }
+        if (oldestKey !== null) entries.delete(oldestKey);
+    }
+
     return {
         increment(key) {
             const now = Date.now();
@@ -103,6 +117,9 @@ function createExpiringCounterStore(windowMs) {
 
             const entry = entries.get(key);
             if (!entry) {
+                if (entries.size >= MAX_STORE_ENTRIES) {
+                    evictOldest();
+                }
                 entries.set(key, { start: now, count: 1 });
                 return 1;
             }
@@ -137,6 +154,18 @@ function createQuarantineStore(quarantineMs) {
             const now = Date.now();
             prune(now);
 
+            if (entries.size >= MAX_STORE_ENTRIES) {
+                let soonestKey = null;
+                let soonestUntil = Infinity;
+                for (const [k, v] of entries) {
+                    if (v.until < soonestUntil) {
+                        soonestUntil = v.until;
+                        soonestKey = k;
+                    }
+                }
+                if (soonestKey !== null) entries.delete(soonestKey);
+            }
+
             const entry = {
                 until: now + quarantineMs,
                 reason: details.reason || 'quarantined',
@@ -163,6 +192,10 @@ function createRateLimiter(windowMs, maxRequests) {
         const entry = entries.get(key);
 
         if (!entry || now - entry.start > windowMs) {
+            if (entries.size >= MAX_STORE_ENTRIES) {
+                const firstKey = entries.keys().next().value;
+                if (firstKey !== undefined) entries.delete(firstKey);
+            }
             entries.set(key, { start: now, count: 1 });
             return true;
         }
@@ -183,12 +216,17 @@ function sanitizeInput(value, maxLength) {
 
     return value
         .trim()
-        .replace(/&/g, '&amp;')
-        .replace(/</g, '&lt;')
-        .replace(/>/g, '&gt;')
-        .replace(/"/g, '&quot;')
-        .replace(/'/g, '&#x27;')
+        .replace(/[\x00-\x08\x0b\x0c\x0e-\x1f\x7f]/g, '')
+        .replace(/[<>"'`]/g, '')
         .slice(0, maxLength);
+}
+
+function hasPrototypePollutionKeys(obj) {
+    if (!obj || typeof obj !== 'object') {
+        return false;
+    }
+
+    return Object.keys(obj).some((k) => FORBIDDEN_BODY_KEYS.has(k));
 }
 
 function sanitizeMetadata(value, maxLength = 512) {
@@ -203,6 +241,10 @@ function sanitizeMetadata(value, maxLength = 512) {
 }
 
 function validateContactPayload(body) {
+    if (hasPrototypePollutionKeys(body)) {
+        return { ok: false, status: 400, error: 'Invalid request.' };
+    }
+
     const name = sanitizeInput(body?.name, 100);
     const email = sanitizeInput(body?.email, 200);
     const message = sanitizeInput(body?.message, 2000);
@@ -709,7 +751,7 @@ function createApp() {
         res.setHeader('Cross-Origin-Opener-Policy', 'same-origin');
         res.setHeader('Cross-Origin-Resource-Policy', 'same-origin');
         res.setHeader('Origin-Agent-Cluster', '?1');
-        res.setHeader('Permissions-Policy', 'camera=(), microphone=(), geolocation=()');
+        res.setHeader('Permissions-Policy', 'camera=(), microphone=(), geolocation=(), payment=(), usb=(), bluetooth=(), autoplay=(), picture-in-picture=(self)');
         res.setHeader('Referrer-Policy', 'strict-origin-when-cross-origin');
         res.setHeader('X-Content-Type-Options', 'nosniff');
         res.setHeader('X-DNS-Prefetch-Control', 'off');
