@@ -1,8 +1,11 @@
 {
-  "name": "web_server",
+  "name": "oba-portfolio",
   "version": "1.0.0",
-  "description": "",
+  "description": "Ömer Burak Akçınar — IT & Cybersecurity Portfolio web server",
   "main": "server.js",
+  "engines": {
+    "node": ">=20.0.0"
+  },
   "scripts": {
     "start": "node server.js",
     "dev": "node --watch server.js",
@@ -10,9 +13,9 @@
     "test": "node --test app-utils.test.js server.test.js security-events-report.test.js",
     "security:report": "node scripts/security-events-report.js"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "keywords": ["portfolio", "cybersecurity", "node", "express"],
+  "author": "Ömer Burak Akçınar",
+  "license": "MIT",
   "type": "commonjs",
   "dependencies": {
     "express": "^5.2.1"
