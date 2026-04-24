@@ -1,6 +1,6 @@
 /* ============================================
-   script.js � Animations, Matrix, Interactions
-   v4.0 � Interactive terminal, theme switcher,
+   script.js — Animations, Matrix, Interactions
+   v4.0 — Interactive terminal, theme switcher,
           command palette, radar chart, toasts,
           3D tilt, text decrypt, mouse-reactive
    ============================================ */
@@ -39,7 +39,7 @@ function syncModeUrl(mode) {
     }
 }
 
-// --- Terminal Intro Screen --------------------------------------------------
+// ─── Terminal Intro Screen ──────────────────────────────────────────────────
 (function initIntroTerminal() {
     const overlay = document.getElementById('intro-overlay');
     const screen  = document.getElementById('intro-body');
@@ -93,19 +93,19 @@ function syncModeUrl(mode) {
     const lastLogin = now.toDateString() + ' ' + now.toTimeString().slice(0, 8) + ' from 10.10.14.1';
 
     // Step types:
-    //   line     ? append HTML instantly
-    //   blank    ? append empty line
-    //   dots     ? animate password dots into a new line
-    //   prompt   ? append the two-line kali prompt (+--/+-#)
-    //   typecmd  ? typewriter text appended to last element
+    //   line     → append HTML instantly
+    //   blank    → append empty line
+    //   dots     → animate password dots into a new line
+    //   prompt   → append the two-line kali prompt (┌──/└─#)
+    //   typecmd  → typewriter text appended to last element
     const STEPS = [
         { t: 'line',    html: '<span class="k-dim">Kali GNU/Linux Rolling Release (kali-rolling)</span>', ms: 0 },
         { t: 'line',    html: '<span class="k-dim">Kernel 6.8.0-kali1-amd64 on an x86_64</span>', ms: 60 },
         { t: 'blank',   ms: 200 },
-        { t: 'line',    html: 'oba-sec login: <span class="k-white">root</span>', ms: 500 },
+        { t: 'line',    html: 'som-sec login: <span class="k-white">root</span>', ms: 500 },
         { t: 'dots',    prefix: 'Password: ', count: 8, ms: 350 },
         { t: 'blank',   ms: 150 },
-        { t: 'line',    html: '<span class="k-dim">Linux oba-sec 6.8.0-kali1-amd64 #1 SMP PREEMPT_DYNAMIC</span>', ms: 50 },
+        { t: 'line',    html: '<span class="k-dim">Linux som-sec 6.8.0-kali1-amd64 #1 SMP PREEMPT_DYNAMIC</span>', ms: 50 },
         { t: 'line',    html: '<span class="k-dim">Last login: ' + lastLogin + '</span>', ms: 50 },
         { t: 'blank',   ms: 300 },
         { t: 'prompt',  dir: '~', ms: 0 },
@@ -122,16 +122,16 @@ function syncModeUrl(mode) {
         { t: 'line',    html: '<span class="k-blue">[*]</span> Loading modules...', ms: 200 },
         { t: 'line',    html: '<span class="k-blue">[*]</span> All systems ready.', ms: 280 },
         { t: 'blank',   ms: 120 },
-        { t: 'line',    html: '<span class="k-blue">+-------------------------------------------------+</span>', ms: 60 },
-        { t: 'line',    html: '<span class="k-blue">�</span>  Select interface mode:                          <span class="k-blue">�</span>', ms: 60 },
-        { t: 'line',    html: '<span class="k-blue">�</span>                                                   <span class="k-blue">�</span>', ms: 60 },
-        { t: 'line',    html: '<span class="k-blue">�</span>  <span class="k-white">[1]</span> <span class="k-blue">GUI Mode</span>    � Visual portfolio interface   <span class="k-blue">�</span>', ms: 60 },
-        { t: 'line',    html: '<span class="k-blue">�</span>  <span class="k-white">[2]</span> <span class="k-blue">CLI Mode</span>    � Terminal-only access         <span class="k-blue">�</span>', ms: 60 },
-        { t: 'line',    html: '<span class="k-blue">�</span>                                                   <span class="k-blue">�</span>', ms: 60 },
-        { t: 'line',    html: '<span class="k-blue">+-------------------------------------------------+</span>', ms: 60 },
+        { t: 'line',    html: '<span class="k-blue">┌─────────────────────────────────────────────────┐</span>', ms: 60 },
+        { t: 'line',    html: '<span class="k-blue">│</span>  Select interface mode:                          <span class="k-blue">│</span>', ms: 60 },
+        { t: 'line',    html: '<span class="k-blue">│</span>                                                   <span class="k-blue">│</span>', ms: 60 },
+        { t: 'line',    html: '<span class="k-blue">│</span>  <span class="k-white">[1]</span> <span class="k-blue">GUI Mode</span>    — Visual portfolio interface   <span class="k-blue">│</span>', ms: 60 },
+        { t: 'line',    html: '<span class="k-blue">│</span>  <span class="k-white">[2]</span> <span class="k-blue">CLI Mode</span>    — Terminal-only access         <span class="k-blue">│</span>', ms: 60 },
+        { t: 'line',    html: '<span class="k-blue">│</span>                                                   <span class="k-blue">│</span>', ms: 60 },
+        { t: 'line',    html: '<span class="k-blue">└─────────────────────────────────────────────────┘</span>', ms: 60 },
         { t: 'blank',   ms: 100 },
         { t: 'prompt',  dir: '~', ms: 0 },
-        { t: 'line',    html: '<span class="k-blue">select</span> <span class="k-dim">(1/2):</span> <span class="k-blink">?</span>', ms: 0 },
+        { t: 'line',    html: '<span class="k-blue">select</span> <span class="k-dim">(1/2):</span> <span class="k-blink">▋</span>', ms: 0 },
     ];
 
     let canEnter = false;
@@ -210,7 +210,7 @@ function syncModeUrl(mode) {
             }, s.ms);
 
         } else if (s.t === 'prompt') {
-            appendLine('<span class="k-blue">\u250c\u2500\u2500(root@oba-sec)-[' + s.dir + ']</span>');
+            appendLine('<span class="k-blue">\u250c\u2500\u2500(root@som-sec)-[' + s.dir + ']</span>');
             const p = appendLine('<span class="k-blue">\u2514\u2500# </span>');
             // store for typecmd
             screen._lastPromptLine = p;
@@ -239,9 +239,9 @@ function syncModeUrl(mode) {
 })();
 
 
-// --- Fullscreen CLI Terminal ------------------------------------------------
+// ─── Fullscreen CLI Terminal ────────────────────────────────────────────────
 function initFullscreenTerminal() {
-    // Prevent duplicate initialization � only one instance allowed
+    // Prevent duplicate initialization — only one instance allowed
     if (document.getElementById('fs-terminal')) {
         document.getElementById('fs-term-input')?.focus();
         return;
@@ -253,7 +253,7 @@ function initFullscreenTerminal() {
         <div class="fs-term-body" id="fs-term-body">
             <div class="fs-term-output" id="fs-term-output"></div>
             <div class="fs-term-input-line">
-                <span class="prompt">root@oba-sec:~$</span>
+                <span class="prompt">root@som-sec:~$</span>
                 <input type="text" class="fs-term-input" id="fs-term-input" spellcheck="false" autocomplete="off" autofocus>
             </div>
         </div>
@@ -274,12 +274,12 @@ function initFullscreenTerminal() {
     let cwd = '~';
 
     const FS_BANNER = `
-  ������+ ������+  �����+       �������+�������+ ������+
- ��+---��+��+--��+��+--��+      ��+----+��+----+��+----+
- ���   ���������++�������������+�������+�����+  ���
- ���   �����+--��+��+--���+----++----�����+--+  ���
- +������++������++���  ���      ���������������++������+
-  +-----+ +-----+ +-+  +-+      +------++------+ +-----+`;
+  ██████╗ ██████╗  █████╗       ███████╗███████╗ ██████╗
+ ██╔═══██╗██╔══██╗██╔══██╗      ██╔════╝██╔════╝██╔════╝
+ ██║   ██║██████╔╝███████║█████╗███████╗█████╗  ██║
+ ██║   ██║██╔══██╗██╔══██║╚════╝╚════██║██╔══╝  ██║
+ ╚██████╔╝██████╔╝██║  ██║      ███████║███████╗╚██████╗
+  ╚═════╝ ╚═════╝ ╚═╝  ╚═╝      ╚══════╝╚══════╝ ╚═════╝`;
 
     // File system simulation
     const FILESYSTEM = {
@@ -289,11 +289,11 @@ function initFullscreenTerminal() {
         },
         '~/experience': {
             type: 'dir',
-            children: ['01_soc_analyst.log', '02_it_support.log', '03_cyber_intern.log', '04_tech_support.log']
+            children: ['01_soc_analyst.log', '02_it_support.log', '03_security_intern.log', '04_helpdesk.log']
         },
         '~/education': {
             type: 'dir',
-            children: ['01_college_1.txt', '02_university_1.txt']
+            children: ['01_infosec_bsc.txt', '02_network_diploma.txt']
         },
         '~/projects': {
             type: 'dir',
@@ -303,7 +303,7 @@ function initFullscreenTerminal() {
 
     const FILES = {
         '~/README.md': [
-            { text: '# Sam Novak � IT & Cybersecurity Portfolio', cls: 'success' },
+            { text: '# Sam Novak — IT & Cybersecurity Portfolio', cls: 'success' },
             { text: '', cls: '' },
             { text: '  Welcome to my terminal portfolio.', cls: '' },
             { text: '  Navigate my files to learn about me.', cls: '' },
@@ -312,26 +312,26 @@ function initFullscreenTerminal() {
             { text: '  Type "gui" to switch to visual mode.', cls: 'info' },
         ],
         '~/about.txt': [
-            { text: '+- About -------------------------------------------------------+', cls: 'success' },
-            { text: '�                                                               �', cls: '' },
-            { text: '�  Name     : Sam Novak                               �', cls: '' },
-            { text: '�  Role     : IT & Cybersecurity Professional                   �', cls: '' },
-            { text: '�  Location : Amsterdam, Netherlands                            �', cls: '' },
-            { text: '�  Status   : Open to new opportunities                         �', cls: 'info' },
-            { text: '�                                                               �', cls: '' },
-            { text: '+- Summary ----------------------------------------------------  �', cls: 'success' },
-            { text: '�                                                               �', cls: '' },
-            { text: '�  Analytical IT and cybersecurity professional with hands-on   �', cls: '' },
-            { text: '�  experience in troubleshooting, end-user support and          �', cls: '' },
-            { text: '�  incident response.                                           �', cls: '' },
-            { text: '�                                                               �', cls: '' },
-            { text: '�  Experienced in leading teams of 10+ staff in high-pressure   �', cls: '' },
-            { text: '�  environments while maintaining operational efficiency.        �', cls: '' },
-            { text: '�                                                               �', cls: '' },
-            { text: '�  Continuous learner committed to staying current with          �', cls: '' },
-            { text: '�  emerging cyber threats and IT operations.                     �', cls: '' },
-            { text: '�                                                               �', cls: '' },
-            { text: '+---------------------------------------------------------------+', cls: 'success' },
+            { text: '┌─ About ───────────────────────────────────────────────────────┐', cls: 'success' },
+            { text: '│                                                               │', cls: '' },
+            { text: '│  Name     : Sam Novak                               │', cls: '' },
+            { text: '│  Role     : IT & Cybersecurity Professional                   │', cls: '' },
+            { text: '│  Location : Amsterdam, Netherlands                            │', cls: '' },
+            { text: '│  Status   : Open to new opportunities                         │', cls: 'info' },
+            { text: '│                                                               │', cls: '' },
+            { text: '├─ Summary ────────────────────────────────────────────────────  │', cls: 'success' },
+            { text: '│                                                               │', cls: '' },
+            { text: '│  Analytical IT and cybersecurity professional with hands-on   │', cls: '' },
+            { text: '│  experience in troubleshooting, end-user support and          │', cls: '' },
+            { text: '│  incident response.                                           │', cls: '' },
+            { text: '│                                                               │', cls: '' },
+            { text: '│  Experienced in leading teams of 10+ staff in high-pressure   │', cls: '' },
+            { text: '│  environments while maintaining operational efficiency.        │', cls: '' },
+            { text: '│                                                               │', cls: '' },
+            { text: '│  Continuous learner committed to staying current with          │', cls: '' },
+            { text: '│  emerging cyber threats and IT operations.                     │', cls: '' },
+            { text: '│                                                               │', cls: '' },
+            { text: '└───────────────────────────────────────────────────────────────┘', cls: 'success' },
         ],
         '~/contact.json': [
             { text: '  {', cls: '' },
@@ -344,187 +344,170 @@ function initFullscreenTerminal() {
             { text: '  }', cls: '' },
         ],
         '~/skills.txt': [
-            { text: '  +- Systems & Networking -------------------------+', cls: 'success' },
-            { text: '  �  [����������]  90%  Windows                   �', cls: '' },
-            { text: '  �  [����������]  85%  Linux / Kali Linux        �', cls: '' },
-            { text: '  �  [����������]  75%  Active Directory          �', cls: '' },
-            { text: '  �  [����������]  80%  Networking (DNS/DHCP/VPN) �', cls: '' },
-            { text: '  +------------------------------------------------+', cls: 'success' },
+            { text: '  ┌─ Systems & Networking ─────────────────────────┐', cls: 'success' },
+            { text: '  │  [■■■■■■■■■░]  90%  Windows                   │', cls: '' },
+            { text: '  │  [■■■■■■■■░░]  85%  Linux / Kali Linux        │', cls: '' },
+            { text: '  │  [■■■■■■■░░░]  75%  Active Directory          │', cls: '' },
+            { text: '  │  [■■■■■■■■░░]  80%  Networking (DNS/DHCP/VPN) │', cls: '' },
+            { text: '  └────────────────────────────────────────────────┘', cls: 'success' },
             { text: '', cls: '' },
-            { text: '  +- Cybersecurity --------------------------------+', cls: 'success' },
-            { text: '  �  [����������]  80%  Incident Response         �', cls: '' },
-            { text: '  �  [����������]  75%  Threat Detection          �', cls: '' },
-            { text: '  �  [����������]  78%  Vulnerability Assessment  �', cls: '' },
-            { text: '  �  [����������]  92%  IT Support & Troubleshoot �', cls: '' },
-            { text: '  +------------------------------------------------+', cls: 'success' },
+            { text: '  ┌─ Cybersecurity ────────────────────────────────┐', cls: 'success' },
+            { text: '  │  [■■■■■■■■░░]  80%  Incident Response         │', cls: '' },
+            { text: '  │  [■■■■■■■░░░]  75%  Threat Detection          │', cls: '' },
+            { text: '  │  [■■■■■■■░░░]  78%  Vulnerability Assessment  │', cls: '' },
+            { text: '  │  [■■■■■■■■■░]  92%  IT Support & Troubleshoot │', cls: '' },
+            { text: '  └────────────────────────────────────────────────┘', cls: 'success' },
             { text: '', cls: '' },
-            { text: '  +- Tools & Technologies -------------------------+', cls: 'success' },
-            { text: '  �  Windows � Linux � Kali Linux � Active Dir     �', cls: 'info' },
-            { text: '  �  Wireshark � Nmap � Metasploit � Burp Suite    �', cls: 'info' },
-            { text: '  �  Microsoft 365 � DNS/DHCP � VPN � Docker       �', cls: 'info' },
-            { text: '  �  PowerShell � Bash � Git � Python              �', cls: 'info' },
-            { text: '  �  SIEM � Splunk                                 �', cls: 'info' },
-            { text: '  +------------------------------------------------+', cls: 'success' },
+            { text: '  ┌─ Tools & Technologies ─────────────────────────┐', cls: 'success' },
+            { text: '  │  Windows · Linux · Kali Linux · Active Dir     │', cls: 'info' },
+            { text: '  │  Wireshark · Nmap · Metasploit · Burp Suite    │', cls: 'info' },
+            { text: '  │  Microsoft 365 · DNS/DHCP · VPN · Docker       │', cls: 'info' },
+            { text: '  │  PowerShell · Bash · Git · Python              │', cls: 'info' },
+            { text: '  │  SIEM · Splunk                                 │', cls: 'info' },
+            { text: '  └────────────────────────────────────────────────┘', cls: 'success' },
         ],
         '~/certs.txt': [
-            { text: '  +- Certifications -------------------------------+', cls: 'success' },
-            { text: '  �  [?] CompTIA A+                                �', cls: '' },
-            { text: '  �  [?] Cisco Cybersecurity Essentials            �', cls: '' },
-            { text: '  �  [?] CyberTakeOff Programme                   �', cls: '' },
-            { text: '  �  [?] CompTIA Security+ (in progress)          �', cls: 'info' },
-            { text: '  +------------------------------------------------+', cls: 'success' },
+            { text: '  ┌─ Certifications ───────────────────────────────┐', cls: 'success' },
+            { text: '  │  [✔] CompTIA A+                                │', cls: '' },
+            { text: '  │  [✔] Cisco Cybersecurity Essentials            │', cls: '' },
+            { text: '  │  [✔] CyberTakeOff Programme                   │', cls: '' },
+            { text: '  │  [⏳] CompTIA Security+ (in progress)          │', cls: 'info' },
+            { text: '  └────────────────────────────────────────────────┘', cls: 'success' },
         ],
         '~/experience/01_soc_analyst.log': [
-            { text: '  +- SOC Analyst Jr. ------------------------------+', cls: 'success' },
-            { text: '  �  Period  : Jan 2024 � Present                  �', cls: '' },
-            { text: '  �  Company : CyberWatch GmbH � Berlin, Germany    �', cls: '' },
-            { text: '  +----------------------------------------------+', cls: 'success' },
-            { text: '  �  Monitoring network traffic and performing     �', cls: '' },
-            { text: '  �  daily incident triage. Investigating SIEM     �', cls: '' },
-            { text: '  �  alerts and reporting security events.         �', cls: '' },
-            { text: '  +- Tags ----------------------------------------+', cls: 'success' },
-            { text: '  �  #SOC  #SIEM  #IncidentTriage  #BlueTeam     �', cls: 'info' },
-            { text: '  +----------------------------------------------+', cls: 'success' },
-        ],
-            { text: '  +------------------------------------------------�', cls: 'success' },
-            { text: '  �  Delivering efficient service in a high-volume �', cls: '' },
-            { text: '  �  environment serving 100+ customers per shift. �', cls: '' },
-            { text: '  �  Supporting daily ops, cash handling and team  �', cls: '' },
-            { text: '  �  coordination.                                 �', cls: '' },
-            { text: '  +- Tags -----------------------------------------�', cls: 'success' },
-            { text: '  �  #CustomerService  #Operations  #Teamwork     �', cls: 'info' },
-            { text: '  +------------------------------------------------+', cls: 'success' },
+            { text: '  ┌─ SOC Analyst Jr. ──────────────────────────────┐', cls: 'success' },
+            { text: '  │  Period  : Jan 2024 — Present                  │', cls: '' },
+            { text: '  │  Company : CyberWatch GmbH — Berlin, Germany    │', cls: '' },
+            { text: '  ├──────────────────────────────────────────────┤', cls: 'success' },
+            { text: '  │  Monitoring network traffic and performing     │', cls: '' },
+            { text: '  │  daily incident triage. Investigating SIEM     │', cls: '' },
+            { text: '  │  alerts and reporting security events.         │', cls: '' },
+            { text: '  ├─ Tags ────────────────────────────────────────┤', cls: 'success' },
+            { text: '  │  #SOC  #SIEM  #IncidentTriage  #BlueTeam     │', cls: 'info' },
+            { text: '  └──────────────────────────────────────────────┘', cls: 'success' },
         ],
         '~/experience/02_it_support.log': [
-            { text: '  +- IT Support Specialist -----------------------+', cls: 'success' },
-            { text: '  �  Period  : Mar 2021 � Dec 2023                 �', cls: '' },
-            { text: '  �  Company : NordNet AS � Oslo, Norway            �', cls: '' },
-            { text: '  +----------------------------------------------+', cls: 'success' },
-            { text: '  �  Resolving end-user issues at tier 1 and 2.   �', cls: '' },
-            { text: '  �  Maintaining network infrastructure and         �', cls: '' },
-            { text: '  �  managing Active Directory.                    �', cls: '' },
-            { text: '  +- Tags ----------------------------------------+', cls: 'success' },
-            { text: '  �  #ITSupport  #Networking  #ActiveDirectory     �', cls: 'info' },
-            { text: '  +----------------------------------------------+', cls: 'success' },
+            { text: '  ┌─ IT Support Specialist ───────────────────────┐', cls: 'success' },
+            { text: '  │  Period  : Mar 2021 — Dec 2023                 │', cls: '' },
+            { text: '  │  Company : NordNet AS — Oslo, Norway            │', cls: '' },
+            { text: '  ├──────────────────────────────────────────────┤', cls: 'success' },
+            { text: '  │  Resolving end-user issues at tier 1 and 2.   │', cls: '' },
+            { text: '  │  Maintaining network infrastructure and         │', cls: '' },
+            { text: '  │  managing Active Directory accounts.           │', cls: '' },
+            { text: '  ├─ Tags ────────────────────────────────────────┤', cls: 'success' },
+            { text: '  │  #ITSupport  #Networking  #ActiveDirectory     │', cls: 'info' },
+            { text: '  └──────────────────────────────────────────────┘', cls: 'success' },
         ],
-            { text: '  +------------------------------------------------�', cls: 'success' },
-            { text: '  �  Led a team of 10+ staff, acted as duty        �', cls: '' },
-            { text: '  �  manager during absences. Oversaw scheduling,  �', cls: '' },
-            { text: '  �  delegation, inventory control, cash mgmt and  �', cls: '' },
-            { text: '  �  operational compliance.                       �', cls: '' },
-            { text: '  +- Tags -----------------------------------------�', cls: 'success' },
-            { text: '  �  #TeamLeadership  #DutyManager  #Operations   �', cls: 'info' },
-            { text: '  +------------------------------------------------+', cls: 'success' },
+        '~/experience/03_security_intern.log': [
+            { text: '  ┌─ Security Intern ──────────────────────────────┐', cls: 'success' },
+            { text: '  │  Period  : Sep 2020 — Feb 2021                 │', cls: '' },
+            { text: '  │  Company : DataShield Lab — Helsinki, Finland   │', cls: '' },
+            { text: '  ├──────────────────────────────────────────────┤', cls: 'success' },
+            { text: '  │  Assisted with vulnerability assessments and   │', cls: '' },
+            { text: '  │  penetration testing support. Prepared         │', cls: '' },
+            { text: '  │  security awareness training materials.        │', cls: '' },
+            { text: '  ├─ Tags ────────────────────────────────────────┤', cls: 'success' },
+            { text: '  │  #VulnAssess  #PenTest  #SecurityAwareness    │', cls: 'info' },
+            { text: '  └──────────────────────────────────────────────┘', cls: 'success' },
         ],
-        '~/experience/03_cyber_intern.log': [
-            { text: '  +- Security Intern -----------------------------+', cls: 'success' },
-            { text: '  �  Period  : Sep 2020 � Feb 2021                 �', cls: '' },
-            { text: '  �  Company : DataShield Lab � Helsinki, Finland   �', cls: '' },
-            { text: '  +----------------------------------------------+', cls: 'success' },
-            { text: '  �  Assisted with vulnerability assessments and   �', cls: '' },
-            { text: '  �  penetration testing support. Prepared         �', cls: '' },
-            { text: '  �  security awareness training materials.        �', cls: '' },
-            { text: '  +- Tags ----------------------------------------+', cls: 'success' },
-            { text: '  �  #VulnAssess  #PenTest  #SecurityAwareness    �', cls: 'info' },
-            { text: '  +----------------------------------------------+', cls: 'success' },
+
+        '~/experience/04_helpdesk.log': [
+            { text: '  ┌─ Help Desk Technician ─────────────────────────┐', cls: 'success' },
+            { text: '  │  Period  : Jan 2019 — Aug 2020                 │', cls: '' },
+            { text: '  │  Company : TechPoint BV — Amsterdam, NL        │', cls: '' },
+            { text: '  ├──────────────────────────────────────────────┤', cls: 'success' },
+            { text: '  │  Hardware and software installation, debug and  │', cls: '' },
+            { text: '  │  user support. Assisted with small business     │', cls: '' },
+            { text: '  │  network setups and basic cybersecurity.       │', cls: '' },
+            { text: '  ├─ Tags ────────────────────────────────────────┤', cls: 'success' },
+            { text: '  │  #HelpDesk  #Hardware  #Networking             │', cls: 'info' },
+            { text: '  └──────────────────────────────────────────────┘', cls: 'success' },
         ],
-        '~/experience/04_tech_support.log': [
-            { text: '  +- Help Desk Technician -------------------------+', cls: 'success' },
-            { text: '  �  Period  : Jan 2019 � Aug 2020                 �', cls: '' },
-            { text: '  �  Company : TechPoint BV � Amsterdam, NL        �', cls: '' },
-            { text: '  +------------------------------------------------�', cls: 'success' },
-            { text: '  �  Hardware and software installation, debug and  �', cls: '' },
-            { text: '  �  user support. Assisted with small business     �', cls: '' },
-            { text: '  �  network setups and basic cybersecurity.       �', cls: '' },
-            { text: '  +- Tags -----------------------------------------�', cls: 'success' },
-            { text: '  �  #Hardware  #Networking  #EndUserSupport       �', cls: 'info' },
-            { text: '  +------------------------------------------------+', cls: 'success' },
+        '~/education/01_infosec_bsc.txt': [
+            { text: '  ┌─ B.Sc. Information Security ───────────────────┐', cls: 'success' },
+            { text: '  │  Year   : 2023                                 │', cls: '' },
+            { text: '  │  School : Nordia University — Oslo, Norway    │', cls: '' },
+            { text: '  │  Desc   : B.Sc. in Information Security         │', cls: '' },
+            { text: '  └──────────────────────────────────────────────┘', cls: 'success' },
         ],
-        '~/education/01_college_1.txt': [
-            { text: '  +- B.Sc. Information Security -------------------+', cls: 'success' },
-            { text: '  �  Year   : 2023                                 �', cls: '' },
-            { text: '  �  School : Nordia University � Oslo, Norway    �', cls: '' },
-            { text: '  �  Desc   : B.Sc. in Information Security        �', cls: '' },
-            { text: '  +------------------------------------------------+', cls: 'success' },
-        ],
-        '~/education/02_university_1.txt': [
-            { text: '  +- Diploma in Network Administration ------------+', cls: 'success' },
-            { text: '  �  Year   : 2019                                 �', cls: '' },
-            { text: '  �  School : Oslo Tech Institute � Oslo, Norway  �', cls: '' },
-            { text: '  �  Desc   : Diploma in Network Administration    �', cls: '' },
-            { text: '  +------------------------------------------------+', cls: 'success' },
+        '~/education/02_network_diploma.txt': [
+            { text: '  ┌─ Diploma in Network Administration ────────────┐', cls: 'success' },
+            { text: '  │  Year   : 2019                                 │', cls: '' },
+            { text: '  │  School : Oslo Tech Institute — Oslo, Norway  │', cls: '' },
+            { text: '  │  Desc   : Diploma in Network Administration     │', cls: '' },
+            { text: '  └──────────────────────────────────────────────┘', cls: 'success' },
         ],
         '~/projects/netsweep_scanner.sh': [
-            { text: '  +- NetSweep Scanner -----------------------------+', cls: 'success' },
-            { text: '  �  Type : Offense                                �', cls: '' },
-            { text: '  �  Tech : Python, Nmap, CVE-DB                   �', cls: 'info' },
-            { text: '  +------------------------------------------------�', cls: 'success' },
-            { text: '  �  Custom-built network scanner and vulnerability �', cls: '' },
-            { text: '  �  detection tool. Analyzes Nmap outputs for     �', cls: '' },
-            { text: '  �  automatic CVE matching.                       �', cls: '' },
-            { text: '  +- Findings -------------------------------------�', cls: 'success' },
-            { text: '  �  CRITICAL: 3   HIGH: 12                        �', cls: 'error' },
-            { text: '  +------------------------------------------------+', cls: 'success' },
+            { text: '  ┌─ NetSweep Scanner ─────────────────────────────┐', cls: 'success' },
+            { text: '  │  Type : Offense                                │', cls: '' },
+            { text: '  │  Tech : Python, Nmap, CVE-DB                   │', cls: 'info' },
+            { text: '  ├────────────────────────────────────────────────┤', cls: 'success' },
+            { text: '  │  Custom-built network scanner and vulnerability │', cls: '' },
+            { text: '  │  detection tool. Analyzes Nmap outputs for     │', cls: '' },
+            { text: '  │  automatic CVE matching.                       │', cls: '' },
+            { text: '  ├─ Findings ─────────────────────────────────────┤', cls: 'success' },
+            { text: '  │  CRITICAL: 3   HIGH: 12                        │', cls: 'error' },
+            { text: '  └────────────────────────────────────────────────┘', cls: 'success' },
         ],
         '~/projects/webcrawl_pro.py': [
-            { text: '  +- WebCrawl Pro ---------------------------------+', cls: 'success' },
-            { text: '  �  Type : Offense                                �', cls: '' },
-            { text: '  �  Tech : Python, Selenium, OWASP                �', cls: 'info' },
-            { text: '  +------------------------------------------------�', cls: 'success' },
-            { text: '  �  Web application security scanner. Detects     �', cls: '' },
-            { text: '  �  XSS, SQL injection, CSRF and IDOR vulns.     �', cls: '' },
-            { text: '  �  Full OWASP Top 10 coverage.                   �', cls: '' },
-            { text: '  +- Findings -------------------------------------�', cls: 'success' },
-            { text: '  �  CRITICAL: 7   HIGH: 24                        �', cls: 'error' },
-            { text: '  +------------------------------------------------+', cls: 'success' },
+            { text: '  ┌─ WebCrawl Pro ─────────────────────────────────┐', cls: 'success' },
+            { text: '  │  Type : Offense                                │', cls: '' },
+            { text: '  │  Tech : Python, Selenium, OWASP                │', cls: 'info' },
+            { text: '  ├────────────────────────────────────────────────┤', cls: 'success' },
+            { text: '  │  Web application security scanner. Detects     │', cls: '' },
+            { text: '  │  XSS, SQL injection, CSRF and IDOR vulns.     │', cls: '' },
+            { text: '  │  Full OWASP Top 10 coverage.                   │', cls: '' },
+            { text: '  ├─ Findings ─────────────────────────────────────┤', cls: 'success' },
+            { text: '  │  CRITICAL: 7   HIGH: 24                        │', cls: 'error' },
+            { text: '  └────────────────────────────────────────────────┘', cls: 'success' },
         ],
         '~/projects/cryptovault.cpp': [
-            { text: '  +- CryptoVault ----------------------------------+', cls: 'success' },
-            { text: '  �  Type : Tool                                   �', cls: '' },
-            { text: '  �  Tech : C++, OpenSSL, Crypto                   �', cls: 'info' },
-            { text: '  +------------------------------------------------�', cls: 'success' },
-            { text: '  �  Cryptographic algorithm analysis platform.    �', cls: '' },
-            { text: '  �  Detects weak implementations and recommends  �', cls: '' },
-            { text: '  �  modern alternatives.                          �', cls: '' },
-            { text: '  +- Findings -------------------------------------�', cls: 'success' },
-            { text: '  �  HIGH: 8   MEDIUM: 31                          �', cls: 'warn' },
-            { text: '  +------------------------------------------------+', cls: 'success' },
+            { text: '  ┌─ CryptoVault ──────────────────────────────────┐', cls: 'success' },
+            { text: '  │  Type : Tool                                   │', cls: '' },
+            { text: '  │  Tech : C++, OpenSSL, Crypto                   │', cls: 'info' },
+            { text: '  ├────────────────────────────────────────────────┤', cls: 'success' },
+            { text: '  │  Cryptographic algorithm analysis platform.    │', cls: '' },
+            { text: '  │  Detects weak implementations and recommends  │', cls: '' },
+            { text: '  │  modern alternatives.                          │', cls: '' },
+            { text: '  ├─ Findings ─────────────────────────────────────┤', cls: 'success' },
+            { text: '  │  HIGH: 8   MEDIUM: 31                          │', cls: 'warn' },
+            { text: '  └────────────────────────────────────────────────┘', cls: 'success' },
         ],
         '~/projects/malsandbox.docker': [
-            { text: '  +- MalSandbox -----------------------------------+', cls: 'success' },
-            { text: '  �  Type : Defense                                �', cls: '' },
-            { text: '  �  Tech : Docker, Python, YARA                   �', cls: 'info' },
-            { text: '  +------------------------------------------------�', cls: 'success' },
-            { text: '  �  Malware analysis platform in isolated sandbox �', cls: '' },
-            { text: '  �  environment. Behavior-based detection and     �', cls: '' },
-            { text: '  �  reporting system.                             �', cls: '' },
-            { text: '  +- Stats ----------------------------------------�', cls: 'success' },
-            { text: '  �  Malware Analyzed: 500+                        �', cls: 'error' },
-            { text: '  +------------------------------------------------+', cls: 'success' },
+            { text: '  ┌─ MalSandbox ───────────────────────────────────┐', cls: 'success' },
+            { text: '  │  Type : Defense                                │', cls: '' },
+            { text: '  │  Tech : Docker, Python, YARA                   │', cls: 'info' },
+            { text: '  ├────────────────────────────────────────────────┤', cls: 'success' },
+            { text: '  │  Malware analysis platform in isolated sandbox │', cls: '' },
+            { text: '  │  environment. Behavior-based detection and     │', cls: '' },
+            { text: '  │  reporting system.                             │', cls: '' },
+            { text: '  ├─ Stats ────────────────────────────────────────┤', cls: 'success' },
+            { text: '  │  Malware Analyzed: 500+                        │', cls: 'error' },
+            { text: '  └────────────────────────────────────────────────┘', cls: 'success' },
         ],
         '~/projects/packetprowler.py': [
-            { text: '  +- PacketProwler --------------------------------+', cls: 'success' },
-            { text: '  �  Type : Defense                                �', cls: '' },
-            { text: '  �  Tech : Python, Scapy, ML                      �', cls: 'info' },
-            { text: '  +------------------------------------------------�', cls: 'success' },
-            { text: '  �  Real-time network packet analysis and anomaly �', cls: '' },
-            { text: '  �  detection system. Uses machine learning to    �', cls: '' },
-            { text: '  �  recognize attack patterns.                    �', cls: '' },
-            { text: '  +- Stats ----------------------------------------�', cls: 'success' },
-            { text: '  �  Detection Rate: 98.7%                         �', cls: 'success' },
-            { text: '  +------------------------------------------------+', cls: 'success' },
+            { text: '  ┌─ PacketProwler ────────────────────────────────┐', cls: 'success' },
+            { text: '  │  Type : Defense                                │', cls: '' },
+            { text: '  │  Tech : Python, Scapy, ML                      │', cls: 'info' },
+            { text: '  ├────────────────────────────────────────────────┤', cls: 'success' },
+            { text: '  │  Real-time network packet analysis and anomaly │', cls: '' },
+            { text: '  │  detection system. Uses machine learning to    │', cls: '' },
+            { text: '  │  recognize attack patterns.                    │', cls: '' },
+            { text: '  ├─ Stats ────────────────────────────────────────┤', cls: 'success' },
+            { text: '  │  Detection Rate: 98.7%                         │', cls: 'success' },
+            { text: '  └────────────────────────────────────────────────┘', cls: 'success' },
         ],
         '~/projects/ctf_writeups.md': [
-            { text: '  +- CTF Writeups ---------------------------------+', cls: 'success' },
-            { text: '  �  Type : Offense                                �', cls: '' },
-            { text: '  �  Tech : HackTheBox, CTF, Writeup               �', cls: 'info' },
-            { text: '  +------------------------------------------------�', cls: 'success' },
-            { text: '  �  Detailed writeup collection of challenges     �', cls: '' },
-            { text: '  �  solved on HackTheBox, TryHackMe and           �', cls: '' },
-            { text: '  �  international CTF competitions.               �', cls: '' },
-            { text: '  +- Stats ----------------------------------------�', cls: 'success' },
-            { text: '  �  Solved: 200+ Challenges                       �', cls: 'success' },
-            { text: '  +------------------------------------------------+', cls: 'success' },
+            { text: '  ┌─ CTF Writeups ─────────────────────────────────┐', cls: 'success' },
+            { text: '  │  Type : Offense                                │', cls: '' },
+            { text: '  │  Tech : HackTheBox, CTF, Writeup               │', cls: 'info' },
+            { text: '  ├────────────────────────────────────────────────┤', cls: 'success' },
+            { text: '  │  Detailed writeup collection of challenges     │', cls: '' },
+            { text: '  │  solved on HackTheBox, TryHackMe and           │', cls: '' },
+            { text: '  │  international CTF competitions.               │', cls: '' },
+            { text: '  ├─ Stats ────────────────────────────────────────┤', cls: 'success' },
+            { text: '  │  Solved: 200+ Challenges                       │', cls: 'success' },
+            { text: '  └────────────────────────────────────────────────┘', cls: 'success' },
         ],
     };
 
@@ -555,8 +538,8 @@ function initFullscreenTerminal() {
     addOutput([
         { text: FS_BANNER, cls: 'ascii-art' },
         { text: '', cls: '' },
-        { text: '  �� Sam Novak � IT & Cybersecurity Portfolio ��', cls: 'success' },
-        { text: '  CLI Mode � Navigate my files to learn about me.', cls: 'info' },
+        { text: '  ██ Sam Novak — IT & Cybersecurity Portfolio ██', cls: 'success' },
+        { text: '  CLI Mode — Navigate my files to learn about me.', cls: 'info' },
         { text: '', cls: '' },
         { text: '  Type "help" for available commands.', cls: 'info' },
         { text: '  Type "gui" to switch to visual portfolio mode.', cls: 'dim' },
@@ -566,38 +549,38 @@ function initFullscreenTerminal() {
     const COMMANDS = {
         help: () => [
             { text: '', cls: '' },
-            { text: '  +- Available Commands ---------------------------+', cls: 'success' },
-            { text: '  �                                                �', cls: '' },
-            { text: '  �  ls [dir]      � List files / directories      �', cls: '' },
-            { text: '  �  cd <dir>      � Change directory              �', cls: '' },
-            { text: '  �  cat <file>    � View file contents            �', cls: '' },
-            { text: '  �  pwd           � Print current directory       �', cls: '' },
-            { text: '  �  tree          � Show full directory tree       �', cls: '' },
-            { text: '  �  whoami        � Who am I?                     �', cls: '' },
-            { text: '  �  uname -a      � System info                   �', cls: '' },
-            { text: '  �  date          � Current date/time             �', cls: '' },
-            { text: '  �  neofetch      � System overview               �', cls: '' },
-            { text: '  �  banner        � Show ASCII banner             �', cls: '' },
-            { text: '  �  theme <name>  � Switch theme (kali/green/red) �', cls: '' },
-            { text: '  �  gui           � Switch to visual mode         �', cls: '' },
-            { text: '  �  exit          � Close terminal, open GUI       �', cls: '' },
-            { text: '  �  clear         � Clear terminal                �', cls: '' },
-            { text: '  �  history       � Command history               �', cls: '' },
-            { text: '  �  sudo          � Try sudo ;)                   �', cls: '' },
-            { text: '  �                                                �', cls: '' },
-            { text: '  �  Tip: cd experience && cat 03_cyber_intern.log �', cls: 'info' },
-            { text: '  �                                                �', cls: '' },
-            { text: '  +------------------------------------------------+', cls: 'success' },
+            { text: '  ┌─ Available Commands ───────────────────────────┐', cls: 'success' },
+            { text: '  │                                                │', cls: '' },
+            { text: '  │  ls [dir]      — List files / directories      │', cls: '' },
+            { text: '  │  cd <dir>      — Change directory              │', cls: '' },
+            { text: '  │  cat <file>    — View file contents            │', cls: '' },
+            { text: '  │  pwd           — Print current directory       │', cls: '' },
+            { text: '  │  tree          — Show full directory tree       │', cls: '' },
+            { text: '  │  whoami        — Who am I?                     │', cls: '' },
+            { text: '  │  uname -a      — System info                   │', cls: '' },
+            { text: '  │  date          — Current date/time             │', cls: '' },
+            { text: '  │  neofetch      — System overview               │', cls: '' },
+            { text: '  │  banner        — Show ASCII banner             │', cls: '' },
+            { text: '  │  theme <name>  — Switch theme (kali/green/red) │', cls: '' },
+            { text: '  │  gui           — Switch to visual mode         │', cls: '' },
+            { text: '  │  exit          — Close terminal, open GUI       │', cls: '' },
+            { text: '  │  clear         — Clear terminal                │', cls: '' },
+            { text: '  │  history       — Command history               │', cls: '' },
+            { text: '  │  sudo          — Try sudo ;)                   │', cls: '' },
+            { text: '  │                                                │', cls: '' },
+            { text: '  │  Tip: cd experience && cat 01_soc_analyst.log    │', cls: 'info' },
+            { text: '  │                                                │', cls: '' },
+            { text: '  └────────────────────────────────────────────────┘', cls: 'success' },
             { text: '', cls: '' },
         ],
         pwd: () => [{ text: '  ' + cwd, cls: 'info' }],
-        whoami: () => [{ text: '  root � viewing som_portfolio from ' + window.location.hostname, cls: 'success' }],
+        whoami: () => [{ text: '  root — viewing som_portfolio from ' + window.location.hostname, cls: 'success' }],
         date: () => [{ text: '  ' + new Date().toLocaleString(), cls: 'info' }],
         banner: () => [{ text: FS_BANNER, cls: 'ascii-art' }],
         neofetch: () => [
             { text: '', cls: '' },
-            { text: '         ,.        root@oba-sec', cls: 'info' },
-            { text: '        ,;:;,      --------------------', cls: 'info' },
+            { text: '         ,.        root@som-sec', cls: 'info' },
+            { text: '        ,;:;,      ────────────────────', cls: 'info' },
             { text: '       ;:;:;\';     OS    : Kali GNU/Linux Rolling', cls: '' },
             { text: '      \';:;:\';\'    Kernel: 6.8.0-kali1-amd64', cls: '' },
             { text: '     \';:;:;:\';    Shell : zsh 5.9', cls: '' },
@@ -611,26 +594,26 @@ function initFullscreenTerminal() {
         tree: () => {
             const lines = [
                 { text: '  ~/', cls: 'success' },
-                { text: '  +-- README.md', cls: '' },
-                { text: '  +-- about.txt', cls: '' },
-                { text: '  +-- contact.json', cls: '' },
-                { text: '  +-- skills.txt', cls: '' },
-                { text: '  +-- certs.txt', cls: '' },
-                { text: '  +-- experience/', cls: 'info' },
-                { text: '  �   +-- 01_soc_analyst.log', cls: '' },
-                { text: '  �   +-- 02_it_support.log', cls: '' },
-                { text: '  �   +-- 03_cyber_intern.log', cls: '' },
-                { text: '  �   +-- 04_tech_support.log', cls: '' },
-                { text: '  +-- education/', cls: 'info' },
-                { text: '  �   +-- 01_college_1.txt', cls: '' },
-                { text: '  �   +-- 02_university_1.txt', cls: '' },
-                { text: '  +-- projects/', cls: 'info' },
-                { text: '      +-- netsweep_scanner.sh', cls: '' },
-                { text: '      +-- webcrawl_pro.py', cls: '' },
-                { text: '      +-- cryptovault.cpp', cls: '' },
-                { text: '      +-- malsandbox.docker', cls: '' },
-                { text: '      +-- packetprowler.py', cls: '' },
-                { text: '      +-- ctf_writeups.md', cls: '' },
+                { text: '  ├── README.md', cls: '' },
+                { text: '  ├── about.txt', cls: '' },
+                { text: '  ├── contact.json', cls: '' },
+                { text: '  ├── skills.txt', cls: '' },
+                { text: '  ├── certs.txt', cls: '' },
+                { text: '  ├── experience/', cls: 'info' },
+                { text: '  │   ├── 01_soc_analyst.log', cls: '' },
+                { text: '  │   ├── 02_it_support.log', cls: '' },
+                { text: '  │   ├── 03_security_intern.log', cls: '' },
+                { text: '  │   └── 04_helpdesk.log', cls: '' },
+                { text: '  ├── education/', cls: 'info' },
+                { text: '  │   ├── 01_infosec_bsc.txt', cls: '' },
+                { text: '  │   └── 02_network_diploma.txt', cls: '' },
+                { text: '  └── projects/', cls: 'info' },
+                { text: '      ├── netsweep_scanner.sh', cls: '' },
+                { text: '      ├── webcrawl_pro.py', cls: '' },
+                { text: '      ├── cryptovault.cpp', cls: '' },
+                { text: '      ├── malsandbox.docker', cls: '' },
+                { text: '      ├── packetprowler.py', cls: '' },
+                { text: '      └── ctf_writeups.md', cls: '' },
                 { text: '', cls: '' },
                 { text: '  3 directories, 13 files', cls: 'dim' },
             ];
@@ -643,7 +626,7 @@ function initFullscreenTerminal() {
         },
         sudo: () => [
             { text: '  [sudo] password for root: ********', cls: 'error' },
-            { text: '  Nice try! This incident will be reported. ??', cls: 'error' },
+            { text: '  Nice try! This incident will be reported. 🚨', cls: 'error' },
         ],
     };
 
@@ -657,7 +640,7 @@ function initFullscreenTerminal() {
         // Echo command with prompt
         const echo = document.createElement('p');
         echo.className = 'cmd';
-        echo.textContent = `root@oba-sec:${cwd}$ ${trimmed}`;
+        echo.textContent = `root@som-sec:${cwd}$ ${trimmed}`;
         output.appendChild(echo);
         requestAnimationFrame(() => { scrollElementToBottom(body); });
 
@@ -694,7 +677,7 @@ function initFullscreenTerminal() {
         }
 
         if (cmd === 'uname') {
-            addOutput([{ text: '  Linux oba-sec 6.8.0-kali1-amd64 #1 SMP PREEMPT_DYNAMIC x86_64 GNU/Linux', cls: 'info' }]);
+            addOutput([{ text: '  Linux som-sec 6.8.0-kali1-amd64 #1 SMP PREEMPT_DYNAMIC x86_64 GNU/Linux', cls: 'info' }]);
             return;
         }
 
@@ -772,7 +755,7 @@ function initFullscreenTerminal() {
     }
 
     function updatePrompt() {
-        if (promptEl) promptEl.textContent = `root@oba-sec:${cwd}$`;
+        if (promptEl) promptEl.textContent = `root@som-sec:${cwd}$`;
     }
 
     input.addEventListener('keydown', e => {
@@ -797,7 +780,7 @@ function initFullscreenTerminal() {
         }
     });
 
-    // Tab autocomplete � real Kali-style
+    // Tab autocomplete — real Kali-style
     let lastTabVal = null;
     let tabShownList = false;
 
@@ -811,7 +794,7 @@ function initFullscreenTerminal() {
         if (inputChanged) tabShownList = false;
         lastTabVal = val;
 
-        // Split: "cat " ? cmd="cat", partial=""
+        // Split: "cat " → cmd="cat", partial=""
         const spaceIdx = val.indexOf(' ');
         const hasArg = spaceIdx !== -1;
         const cmdPart = hasArg ? val.substring(0, spaceIdx) : val;
@@ -884,7 +867,7 @@ function initFullscreenTerminal() {
 }
 
 
-// --- Custom Cursor ----------------------------------------------------------
+// ─── Custom Cursor ──────────────────────────────────────────────────────────
 
 // --- Logo Button ---
 (function initLogoButton() {
@@ -934,7 +917,7 @@ function initFullscreenTerminal() {
     document.querySelectorAll('a, button').forEach(el => el.style.cursor = 'none');
 })();
 
-// --- Particle System --------------------------------------------------------
+// ─── Particle System ────────────────────────────────────────────────────────
 (function initParticles() {
     const canvas = document.getElementById('particle-canvas');
     if (!canvas) return;
@@ -999,11 +982,11 @@ function initFullscreenTerminal() {
     draw();
 })();
 
-// --- Matrix Rain (Mouse-Reactive) -------------------------------------------
+// ─── Matrix Rain (Mouse-Reactive) ───────────────────────────────────────────
 (function initMatrix() {
     const canvas  = document.getElementById('matrix-canvas');
     const ctx     = canvas.getContext('2d');
-    const CHARS   = '?????????????????????????01?BAD0x</>{}[]$#@!%^&*';
+    const CHARS   = 'アイウエオカキクケコサシスセソタチツテトナニヌネノ01アBAD0x</>{}[]$#@!%^&*';
     const FONT_SZ = 14;
     let cols, drops, speeds, brightness;
     let mouseX = -1, mouseY = -1;
@@ -1038,7 +1021,7 @@ function initFullscreenTerminal() {
     });
 
     function draw() {
-        // Fade trail � slower fade = longer trails
+        // Fade trail — slower fade = longer trails
         ctx.fillStyle = 'rgba(0,0,0,0.05)';
         ctx.fillRect(0, 0, canvas.width, canvas.height);
 
@@ -1050,7 +1033,7 @@ function initFullscreenTerminal() {
             const dist = Math.sqrt(dx * dx + dy * dy);
             const char = CHARS[Math.floor(Math.random() * CHARS.length)];
 
-            // Mouse proximity � bright glow
+            // Mouse proximity — bright glow
             if (dist < MOUSE_RADIUS) {
                 const intensity = 1 - (dist / MOUSE_RADIUS);
                 ctx.fillStyle = getThemeColor(0.4 + intensity * 0.6);
@@ -1058,7 +1041,7 @@ function initFullscreenTerminal() {
                 ctx.fillText(char, x, y);
                 ctx.font = FONT_SZ + 'px monospace';
             } else {
-                // Head character � bright white/blue
+                // Head character — bright white/blue
                 ctx.fillStyle = getThemeColor(brightness[i] * 0.8);
                 ctx.font = FONT_SZ + 'px monospace';
                 ctx.fillText(char, x, y);
@@ -1086,7 +1069,7 @@ function initFullscreenTerminal() {
 })();
 
 
-// --- Typewriter Utility ------------------------------------------------------
+// ─── Typewriter Utility ──────────────────────────────────────────────────────
 function typewrite(el, text, speed, callback) {
     let i = 0;
     el.textContent = '';
@@ -1102,7 +1085,7 @@ function typewrite(el, text, speed, callback) {
 }
 
 
-// --- Hero Terminal Sequence --------------------------------------------------
+// ─── Hero Terminal Sequence ──────────────────────────────────────────────────
 function runHeroTerminal() {
     const cmd1    = document.getElementById('cmd1');
     const out1    = document.getElementById('output1');
@@ -1152,7 +1135,7 @@ function animateProgress(barEl, pctEl, from, to, duration, cb) {
 }
 
 
-// --- Logo Typewriter ---------------------------------------------------------
+// ─── Logo Typewriter ─────────────────────────────────────────────────────────
 function runLogoType() {
     const el   = document.getElementById('logo-type');
     const text = 'SOM_SEC';
@@ -1160,7 +1143,7 @@ function runLogoType() {
 }
 
 
-// --- Smooth Nav Active State -------------------------------------------------
+// ─── Smooth Nav Active State ─────────────────────────────────────────────────
 function initNavActiveState() {
     const sections = document.querySelectorAll('section[id]');
     const links    = document.querySelectorAll('.nav-link');
@@ -1179,7 +1162,7 @@ function initNavActiveState() {
 }
 
 
-// --- Fade-In on Scroll -------------------------------------------------------
+// ─── Fade-In on Scroll ───────────────────────────────────────────────────────
 function initFadeIn() {
     const targets = document.querySelectorAll(
         '.section-header, .terminal-card, .project-card, .skill-category, .stat-card, .hero-cta, .about-stats'
@@ -1200,7 +1183,7 @@ function initFadeIn() {
 }
 
 
-// --- Skill Bar Animation -----------------------------------------------------
+// ─── Skill Bar Animation ─────────────────────────────────────────────────────
 function initSkillBars() {
     const fills = document.querySelectorAll('.skill-fill');
 
@@ -1218,7 +1201,7 @@ function initSkillBars() {
 }
 
 
-// --- Stat Counter Animation --------------------------------------------------
+// ─── Stat Counter Animation ──────────────────────────────────────────────────
 function initStatCounters() {
     const nums = document.querySelectorAll('.stat-num[data-target]');
 
@@ -1247,8 +1230,8 @@ function countUp(el, target, duration) {
 }
 
 
-// --- Contact Form (Backend API) ---------------------------------------------
-// --- Contact Form feature moved to feature-contact.js -------------------------------------------
+// ─── Contact Form (Backend API) ─────────────────────────────────────────────
+// ─── Contact Form feature moved to feature-contact.js ───────────────────────────────────────────
 // initContactForm is now defined in feature-contact.js and wired from DOMContentLoaded.
 function initGlitch() {
     const logo = document.querySelector('.nav-logo');
@@ -1261,7 +1244,7 @@ function initGlitch() {
 }
 
 
-// --- Keyboard Shortcut: G for GitHub (example Easter Egg) -------------------
+// ─── Keyboard Shortcut: G for GitHub (example Easter Egg) ───────────────────
 function initKeyboardEasterEgg() {
     const sequence = [];
     const CODE     = ['ArrowUp','ArrowUp','ArrowDown','ArrowDown','ArrowLeft','ArrowRight','ArrowLeft','ArrowRight'];
@@ -1287,7 +1270,7 @@ function flashScreen() {
     setTimeout(() => flash.remove(), 600);
 
     const msg = document.createElement('div');
-    msg.textContent = '// ACCESS GRANTED � KONAMI CODE DETECTED';
+    msg.textContent = '// ACCESS GRANTED — KONAMI CODE DETECTED';
     msg.style.cssText = [
         'position:fixed','top:50%','left:50%',
         'transform:translate(-50%,-50%)',
@@ -1301,7 +1284,7 @@ function flashScreen() {
 }
 
 
-// --- Mobile Nav Toggle -------------------------------------------------------
+// ─── Mobile Nav Toggle ───────────────────────────────────────────────────────
 function initMobileNav() {
     const btn   = document.getElementById('mobile-menu-btn');
     const links = document.getElementById('nav-links');
@@ -1322,7 +1305,7 @@ function initMobileNav() {
 }
 
 
-// --- Project Filters ---------------------------------------------------------
+// ─── Project Filters ─────────────────────────────────────────────────────────
 function initProjectFilters() {
     const buttons = document.querySelectorAll('.filter-btn');
     const cards   = document.querySelectorAll('.project-card[data-category]');
@@ -1353,7 +1336,7 @@ function initProjectFilters() {
 }
 
 
-// --- Back to Top -------------------------------------------------------------
+// ─── Back to Top ─────────────────────────────────────────────────────────────
 function initBackToTop() {
     const btn = document.getElementById('back-to-top');
     if (!btn) return;
@@ -1372,7 +1355,7 @@ function initBackToTop() {
 }
 
 
-// --- Nav Scroll Effect -------------------------------------------------------
+// ─── Nav Scroll Effect ───────────────────────────────────────────────────────
 function initNavScroll() {
     const nav = document.getElementById('main-nav');
     if (!nav) return;
@@ -1383,7 +1366,7 @@ function initNavScroll() {
 }
 
 
-// --- Server Stats ------------------------------------------------------------
+// ─── Server Stats ────────────────────────────────────────────────────────────
 function initServerStats() {
     const statusEl = document.getElementById('server-status');
     const uptimeEl = document.getElementById('server-uptime');
@@ -1402,13 +1385,13 @@ function initServerStats() {
                     visitorEl.textContent = data.visitors;
                 }
                 if (statusEl) {
-                    statusEl.textContent = '? ONLINE';
+                    statusEl.textContent = '● ONLINE';
                     statusEl.className = 'val success';
                 }
             })
             .catch(() => {
                 if (statusEl) {
-                    statusEl.textContent = '? OFFLINE';
+                    statusEl.textContent = '● OFFLINE';
                     statusEl.className = 'val warn';
                 }
             });
@@ -1419,7 +1402,7 @@ function initServerStats() {
 }
 
 
-// --- Staggered Timeline Animation -------------------------------------------
+// ─── Staggered Timeline Animation ───────────────────────────────────────────
 function initTimelineAnim() {
     const items = document.querySelectorAll('.timeline-item');
 
@@ -1440,7 +1423,7 @@ function initTimelineAnim() {
 }
 
 
-// --- Section Header Typewriter on Scroll ------------------------------------
+// ─── Section Header Typewriter on Scroll ────────────────────────────────────
 function initSectionTypewriter() {
     const headers = document.querySelectorAll('.section-header');
 
@@ -1496,7 +1479,7 @@ function initSectionTypewriter() {
 }
 
 
-// --- Scroll Progress Bar ----------------------------------------------------
+// ─── Scroll Progress Bar ────────────────────────────────────────────────────
 function initScrollProgress() {
     const bar = document.getElementById('scroll-progress');
     if (!bar) return;
@@ -1509,7 +1492,7 @@ function initScrollProgress() {
 }
 
 
-// --- Section Content Reveal -------------------------------------------------
+// ─── Section Content Reveal ─────────────────────────────────────────────────
 function initSectionReveal() {
     const sections = document.querySelectorAll('.section');
 
@@ -1541,7 +1524,7 @@ function initSectionReveal() {
 }
 
 
-// --- Boot --------------------------------------------------------------------
+// ─── Boot ────────────────────────────────────────────────────────────────────
 function runIfReady(nameOrFn) {
     const initFn = typeof nameOrFn === 'string' ? window[nameOrFn] : nameOrFn;
     if (typeof initFn === 'function') {
@@ -1585,11 +1568,11 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 
-// -------------------------------------------------------------------------------
-//   v4.0 � New Feature Modules
-// -------------------------------------------------------------------------------
+// ═══════════════════════════════════════════════════════════════════════════════
+//   v4.0 — New Feature Modules
+// ═══════════════════════════════════════════════════════════════════════════════
 
-// --- Toast Notification System ----------------------------------------------
+// ─── Toast Notification System ──────────────────────────────────────────────
 function showToast(msg, type = 'info') {
     const container = document.getElementById('toast-container');
     if (!container) return;
@@ -1605,8 +1588,8 @@ function initToastSystem() {
     window.showToast = showToast;
 }
 
-// --- Theme Switcher ---------------------------------------------------------
-// --- Theme + Command Palette features moved to feature-theme.js and feature-command-palette.js
+// ─── Theme Switcher ─────────────────────────────────────────────────────────
+// ─── Theme + Command Palette features moved to feature-theme.js and feature-command-palette.js
 // initThemeSwitcher and initCommandPalette are now defined in feature modules.
 function initLiveTerminal() {
     const input  = document.getElementById('live-term-input');
@@ -1621,65 +1604,65 @@ function initLiveTerminal() {
     let histIdx = -1;
 
     const ASCII_BANNER = `
- �������+�������+ ������+    ������+  ������+ ������+ ��������+
- ��+----+��+----+��+----+    ��+--��+��+---��+��+--��++--��+--+
- �������+�����+  ���         ������++���   ���������++   ���   
- +----�����+--+  ���         ��+---+ ���   �����+--��+   ���   
- ���������������++������+    ���     +������++���  ���   ���   
- +------++------+ +-----+    +-+      +-----+ +-+  +-+   +-+`;
+ ███████╗███████╗ ██████╗    ██████╗  ██████╗ ██████╗ ████████╗
+ ██╔════╝██╔════╝██╔════╝    ██╔══██╗██╔═══██╗██╔══██╗╚══██╔══╝
+ ███████╗█████╗  ██║         ██████╔╝██║   ██║██████╔╝   ██║   
+ ╚════██║██╔══╝  ██║         ██╔═══╝ ██║   ██║██╔══██╗   ██║   
+ ███████║███████╗╚██████╗    ██║     ╚██████╔╝██║  ██║   ██║   
+ ╚══════╝╚══════╝ ╚═════╝    ╚═╝      ╚═════╝ ╚═╝  ╚═╝   ╚═╝`;
 
     const COMMANDS = {
         help: () => [
-            { text: '  help         � Show available commands', cls: 'info' },
-            { text: '  about        � About me', cls: '' },
-            { text: '  skills       � List skills', cls: '' },
-            { text: '  projects     � Show projects', cls: '' },
-            { text: '  contact      � Contact info', cls: '' },
-            { text: '  theme <name> � Switch theme (kali/green/red)', cls: '' },
-            { text: '  whoami       � Who are you?', cls: '' },
-            { text: '  date         � Current date/time', cls: '' },
-            { text: '  uptime       � Server uptime', cls: '' },
-            { text: '  matrix       � Toggle matrix rain', cls: '' },
-            { text: '  banner       � Show ASCII banner', cls: '' },
-            { text: '  clear        � Clear terminal', cls: '' },
-            { text: '  history      � Command history', cls: '' },
-            { text: '  sudo         � Try sudo ;)', cls: '' },
+            { text: '  help         — Show available commands', cls: 'info' },
+            { text: '  about        — About me', cls: '' },
+            { text: '  skills       — List skills', cls: '' },
+            { text: '  projects     — Show projects', cls: '' },
+            { text: '  contact      — Contact info', cls: '' },
+            { text: '  theme <name> — Switch theme (kali/green/red)', cls: '' },
+            { text: '  whoami       — Who are you?', cls: '' },
+            { text: '  date         — Current date/time', cls: '' },
+            { text: '  uptime       — Server uptime', cls: '' },
+            { text: '  matrix       — Toggle matrix rain', cls: '' },
+            { text: '  banner       — Show ASCII banner', cls: '' },
+            { text: '  clear        — Clear terminal', cls: '' },
+            { text: '  history      — Command history', cls: '' },
+            { text: '  sudo         — Try sudo ;)', cls: '' },
         ],
         about: () => [
-            { text: '+- About --------------------------------------+', cls: 'success' },
-            { text: '� Sam Novak                          �', cls: '' },
-            { text: '� IT & Cybersecurity Professional              �', cls: '' },
-            { text: '� Incident Response, Threat Detection, IT Ops  �', cls: '' },
-            { text: '� Based in Amsterdam, Netherlands              �', cls: '' },
-            { text: '+----------------------------------------------+', cls: 'success' },
+            { text: '┌─ About ──────────────────────────────────────┐', cls: 'success' },
+            { text: '│ Sam Novak                          │', cls: '' },
+            { text: '│ IT & Cybersecurity Professional              │', cls: '' },
+            { text: '│ Incident Response, Threat Detection, IT Ops  │', cls: '' },
+            { text: '│ Based in Amsterdam, Netherlands                  │', cls: '' },
+            { text: '└──────────────────────────────────────────────┘', cls: 'success' },
         ],
         skills: () => [
-            { text: '  [����������]  92%  IT Support & Troubleshooting', cls: 'success' },
-            { text: '  [����������]  90%  Windows', cls: 'success' },
-            { text: '  [����������]  85%  Linux', cls: 'success' },
-            { text: '  [����������]  80%  Networking (DNS/DHCP/VPN)', cls: 'info' },
-            { text: '  [����������]  80%  Incident Response', cls: 'info' },
-            { text: '  [����������]  78%  Vulnerability Assessment', cls: '' },
-            { text: '  [����������]  75%  Active Directory', cls: '' },
-            { text: '  [����������]  75%  Threat Detection', cls: '' },
+            { text: '  [■■■■■■■■■░]  92%  IT Support & Troubleshooting', cls: 'success' },
+            { text: '  [■■■■■■■■■░]  90%  Windows', cls: 'success' },
+            { text: '  [■■■■■■■■░░]  85%  Linux', cls: 'success' },
+            { text: '  [■■■■■■■■░░]  80%  Networking (DNS/DHCP/VPN)', cls: 'info' },
+            { text: '  [■■■■■■■■░░]  80%  Incident Response', cls: 'info' },
+            { text: '  [■■■■■■■░░░]  78%  Vulnerability Assessment', cls: '' },
+            { text: '  [■■■■■■■░░░]  75%  Active Directory', cls: '' },
+            { text: '  [■■■■■■■░░░]  75%  Threat Detection', cls: '' },
         ],
         projects: () => [
-            { text: '  [01] NetHunter Toolkit    � Network scanner & analyzer', cls: 'success' },
-            { text: '  [02] CryptoVault          � Encrypted file manager', cls: 'success' },
-            { text: '  [03] WebShield WAF        � Custom web app firewall', cls: 'info' },
-            { text: '  [04] MalwareScope         � Binary analysis tool', cls: 'info' },
-            { text: '  [05] PhishGuard           � Anti-phishing browser ext', cls: '' },
-            { text: '  [06] SecAudit Framework   � Automated auditing', cls: '' },
+            { text: '  [01] NetHunter Toolkit    — Network scanner & analyzer', cls: 'success' },
+            { text: '  [02] CryptoVault          — Encrypted file manager', cls: 'success' },
+            { text: '  [03] WebShield WAF        — Custom web app firewall', cls: 'info' },
+            { text: '  [04] MalwareScope         — Binary analysis tool', cls: 'info' },
+            { text: '  [05] PhishGuard           — Anti-phishing browser ext', cls: '' },
+            { text: '  [06] SecAudit Framework   — Automated auditing', cls: '' },
         ],
         contact: () => [
-            { text: '  ?? Email      : sam.novak@protonmail.com', cls: 'info' },
-            { text: '  ?? GitHub     : github.com/som_sec', cls: '' },
-            { text: '  ?? LinkedIn   : linkedin.com/in/sam-novak', cls: '' },
-            { text: '  ?? TryHackMe : tryhackme.com/p/som_sec', cls: 'success' },
-            { text: '  ?? Location   : Amsterdam, Netherlands', cls: '' },
+            { text: '  📧 Email      : sam.novak@protonmail.com', cls: 'info' },
+            { text: '  🐙 GitHub     : github.com/som_sec', cls: '' },
+            { text: '  💼 LinkedIn   : linkedin.com/in/som_sec', cls: '' },
+            { text: '  🔓 TryHackMe : tryhackme.com/p/som_sec', cls: 'success' },
+            { text: '  📍 Location   : Amsterdam, Netherlands', cls: '' },
         ],
         whoami: () => [
-            { text: '  visitor � Viewing som_portfolio from ' + window.location.hostname, cls: 'success' },
+            { text: '  visitor — Viewing som_portfolio from ' + window.location.hostname, cls: 'success' },
         ],
         date: () => [
             { text: '  ' + new Date().toLocaleString(), cls: 'info' },
@@ -1709,7 +1692,7 @@ function initLiveTerminal() {
         },
         sudo: () => [
             { text: '  [sudo] password for visitor: ********', cls: 'error' },
-            { text: '  visitor is not in the sudoers file. This incident will be reported. ??', cls: 'error' },
+            { text: '  visitor is not in the sudoers file. This incident will be reported. 🚨', cls: 'error' },
         ],
     };
 
@@ -1802,7 +1785,7 @@ function initLiveTerminal() {
     window.__serverStartTime = Date.now();
 }
 
-// --- Skill Radar Chart (Canvas) ---------------------------------------------
+// ─── Skill Radar Chart (Canvas) ─────────────────────────────────────────────
 function initSkillRadar() {
     const canvas = document.getElementById('skill-radar');
     if (!canvas) return;
@@ -1934,10 +1917,10 @@ function initSkillRadar() {
     bodyObs.observe(document.body, { attributes: true, attributeFilter: ['data-theme'] });
 }
 
-// --- 3D Tilt Cards (disabled) -----------------------------------------------
-function init3DTilt() { /* simplified � removed 3D tilt for cleaner look */ }
+// ─── 3D Tilt Cards (disabled) ───────────────────────────────────────────────
+function init3DTilt() { /* simplified — removed 3D tilt for cleaner look */ }
 
-// --- Text Decrypt Effect ----------------------------------------------------
+// ─── Text Decrypt Effect ────────────────────────────────────────────────────
 function initTextDecrypt() {
     const targets = document.querySelectorAll('.section-title');
     const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*';
@@ -1972,7 +1955,7 @@ function initTextDecrypt() {
 }
 
 
-// --- Text Scramble on Hover -------------------------------------------------
+// ─── Text Scramble on Hover ─────────────────────────────────────────────────
 function initHoverScramble() {
     const GLITCH = '!@#$%^&*()_+-=[]{}|;:,.<>?/~`01';
     const targets = document.querySelectorAll('.project-title, .timeline-title, .skill-cat-title, .card-header');
@@ -2007,7 +1990,7 @@ function initHoverScramble() {
 }
 
 
-// --- Animated Timeline Draw Line --------------------------------------------
+// ─── Animated Timeline Draw Line ────────────────────────────────────────────
 function initTimelineDraw() {
     const line = document.querySelector('.timeline::before') ? null : null;
     const timeline = document.querySelector('.timeline');
@@ -2035,7 +2018,7 @@ function initTimelineDraw() {
 }
 
 
-// --- Floating Particles (lightweight) ---------------------------------------
+// ─── Floating Particles (lightweight) ───────────────────────────────────────
 function initFloatingParticles() {
     if (window.matchMedia('(max-width: 768px)').matches) return;
 
@@ -2060,7 +2043,7 @@ function initFloatingParticles() {
 }
 
 
-// --- Stat Counter Flicker Effect --------------------------------------------
+// ─── Stat Counter Flicker Effect ────────────────────────────────────────────
 function initStatFlicker() {
     const nums = document.querySelectorAll('.stat-num');
     nums.forEach(el => {
@@ -2080,7 +2063,7 @@ function initStatFlicker() {
 }
 
 
-// --- Section Parallax Depth -------------------------------------------------
+// ─── Section Parallax Depth ─────────────────────────────────────────────────
 function initSectionParallax() {
     const dividers = document.querySelectorAll('.section-divider');
     window.addEventListener('scroll', () => {
@@ -2096,7 +2079,7 @@ function initSectionParallax() {
 }
 
 
-// --- Mouse Glow Follower ----------------------------------------------------
+// ─── Mouse Glow Follower ────────────────────────────────────────────────────
 function initMouseGlow() {
     if (window.matchMedia('(max-width: 768px)').matches) return;
 
@@ -2122,7 +2105,7 @@ function initMouseGlow() {
 }
 
 
-// --- Smooth Section Scroll Indicator ----------------------------------------
+// ─── Smooth Section Scroll Indicator ────────────────────────────────────────
 function initScrollIndicator() {
     const sections = document.querySelectorAll('section[id]');
     const indicator = document.createElement('div');
