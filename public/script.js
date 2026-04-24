@@ -1,4 +1,4 @@
-/* ============================================
+﻿/* ============================================
    script.js — Animations, Matrix, Interactions
    v4.0 — Interactive terminal, theme switcher,
           command palette, radar chart, toasts,
@@ -521,7 +521,7 @@ function initFullscreenTerminal() {
         return cwd + '/' + p;
     }
 
-    function addOutput(lines) {
+    function addOutput(lines, isHeader) {
         lines.forEach(l => {
             const p = document.createElement('p');
             if (l.cls === 'ascii-art') {
@@ -531,6 +531,7 @@ function initFullscreenTerminal() {
                 p.className = l.cls || '';
                 p.textContent = l.text;
             }
+            if (isHeader) p.dataset.header = '1';
             output.appendChild(p);
         });
         requestAnimationFrame(() => { scrollElementToBottom(body); });
@@ -546,7 +547,7 @@ function initFullscreenTerminal() {
         { text: '  Type "help" for available commands.', cls: 'info' },
         { text: '  Type "gui" to switch to visual portfolio mode.', cls: 'dim' },
         { text: '', cls: '' },
-    ]);
+    ], true);
 
     const COMMANDS = {
         help: () => [
@@ -742,7 +743,9 @@ function initFullscreenTerminal() {
         if (COMMANDS[cmd]) {
             const result = COMMANDS[cmd]();
             if (result === 'CLEAR') {
-                clearElementContent(output);
+                Array.from(output.children)
+                    .filter(el => !el.dataset.header)
+                    .forEach(el => el.remove());
                 return;
             }
             addOutput(result);
@@ -774,7 +777,9 @@ function initFullscreenTerminal() {
             autocomplete(input);
         } else if (e.key === 'l' && e.ctrlKey) {
             e.preventDefault();
-            clearElementContent(output);
+            Array.from(output.children)
+                .filter(el => !el.dataset.header)
+                .forEach(el => el.remove());
         }
     });
 
@@ -1743,7 +1748,9 @@ function initLiveTerminal() {
         if (COMMANDS[cmd]) {
             const result = COMMANDS[cmd]();
             if (result === 'CLEAR') {
-                clearElementContent(output);
+                Array.from(output.children)
+                    .filter(el => !el.dataset.header)
+                    .forEach(el => el.remove());
                 return;
             }
             addOutput(result);
