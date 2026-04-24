@@ -1,0 +1,22 @@
+# Dependencies
+node_modules/
+
+# Runtime data (sensitive — never commit)
+messages.json
+security-events.jsonl
+
+# Backup files
+public/*.bak
+
+# Logs
+*.log
+npm-debug.log*
+
+# Environment variables
+.env
+.env.*
+!.env.example
+
+# OS
+.DS_Store
+Thumbs.db
