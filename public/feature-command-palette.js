@@ -51,7 +51,14 @@
             filtered.forEach((cmd, i) => {
                 const li = globalScope.document.createElement('li');
                 if (i === activeIdx) li.classList.add('active');
-                li.innerHTML = `<span class="cmd-icon">${cmd.icon}</span><span class="cmd-label">${cmd.label}</span>`;
+                const iconSpan = globalScope.document.createElement('span');
+                iconSpan.className = 'cmd-icon';
+                iconSpan.textContent = cmd.icon;
+                const labelSpan = globalScope.document.createElement('span');
+                labelSpan.className = 'cmd-label';
+                labelSpan.textContent = cmd.label;
+                li.appendChild(iconSpan);
+                li.appendChild(labelSpan);
                 li.addEventListener('click', () => {
                     closePalette();
                     cmd.action();

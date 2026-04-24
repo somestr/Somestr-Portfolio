@@ -12,6 +12,10 @@ const SECURITY_ALERT_WEBHOOK_URL = (process.env.SECURITY_ALERT_WEBHOOK_URL || ''
 const BODY_LIMIT = '10kb';
 const RATE_WINDOW_MS = 60 * 1000;
 const RATE_MAX_REQUESTS = 5;
+const STATS_RATE_MAX_REQUESTS = 20;
+const MAX_STORED_MESSAGES = 1000;
+const SERVER_REQUEST_TIMEOUT_MS = 10_000;
+const SERVER_HEADERS_TIMEOUT_MS = 11_000;
 const SUSPICIOUS_ACTIVITY_WINDOW_MS = 15 * 60 * 1000;
 const SUSPICIOUS_ACTIVITY_THRESHOLD = 3;
 const RATE_LIMIT_ESCALATION_THRESHOLD = 2;
@@ -179,7 +183,11 @@ function sanitizeInput(value, maxLength) {
 
     return value
         .trim()
-        .replace(/[<>]/g, '')
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#x27;')
         .slice(0, maxLength);
 }
 
@@ -283,6 +291,19 @@ function detectSuspiciousRequest(req) {
                 severity: entry.severity,
                 reason: entry.reason,
             };
+        }
+    }
+
+    if (['POST', 'PUT', 'PATCH'].includes(method) && req.body && typeof req.body === 'object') {
+        const bodyStr = JSON.stringify(req.body);
+        for (const entry of SUSPICIOUS_PAYLOAD_PATTERNS) {
+            if (entry.pattern.test(bodyStr)) {
+                return {
+                    type: 'probe_request',
+                    severity: entry.severity,
+                    reason: entry.reason,
+                };
+            }
         }
     }
 
@@ -579,6 +600,9 @@ async function readStoredMessages() {
 
 async function storeMessage(entry) {
     const messages = await readStoredMessages();
+    if (messages.length >= MAX_STORED_MESSAGES) {
+        messages.splice(0, messages.length - MAX_STORED_MESSAGES + 1);
+    }
     messages.push(entry);
     await fs.writeFile(CONTACT_MESSAGES_FILE, JSON.stringify(messages, null, 2), 'utf8');
 }
@@ -635,6 +659,7 @@ function shouldServeIndex(req) {
 function createApp() {
     const app = express();
     const checkRateLimit = createRateLimiter(RATE_WINDOW_MS, RATE_MAX_REQUESTS);
+    const checkStatsRateLimit = createRateLimiter(RATE_WINDOW_MS, STATS_RATE_MAX_REQUESTS);
     const suspiciousActivityStore = createExpiringCounterStore(SUSPICIOUS_ACTIVITY_WINDOW_MS);
     const rateLimitViolationStore = createExpiringCounterStore(SUSPICIOUS_ACTIVITY_WINDOW_MS);
     const quarantineStore = createQuarantineStore(QUARANTINE_WINDOW_MS);
@@ -692,6 +717,10 @@ function createApp() {
         res.setHeader('X-Frame-Options', 'DENY');
         res.setHeader('X-Permitted-Cross-Domain-Policies', 'none');
         res.setHeader('X-XSS-Protection', '0');
+        if (req.protocol === 'https' || req.get('x-forwarded-proto') === 'https') {
+            res.setHeader('Strict-Transport-Security', 'max-age=63072000; includeSubDomains; preload');
+        }
+        res.setHeader('Cross-Origin-Embedder-Policy', 'require-corp');
         next();
     });
 
@@ -799,7 +828,7 @@ function createApp() {
             }
 
             const entry = {
-                id: Date.now(),
+                id: crypto.randomUUID(),
                 ...validation.value,
                 date: new Date().toISOString(),
                 ip: clientIp,
@@ -815,8 +844,12 @@ function createApp() {
     });
 
     app.get('/api/stats', (req, res) => {
+        const clientIp = getClientIp(req) || 'unknown';
+        if (!checkStatsRateLimit(clientIp)) {
+            return sendApiError(res, 429, 'Too many requests. Please wait.');
+        }
         visitorCount += 1;
-        res.json({ visitors: visitorCount, uptime: process.uptime() });
+        res.json({ visitors: visitorCount });
     });
 
     app.use('/api', (req, res) => {
@@ -874,7 +907,7 @@ function resolvePort() {
 function startServer(port = resolvePort()) {
     const app = createApp();
 
-    return app.listen(port, () => {
+    const server = app.listen(port, () => {
         console.log(`
 ╔══════════════════════════════════════════╗
 ║   OBA Server Active                     ║
@@ -883,6 +916,10 @@ function startServer(port = resolvePort()) {
 ╚══════════════════════════════════════════╝
         `);
     });
+
+    server.requestTimeout = SERVER_REQUEST_TIMEOUT_MS;
+    server.headersTimeout = SERVER_HEADERS_TIMEOUT_MS;
+    return server;
 }
 
 if (require.main === module) {
