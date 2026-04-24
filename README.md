@@ -1,6 +1,6 @@
 # Somestr Portfolio
 
-Interactive IT and cybersecurity portfolio with a CLI-style frontend, contact form, security event logging, and a hardened Node.js/Express backend.
+Interactive IT and cybersecurity portfolio with a CLI-style frontend, static GitHub Pages deployment, and an optional hardened Node.js/Express backend for local/demo security features.
 
 ## Features
 
@@ -8,7 +8,8 @@ Interactive IT and cybersecurity portfolio with a CLI-style frontend, contact fo
 - GUI portfolio mode with skill radar chart, project cards, themes, and contact form
 - Turkish / English language toggle
 - Theme switcher: Kali, Green, and Red
-- Hardened backend:
+- Free static deployment through GitHub Pages and GitHub Actions
+- Optional hardened backend:
   - Contact and stats rate limiting
   - IP quarantine after repeated suspicious activity
   - Decoy routes for scanners and automated probes
@@ -25,6 +26,7 @@ Interactive IT and cybersecurity portfolio with a CLI-style frontend, contact fo
 | Framework | Express 5 |
 | Frontend | Vanilla JavaScript, HTML, CSS custom properties |
 | Tests | Node built-in test runner |
+| Static hosting | GitHub Pages |
 
 ## Getting Started
 
@@ -43,6 +45,8 @@ npm run dev
 ```
 
 Open `http://localhost:3000`.
+
+GitHub Pages deploys the static site from `public/`. The Node server is only needed for local development or optional dynamic backend hosting.
 
 ### Checks
 
@@ -65,48 +69,42 @@ npm run audit
 
 ## Public Release Checklist
 
-Before making the repository public:
+Before and after public releases:
 
 - Confirm `git status --short` does not show accidental runtime data, `.env` files, logs, or backup files.
 - Confirm `messages.json`, `security-events.jsonl`, `.env`, and `node_modules/` are not tracked by Git.
 - Review Git history for previously committed secrets or private data. If any real secret was committed, rotate it first, then clean history.
 - Enable GitHub secret scanning and push protection in the repository security settings.
-- Keep contact messages and security logs outside the repository. Use platform storage, a mounted volume, or a database for production.
+- Keep contact messages and security logs outside the repository. Static GitHub Pages does not store them.
 - Review visible personal details in `public/index.html` before publishing.
 - Run `npm run check`, `npm test`, and `npm run audit` before pushing a release.
 
 ## Deployment
 
-This is a Node.js/Express app. GitHub Pages can host only the static frontend and will not run `/api/contact`, security event logging, or decoy routes. Use a Node-capable host such as Render, Railway, Fly.io, Heroku, or a VPS.
+### GitHub Pages (free static mode)
 
-### Render
+This repository is configured to deploy `public/` with GitHub Actions, so no paid service is required for the public portfolio.
 
-1. Create a new Web Service and connect this GitHub repository.
-2. Build command: `npm install`
-3. Start command: `npm start`
-4. Environment variables: `NODE_ENV=production`, `TRUST_PROXY=1`
+1. Go to repository `Settings > Pages`.
+2. Set `Source` to `GitHub Actions`.
+3. Push to `main` and wait for the `Deploy GitHub Pages` workflow.
+4. The expected project URL is `https://somestr.github.io/Somestr-Portfolio/`.
 
-### Railway
+Static mode limitations:
 
-1. Create a new project from this GitHub repository.
-2. Railway can use the included `Procfile`.
-3. Environment variables: `NODE_ENV=production`, `TRUST_PROXY=1`
+- `/api/contact`, `/api/stats`, security event logging, webhook alerts, and decoy routes do not run on GitHub Pages.
+- The contact form shows a static-mode notice instead of pretending the message was sent.
+- The server status card shows `STATIC`.
 
-### Fly.io
+### Local / optional Node backend
 
-```bash
-fly launch
-fly secrets set NODE_ENV=production TRUST_PROXY=1
-fly deploy
-```
-
-### VPS / Generic Node Host
+Use this mode when you want the backend demo features locally:
 
 ```bash
-NODE_ENV=production PORT=8080 TRUST_PROXY=loopback npm start
+npm run dev
 ```
 
-When the app is behind a reverse proxy, set `TRUST_PROXY` to match the proxy topology. Do not set it blindly if the proxy does not overwrite `X-Forwarded-*` headers.
+If you later want live contact storage, IP-based security logging, or webhook alerts on the public site, use a Node-capable host and persistent storage. When the app is behind a reverse proxy, set `TRUST_PROXY` to match the proxy topology. Do not set it blindly if the proxy does not overwrite `X-Forwarded-*` headers.
 
 ## Security Event Report
 

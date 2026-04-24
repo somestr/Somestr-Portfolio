@@ -29,6 +29,8 @@ If a real secret is ever committed, rotate or revoke it before attempting histor
 
 ## Production Notes
 
+- In GitHub Pages static mode, this app does not receive server-side requests and cannot collect visitor IPs, contact messages, security events, or webhook alerts. GitHub/CDN infrastructure may have its own access logs, but they are not available to this application.
+- Treat IP logging, decoy routes, quarantine behavior, and webhook alerts as Node backend features only.
 - Run the app behind HTTPS in production.
 - Set `NODE_ENV=production`.
 - Set `TRUST_PROXY` only to match the actual trusted proxy chain.

@@ -8,6 +8,14 @@
         ? globalScope.getT
         : (key) => key;
 
+    function isStaticHost() {
+        const location = globalScope.location;
+        const hostname = (location && location.hostname) || '';
+        return !location
+            || location.protocol === 'file:'
+            || /\.github\.io$/i.test(hostname);
+    }
+
     function initContactForm() {
         const form = globalScope.document.getElementById('contact-form');
         const status = globalScope.document.getElementById('form-status');
@@ -34,6 +42,11 @@
                 return;
             }
 
+            if (isStaticHost() || typeof globalScope.fetch !== 'function') {
+                showStatus('error', getTranslation('form_static'));
+                return;
+            }
+
             btn.disabled = true;
             try {
                 const response = await globalScope.fetch('/api/contact', {
@@ -41,9 +54,16 @@
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ name, email, message }),
                 });
+                const contentType = response.headers.get('content-type') || '';
+
+                if (!contentType.includes('application/json')) {
+                    showStatus('error', getTranslation('form_static'));
+                    return;
+                }
+
                 const data = await response.json();
 
-                if (data.ok) {
+                if (response.ok && data.ok) {
                     showStatus('success', getTranslation('form_ok'));
                     form.reset();
                 } else {
@@ -73,4 +93,3 @@
 
     globalScope.initContactForm = initContactForm;
 })(typeof globalThis !== 'undefined' ? globalThis : this);
-

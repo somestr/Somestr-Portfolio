@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://somestr.github.io/Somestr-Portfolio/sitemap.xml

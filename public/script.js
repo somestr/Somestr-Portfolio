@@ -1374,9 +1374,38 @@ function initServerStats() {
 
     if (!statusEl) return;
 
+    const hostname = (window.location && window.location.hostname) || '';
+    const isStaticHost = window.location && (
+        window.location.protocol === 'file:'
+        || /\.github\.io$/i.test(hostname)
+    );
+
+    function setStaticMode() {
+        if (uptimeEl) {
+            uptimeEl.textContent = 'GitHub Pages';
+        }
+        if (visitorEl) {
+            visitorEl.textContent = '--';
+        }
+        if (statusEl) {
+            statusEl.textContent = '● STATIC';
+            statusEl.className = 'val success';
+        }
+    }
+
+    if (isStaticHost || typeof fetch !== 'function') {
+        setStaticMode();
+        return;
+    }
+
     function fetchStats() {
         fetch('/api/stats')
-            .then(res => res.json())
+            .then(res => {
+                if (!res.ok) {
+                    throw new Error('Stats endpoint unavailable');
+                }
+                return res.json();
+            })
             .then(data => {
                 if (uptimeEl) {
                     uptimeEl.textContent = formatUptimeSeconds(data.uptime);

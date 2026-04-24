@@ -125,6 +125,7 @@ const translations = {
         ph_message:   'Mesajınızı yazın...',
         form_ok:      '✔ Mesajınız gönderildi.',
         form_err:     '✖ Lütfen tüm alanları doldurun.',
+        form_static:  'Statik mod: backend bagli degil. GitHub uzerinden ulasin.',
 
         /* Footer */
         footer_echo:  'Tüm haklar saklıdır. İzinsiz erişim yasaktır.',
@@ -265,6 +266,7 @@ const translations = {
         ph_message:   'Write your message...',
         form_ok:      '✔ Message sent successfully.',
         form_err:     '✖ Please fill in all fields.',
+        form_static:  'Static mode: backend is not connected. Contact via GitHub.',
 
         /* Footer */
         footer_echo:  'All rights reserved. Unauthorized access is prohibited.',
@@ -405,6 +407,7 @@ const translations = {
         ph_message:   '메시지를 작성하세요...',
         form_ok:      '✔ 메시지가 전송되었습니다.',
         form_err:     '✖ 모든 필드를 입력해 주세요.',
+        form_static:  'Static mode: backend is not connected. Contact via GitHub.',
 
         /* Footer */
         footer_echo:  '모든 권리 보유. 무단 접근은 금지됩니다.',
