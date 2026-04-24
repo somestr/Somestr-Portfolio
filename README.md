@@ -1,4 +1,4 @@
-# OBA Portfolio — YOUR_NAME
+# OBA Portfolio — Sam Novak
 
 > IT & Cybersecurity Portfolio — interactive CLI terminal, radar chart, dark-mode GUI, contact form, and a hardened Node.js/Express backend.
 
@@ -42,7 +42,7 @@
 
 ```bash
 # 1. Clone the repo
-git clone https://github.com/yourusername/your-repo.git
+git clone https://github.com/som_sec/portfolio.git
 cd Web_Server
 
 # 2. Install dependencies
@@ -133,7 +133,7 @@ Prints a summary of logged security events from `security-events.jsonl`.
 
 ## License
 
-[MIT](./LICENSE) © 2026 YOUR_NAME
+[MIT](./LICENSE) © 2026 Sam Novak
 
 ---
 

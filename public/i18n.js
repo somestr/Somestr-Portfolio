@@ -23,7 +23,7 @@ const translations = {
         hero_location_label: 'KONUM :',
         hero_role_val:       'BT & Siber Güvenlik Uzmanı',
         hero_status_val:     '● AKTİF',
-        hero_location_val:   'Your City, Country',
+        hero_location_val:   'Amsterdam, Hollanda',
         hero_warn:  '⚠  Yetkisiz erişim tespit edildi.',
         hero_auth:  '✔  Kimlik doğrulaması tamamlandı.',
         hero_load:  '→  Portfolyo yükleniyor...',
@@ -43,7 +43,7 @@ const translations = {
         sec_terminal:   'TERMİNAL',
 
         /* About */
-        about_p1: 'Merhaba! Ben <span class="highlight">YOUR_NAME</span> — analitik düşünen bir BT ve siber güvenlik uzmanıyım. Sorun giderme, son kullanıcı desteği ve olay müdahalesi konularında uygulamalı deneyime sahibim.',
+        about_p1: 'Merhaba! Ben <span class="highlight">Sam Novak</span> — analitik düşünen bir BT ve siber güvenlik uzmanıyım. Sorun giderme, son kullanıcı desteği ve olay müdahalesi konularında uygulamalı deneyime sahibim.',
         about_p2: 'Yüksek baskı altındaki ortamlarda 10+ kişilik ekiplere liderlik ederken operasyonel verimliliği ve müşteri memnuniyetini koruma konusunda tecrübeliyim. Teknik sorunları teşhis etme, kullanıcıları destekleme ve güvenli BT operasyonlarına katkıda bulunma yeteneğine sahibim.',
         about_p3: 'Sürekli öğrenmeye ve gelişime inanan biri olarak, yeni siber tehditleri ve BT operasyonlarını takip ediyor, güvenli sistem ortamlarına katkı sağlamaya hazır durumda bekliyorum.',
 
@@ -68,31 +68,31 @@ const translations = {
         skill_support:   'BT Desteği & Sorun Giderme',
 
         /* Experience */
-        exp1_date:    'Haz 2025 — Günümüz',
-        exp1_title:   'Barista',
-        exp1_company: '@ Company Name — City, Country',
-        exp1_desc:    'Her vardiyada 100+ müşteriye verimli hizmet sunma. Günlük operasyonlar, kasa yönetimi ve ekip koordinasyonunu destekleme.',
-        exp2_date:    'May 2023 — Nis 2025',
-        exp2_title:   'Takım Lideri',
-        exp2_company: '@ Company Name — City, Country',
-        exp2_desc:    '10+ kişilik ekibe liderlik, müdür yokluğunda vardiya müdürlüğü. Envanter kontrolü, kasa yönetimi ve operasyonel uyumluluk.',
-        exp3_date:    'Eyl 2021 — Şub 2022',
-        exp3_title:   'Siber Güvenlik Stajyeri',
-        exp3_company: '@ University Name — City, Country',
-        exp3_desc:    'Olay müdahalesi ve zafiyet değerlendirmesi. Personelin oltalama tespit oranını %35 artıran farkındalık oturumlarının düzenlenmesi.',
-        exp4_date:    'Oca 2017 — Şub 2018',
-        exp4_title:   'Teknik Destek Uzmanı',
-        exp4_company: '@ Company Name — City, Country',
-        exp4_desc:    'Donanım ve yazılım kurulumu, yapılandırma ve bakım. Son kullanıcı desteği, küçük işletme ağ kurulumları ve temel siber güvenlik uygulamaları.',
+        exp1_date:    'Oca 2024 — Günümüz',
+        exp1_title:   'Junior SOC Analisti',
+        exp1_company: '@ CyberWatch GmbH — Berlin, Almanya',
+        exp1_desc:    'Ağ trafiği izleme ve günlük olay triyajı. SIEM uyarılarını araştırma ve güvenlik olaylarını raporlama.',
+        exp2_date:    'Mar 2021 — Ara 2023',
+        exp2_title:   'BT Destek Uzmanı',
+        exp2_company: '@ NordNet AS — Oslo, Norveç',
+        exp2_desc:    'Son kullanıcı sorunlarını birinci ve ikinci seviyede çözümleme. Ağ altyapısı bakımı ve Active Directory yönetimi.',
+        exp3_date:    'Eyl 2020 — Şub 2021',
+        exp3_title:   'Güvenlik Stajyeri',
+        exp3_company: '@ DataShield Lab — Helsinki, Finlandiya',
+        exp3_desc:    'Zafiyet değerlendirmesi ve penetrasyon testi desteği. Güvenlik farkındalık eğitimi materyallerinin hazırlanması.',
+        exp4_date:    'Oca 2019 — Ağu 2020',
+        exp4_title:   'Yardım Masası Teknisyeni',
+        exp4_company: '@ TechPoint BV — Amsterdam, Hollanda',
+        exp4_desc:    'Donanım ve yazılım kurulumu, hata ayıklama ve kullanıcı desteği. Küçük işletme ağ kurulumları.',
 
         /* Education */
-        edu1_title:  'Higher Diploma in Computing',
-        edu1_school: '@ College Name — City, Country',
-        edu1_desc:   'Bilişim alanında yüksek lisans diploma programı (2025).',
-        edu2_year:   'Türkiye',
-        edu2_title:  'Mekatronik Mühendisliği Lisans',
-        edu2_school: '@ University Name — City, Country',
-        edu2_desc:   'Mekatronik Mühendisliği bölümünden B.Sc. derecesi.',
+        edu1_title:  'B.Sc. Bilgi Güvenliği',
+        edu1_school: '@ Nordia Üniversitesi — Oslo, Norveç',
+        edu1_desc:   'Bilgi güvenliği alanında lisans derecesi (2023).',
+        edu2_year:   'Norveç',
+        edu2_title:  'Ağ Yönetimi Diploması',
+        edu2_school: '@ Oslo Tech Enstitüsü — Oslo, Norveç',
+        edu2_desc:   'Ağ yönetimi ve sistem altyapısı diploması.',
 
         /* Projects */
         proj1_desc: 'Özel geliştirilmiş ağ tarama ve güvenlik açığı tespiti aracı. Nmap çıktılarını analiz ederek otomatik CVE eşleştirmesi yapar.',
@@ -139,7 +139,7 @@ const translations = {
 
         /* v4.0 */
         terminal_hint:      '"help" yazarak başlayın',
-        terminal_welcome:   '  ██ YOUR_NAME Portfolyo Terminaline Hoş Geldiniz ██',
+        terminal_welcome:   '  ██ Sam Novak Portfolyo Terminaline Hoş Geldiniz ██',
         terminal_help_hint: '  Komut listesi için "help" yazın.',
         radar_title:        'Yetenek Radarı',
     },
@@ -164,9 +164,8 @@ const translations = {
         hero_location_label: 'LOCATION :',
         hero_role_val:       'IT & Cybersecurity Professional',
         hero_status_val:     '● ACTIVE',
-        hero_location_val:   'Your City, Country',
+        hero_location_val:   'Amsterdam, Netherlands',
         hero_warn:  '⚠  Unauthorized access detected.',
-        hero_auth:  '✔  Authentication complete.',
         hero_load:  '→  Loading portfolio...',
 
         /* CTA */
@@ -184,7 +183,7 @@ const translations = {
         sec_terminal:   'TERMINAL',
 
         /* About */
-        about_p1: 'Hi! I\'m <span class="highlight">YOUR_NAME</span> — an analytical IT and cybersecurity professional with hands-on experience in troubleshooting, end-user support and incident response.',
+        about_p1: 'Hi! I\'m <span class="highlight">Sam Novak</span> — an analytical IT and cybersecurity professional with hands-on experience in troubleshooting, end-user support and incident response.',
         about_p2: 'Experienced in leading teams of 10+ staff in high-pressure environments while maintaining operational efficiency and customer satisfaction. Strong ability to diagnose technical issues, support users and contribute to secure, reliable IT operations.',
         about_p3: 'As a continuous learner committed to staying current with emerging cyber threats and IT operations, I\'m ready to add value to your organization\'s security and technology ecosystem.',
 
@@ -209,31 +208,31 @@ const translations = {
         skill_support:   'IT Support & Troubleshooting',
 
         /* Experience */
-        exp1_date:    'Jun 2025 — Present',
-        exp1_title:   'Barista',
-        exp1_company: '@ Company Name — City, Country',
-        exp1_desc:    'Delivering efficient service in a high-volume environment serving 100+ customers per shift. Supporting daily operations, cash handling and team coordination.',
-        exp2_date:    'May 2023 — Apr 2025',
-        exp2_title:   'Team Leader',
-        exp2_company: '@ Company Name — City, Country',
-        exp2_desc:    'Led a team of 10+ staff, acted as duty manager during absences. Oversaw scheduling, delegation, inventory control, cash management and operational compliance.',
-        exp3_date:    'Sep 2021 — Feb 2022',
-        exp3_title:   'Cybersecurity Intern',
-        exp3_company: '@ University Name — City, Country',
-        exp3_desc:    'Assisted with incident response and vulnerability assessments. Co-organized phishing awareness sessions that improved staff detection rates by 35%.',
-        exp4_date:    'Jan 2017 — Feb 2018',
-        exp4_title:   'Technical Support',
-        exp4_company: '@ Company Name — City, Country',
-        exp4_desc:    'Installed, configured and maintained client systems. Diagnosed and resolved technical issues, provided end-user support, assisted with network setups and basic cybersecurity practices.',
+        exp1_date:    'Jan 2024 — Present',
+        exp1_title:   'SOC Analyst Jr.',
+        exp1_company: '@ CyberWatch GmbH — Berlin, Germany',
+        exp1_desc:    'Monitoring network traffic and performing daily incident triage. Investigating SIEM alerts and reporting security events.',
+        exp2_date:    'Mar 2021 — Dec 2023',
+        exp2_title:   'IT Support Specialist',
+        exp2_company: '@ NordNet AS — Oslo, Norway',
+        exp2_desc:    'Resolving end-user issues at tier 1 and tier 2 level. Maintaining network infrastructure and managing Active Directory.',
+        exp3_date:    'Sep 2020 — Feb 2021',
+        exp3_title:   'Security Intern',
+        exp3_company: '@ DataShield Lab — Helsinki, Finland',
+        exp3_desc:    'Assisted with vulnerability assessments and penetration testing support. Prepared security awareness training materials.',
+        exp4_date:    'Jan 2019 — Aug 2020',
+        exp4_title:   'Help Desk Technician',
+        exp4_company: '@ TechPoint BV — Amsterdam, Netherlands',
+        exp4_desc:    'Hardware and software installation, troubleshooting and user support. Assisted with small business network setups.',
 
         /* Education */
-        edu1_title:  'Higher Diploma in Computing',
-        edu1_school: '@ College Name — City, Country',
-        edu1_desc:   'Higher Diploma in Computing programme (2025).',
-        edu2_year:   'Turkey',
-        edu2_title:  'B.Sc. in Mechatronic Engineering',
-        edu2_school: '@ University Name — City, Country',
-        edu2_desc:   'Bachelor of Science degree in Mechatronic Engineering.',
+        edu1_title:  'B.Sc. in Information Security',
+        edu1_school: '@ Nordia University — Oslo, Norway',
+        edu1_desc:   'Bachelor of Science in Information Security (2023).',
+        edu2_year:   'Norway',
+        edu2_title:  'Diploma in Network Administration',
+        edu2_school: '@ Oslo Tech Institute — Oslo, Norway',
+        edu2_desc:   'Diploma in network administration and system infrastructure.',
 
         /* Projects */
         proj1_desc: 'Custom-built network scanner and vulnerability detection tool. Analyzes Nmap outputs to perform automatic CVE matching.',
@@ -280,7 +279,7 @@ const translations = {
 
         /* v4.0 */
         terminal_hint:      'Type "help" to get started',
-        terminal_welcome:   '  ██ Welcome to YOUR_NAME Portfolio Terminal ██',
+        terminal_welcome:   '  ██ Welcome to Sam Novak Portfolio Terminal ██',
         terminal_help_hint: '  Type "help" for available commands.',
         radar_title:        'Skill Radar',
     },
@@ -305,9 +304,8 @@ const translations = {
         hero_location_label: '위치   :',
         hero_role_val:       'IT & 사이버 보안 전문가',
         hero_status_val:     '● 활성',
-        hero_location_val:   'Your City, Country',
+        hero_location_val:   '암스테르담, 네덜란드',
         hero_warn:  '⚠  무단 접근이 감지되었습니다.',
-        hero_auth:  '✔  인증이 완료되었습니다.',
         hero_load:  '→  포트폴리오 로딩 중...',
 
         /* CTA */
@@ -325,7 +323,7 @@ const translations = {
         sec_terminal:   '터미널',
 
         /* About */
-        about_p1: '안녕하세요! 저는 <span class="highlight">YOUR_NAME</span> — 문제 해결, 최종 사용자 지원 및 사고 대응에 실무 경험을 가진 분석적 IT 및 사이버 보안 전문가입니다.',
+        about_p1: '안녕하세요! 저는 <span class="highlight">Sam Novak</span> —  문제 해결, 최종 사용자 지원 및 사고 대응에 실무 경험을 가진 분석적 IT 및 사이버 보안 전문가입니다.',
         about_p2: '높은 압박 환경에서 10명 이상의 팀을 이끌며 운영 효율성과 고객 만족도를 유지한 경험이 있습니다. 기술적 문제 진단, 사용자 지원, 안전하고 신뢰할 수 있는 IT 운영에 기여할 수 있습니다.',
         about_p3: '새로운 사이버 위협과 IT 운영에 대한 지속적인 학습을 통해 조직의 보안 및 기술 생태계에 가치를 더할 준비가 되어 있습니다.',
 
@@ -350,31 +348,31 @@ const translations = {
         skill_support:   'IT 지원 & 문제 해결',
 
         /* Experience */
-        exp1_date:    '2025년 6월 — 현재',
-        exp1_title:   '바리스타',
-        exp1_company: '@ Company Name — City, Country',
-        exp1_desc:    '교대당 100명 이상의 고객에게 효율적인 서비스 제공. 일일 운영, 현금 관리 및 팀 조율 지원.',
-        exp2_date:    '2023년 5월 — 2025년 4월',
-        exp2_title:   '팀 리더',
-        exp2_company: '@ Company Name — City, Country',
-        exp2_desc:    '10명 이상의 팀 리더십, 부재 시 당직 매니저 역할. 스케줄링, 재고 관리, 현금 관리 및 운영 준수 감독.',
-        exp3_date:    '2021년 9월 — 2022년 2월',
-        exp3_title:   '사이버 보안 인턴',
-        exp3_company: '@ University Name — City, Country',
-        exp3_desc:    '사고 대응 및 취약점 평가 지원. 직원 피싱 탐지율을 35% 향상시킨 인식 교육 공동 기획.',
-        exp4_date:    '2017년 1월 — 2018년 2월',
-        exp4_title:   '기술 지원',
-        exp4_company: '@ Company Name — City, Country',
-        exp4_desc:    '클라이언트 시스템 설치, 구성 및 유지보수. 기술 문제 진단 및 해결, 최종 사용자 지원, 네트워크 설정 및 기본 사이버 보안 실무.',
+        exp1_date:    '2024년 1월 — 현재',
+        exp1_title:   'SOC 주니어 분석가',
+        exp1_company: '@ CyberWatch GmbH — 베를린, 독일',
+        exp1_desc:    '네트워크 트래픽 모니터링 및 일일 사고 트리아지. SIEM 알림 조사 및 보안 이벤트 보고.',
+        exp2_date:    '2021년 3월 — 2023년 12월',
+        exp2_title:   'IT 지원 전문가',
+        exp2_company: '@ NordNet AS — 오슬로, 노르웨이',
+        exp2_desc:    '1, 2단계 최종 사용자 문제 해결. 네트워크 인프라 유지보수 및 Active Directory 관리.',
+        exp3_date:    '2020년 9월 — 2021년 2월',
+        exp3_title:   '보안 인턴',
+        exp3_company: '@ DataShield Lab — 헬싱키, 핀란드',
+        exp3_desc:    '취약점 평가 및 침투 테스트 지원. 보안 인식 교육 자료 준비.',
+        exp4_date:    '2019년 1월 — 2020년 8월',
+        exp4_title:   '헬프 데스크 기술자',
+        exp4_company: '@ TechPoint BV — 암스테르담, 네덬란드',
+        exp4_desc:    '하드웨어 및 소프트웨어 설치, 문제 해결 및 사용자 지원. 소규모 사업 네트워크 설정.',
 
         /* Education */
-        edu1_title:  'Higher Diploma in Computing',
-        edu1_school: '@ College Name — City, Country',
-        edu1_desc:   '컴퓨팅 분야 고등 디플로마 프로그램 (2025).',
-        edu2_year:   '터키',
-        edu2_title:  '메카트로닉 공학 학사',
-        edu2_school: '@ University Name — City, Country',
-        edu2_desc:   '메카트로닉 공학과 이학사 학위.',
+        edu1_title:  '정보보안 학사',
+        edu1_school: '@ Nordia University — 오슬로, 노르웨이',
+        edu1_desc:   '정보보안 학사 학위 (2023).',
+        edu2_year:   '노르웨이',
+        edu2_title:  '네트워크 관리 디플로마',
+        edu2_school: '@ Oslo Tech Institute — 오슬로, 노르웨이',
+        edu2_desc:   '네트워크 관리 및 시스템 인프라 디플로마.',
 
         /* Projects */
         proj1_desc: '맞춤 제작 네트워크 스캐너 및 취약점 탐지 도구. Nmap 출력을 분석하여 자동 CVE 매칭을 수행합니다.',
@@ -421,7 +419,7 @@ const translations = {
 
         /* v4.0 */
         terminal_hint:      '"help"를 입력하여 시작하세요',
-        terminal_welcome:   '  ██ YOUR_NAME 포트폴리오 터미널에 오신 것을 환영합니다 ██',
+        terminal_welcome:   '  ██ Sam Novak 포트폴리오 터미널에 오신 것을 환영합니다 ██',
         terminal_help_hint: '  사용 가능한 명령어를 보려면 "help"를 입력하세요.',
         radar_title:        '스킬 레이더',
     }

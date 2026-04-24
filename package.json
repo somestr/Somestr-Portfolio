@@ -14,7 +14,7 @@
     "security:report": "node scripts/security-events-report.js"
   },
   "keywords": ["portfolio", "cybersecurity", "node", "express"],
-  "author": "YOUR_NAME",
+  "author": "Sam Novak",
   "license": "MIT",
   "type": "commonjs",
   "dependencies": {
