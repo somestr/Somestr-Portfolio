@@ -303,7 +303,7 @@ function initFullscreenTerminal() {
 
     const FILES = {
         '~/README.md': [
-            { text: '# Sam Novak — IT & Cybersecurity Portfolio', cls: 'success' },
+            { text: '# somestr — IT & Cybersecurity Portfolio', cls: 'success' },
             { text: '', cls: '' },
             { text: '  Welcome to my terminal portfolio.', cls: '' },
             { text: '  Navigate my files to learn about me.', cls: '' },
@@ -314,9 +314,9 @@ function initFullscreenTerminal() {
         '~/about.txt': [
             { text: '┌─ About ───────────────────────────────────────────────────────┐', cls: 'success' },
             { text: '│                                                               │', cls: '' },
-            { text: '│  Name     : Sam Novak                               │', cls: '' },
+            { text: '│  Name     : somestr                               │', cls: '' },
             { text: '│  Role     : IT & Cybersecurity Professional                   │', cls: '' },
-            { text: '│  Location : Amsterdam, Netherlands                            │', cls: '' },
+            { text: '│  Location : private                            │', cls: '' },
             { text: '│  Status   : Open to new opportunities                         │', cls: 'info' },
             { text: '│                                                               │', cls: '' },
             { text: '├─ Summary ────────────────────────────────────────────────────  │', cls: 'success' },
@@ -335,11 +335,11 @@ function initFullscreenTerminal() {
         ],
         '~/contact.json': [
             { text: '  {', cls: '' },
-            { text: '    "email"     : "sam.novak@protonmail.com",', cls: 'info' },
-            { text: '    "github"    : "github.com/som_sec",', cls: '' },
-            { text: '    "linkedin"  : "linkedin.com/in/sam-novak",', cls: '' },
-            { text: '    "tryhackme" : "tryhackme.com/p/som_sec",', cls: 'success' },
-            { text: '    "location"  : "Amsterdam, Netherlands",', cls: '' },
+            { text: '    "email"     : "private",', cls: 'info' },
+            { text: '    "github"    : "github.com/somestr",', cls: '' },
+            { text: '    "linkedin"  : "private",', cls: '' },
+            { text: '    "tryhackme" : "private",', cls: 'success' },
+            { text: '    "location"  : "private",', cls: '' },
             { text: '    "status"    : "Open to new opportunities"', cls: 'info' },
             { text: '  }', cls: '' },
         ],
@@ -538,7 +538,7 @@ function initFullscreenTerminal() {
     addOutput([
         { text: FS_BANNER, cls: 'ascii-art' },
         { text: '', cls: '' },
-        { text: '  ██ Sam Novak — IT & Cybersecurity Portfolio ██', cls: 'success' },
+        { text: '  ██ somestr — IT & Cybersecurity Portfolio ██', cls: 'success' },
         { text: '  CLI Mode — Navigate my files to learn about me.', cls: 'info' },
         { text: '', cls: '' },
         { text: '  Type "help" for available commands.', cls: 'info' },
@@ -574,7 +574,7 @@ function initFullscreenTerminal() {
             { text: '', cls: '' },
         ],
         pwd: () => [{ text: '  ' + cwd, cls: 'info' }],
-        whoami: () => [{ text: '  root — viewing som_portfolio from ' + window.location.hostname, cls: 'success' }],
+        whoami: () => [{ text: '  root — viewing somestr_portfolio from ' + window.location.hostname, cls: 'success' }],
         date: () => [{ text: '  ' + new Date().toLocaleString(), cls: 'info' }],
         banner: () => [{ text: FS_BANNER, cls: 'ascii-art' }],
         neofetch: () => [
@@ -584,9 +584,9 @@ function initFullscreenTerminal() {
             { text: '       ;:;:;\';     OS    : Kali GNU/Linux Rolling', cls: '' },
             { text: '      \';:;:\';\'    Kernel: 6.8.0-kali1-amd64', cls: '' },
             { text: '     \';:;:;:\';    Shell : zsh 5.9', cls: '' },
-            { text: '    \';:;:;:;\';    User  : Sam Novak', cls: '' },
+            { text: '    \';:;:;:;\';    User  : somestr', cls: '' },
             { text: '      \'\';:\';\'     Role  : IT & Cybersecurity', cls: '' },
-            { text: '       \',:;\'      Loc   : Amsterdam, Netherlands', cls: '' },
+            { text: '       \',:;\'      Loc   : private', cls: '' },
             { text: '         \'        Certs : CompTIA A+, Cisco Cyber', cls: '' },
             { text: '                  Uptime: Always learning', cls: 'success' },
             { text: '', cls: '' },
@@ -1138,7 +1138,7 @@ function animateProgress(barEl, pctEl, from, to, duration, cb) {
 // ─── Logo Typewriter ─────────────────────────────────────────────────────────
 function runLogoType() {
     const el   = document.getElementById('logo-type');
-    const text = 'SOM_SEC';
+    const text = 'SOMESTR';
     typewrite(el, text, 100);
 }
 
@@ -1630,10 +1630,10 @@ function initLiveTerminal() {
         ],
         about: () => [
             { text: '┌─ About ──────────────────────────────────────┐', cls: 'success' },
-            { text: '│ Sam Novak                          │', cls: '' },
+            { text: '│ somestr                          │', cls: '' },
             { text: '│ IT & Cybersecurity Professional              │', cls: '' },
             { text: '│ Incident Response, Threat Detection, IT Ops  │', cls: '' },
-            { text: '│ Based in Amsterdam, Netherlands                  │', cls: '' },
+            { text: '│ Based in private                  │', cls: '' },
             { text: '└──────────────────────────────────────────────┘', cls: 'success' },
         ],
         skills: () => [
@@ -1655,14 +1655,14 @@ function initLiveTerminal() {
             { text: '  [06] SecAudit Framework   — Automated auditing', cls: '' },
         ],
         contact: () => [
-            { text: '  📧 Email      : sam.novak@protonmail.com', cls: 'info' },
-            { text: '  🐙 GitHub     : github.com/som_sec', cls: '' },
-            { text: '  💼 LinkedIn   : linkedin.com/in/som_sec', cls: '' },
-            { text: '  🔓 TryHackMe : tryhackme.com/p/som_sec', cls: 'success' },
-            { text: '  📍 Location   : Amsterdam, Netherlands', cls: '' },
+            { text: '  📧 Email      : private', cls: 'info' },
+            { text: '  🐙 GitHub     : github.com/somestr', cls: '' },
+            { text: '  💼 LinkedIn   : private', cls: '' },
+            { text: '  🔓 TryHackMe : private', cls: 'success' },
+            { text: '  📍 Location   : private', cls: '' },
         ],
         whoami: () => [
-            { text: '  visitor — Viewing som_portfolio from ' + window.location.hostname, cls: 'success' },
+            { text: '  visitor — Viewing somestr_portfolio from ' + window.location.hostname, cls: 'success' },
         ],
         date: () => [
             { text: '  ' + new Date().toLocaleString(), cls: 'info' },
@@ -1723,7 +1723,7 @@ function initLiveTerminal() {
         // Echo command
         const echo = document.createElement('p');
         echo.className = 'cmd';
-        echo.textContent = `visitor@som_sec:~$ ${trimmed}`;
+        echo.textContent = `visitor@somestr:~$ ${trimmed}`;
         output.appendChild(echo);
         requestAnimationFrame(() => { scrollElementToBottom(output); });
 

@@ -114,7 +114,7 @@ const translations = {
         hero_location_label: 'LOCATION :',
         hero_role_val:       'Cybersecurity Expert & Penetration Tester',
         hero_status_val:     '● ACTIVE',
-        hero_location_val:   'Amsterdam, Netherlands',
+        hero_location_val:   'private',
         hero_warn:  '⚠  Unauthorized access detected.',
         hero_auth:  '✔  Authentication complete.',
         hero_load:  '→  Loading portfolio...',

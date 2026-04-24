@@ -1,5 +1,5 @@
 {
-  "name": "oba-portfolio",
+  "name": "somestr-portfolio",
   "version": "1.0.0",
   "description": "Interactive IT and cybersecurity portfolio with a hardened Node.js/Express backend",
   "main": "server.js",
@@ -15,7 +15,7 @@
     "audit": "npm audit --audit-level=high"
   },
   "keywords": ["portfolio", "cybersecurity", "node", "express"],
-  "author": "Sam Novak",
+  "author": "somestr",
   "license": "MIT",
   "type": "commonjs",
   "dependencies": {

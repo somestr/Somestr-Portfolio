@@ -35,8 +35,8 @@ Interactive IT and cybersecurity portfolio with a CLI-style frontend, contact fo
 ### Local development
 
 ```bash
-git clone https://github.com/somestr/Web_Server.git
-cd Web_Server
+git clone https://github.com/somestr/somestr-portfolio.git
+cd somestr-portfolio
 npm install
 cp .env.example .env
 npm run dev
@@ -122,7 +122,7 @@ See [SECURITY.md](./SECURITY.md) for vulnerability reporting and public reposito
 
 ## License
 
-[MIT](./LICENSE) (c) 2026 Sam Novak
+[MIT](./LICENSE) (c) 2026 somestr
 
 ## AI Assistance Disclosure
 
