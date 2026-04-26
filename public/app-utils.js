@@ -92,6 +92,11 @@
         return `${getGitHubPagesBasePath(locationRef)}/${route}`;
     }
 
+    function getHomePath(locationRef = globalScope.location) {
+        const basePath = getGitHubPagesBasePath(locationRef);
+        return basePath ? `${basePath}/` : '/';
+    }
+
     function scrollElementToBottom(element) {
         if (!element) {
             return;
@@ -133,6 +138,7 @@
         clearElementContent,
         formatUptimeSeconds,
         getGitHubPagesBasePath,
+        getHomePath,
         getModePath,
         getRoutedPathname,
         getStoredThemeName,

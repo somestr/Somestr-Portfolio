@@ -52,11 +52,26 @@
             if (activeIdx >= filtered.length) {
                 activeIdx = 0;
             }
+            if (filtered.length === 0) {
+                input.removeAttribute('aria-activedescendant');
+                const empty = globalScope.document.createElement('li');
+                empty.className = 'cmd-empty';
+                empty.setAttribute('role', 'option');
+                empty.setAttribute('aria-disabled', 'true');
+                empty.textContent = 'No commands found';
+                results.appendChild(empty);
+                return;
+            }
             filtered.forEach((cmd, i) => {
                 const li = globalScope.document.createElement('li');
+                const optionId = `cmd-option-${i}`;
+                li.id = optionId;
                 if (i === activeIdx) li.classList.add('active');
                 li.setAttribute('role', 'option');
                 li.setAttribute('aria-selected', String(i === activeIdx));
+                if (i === activeIdx) {
+                    input.setAttribute('aria-activedescendant', optionId);
+                }
                 const iconSpan = globalScope.document.createElement('span');
                 iconSpan.className = 'cmd-icon';
                 iconSpan.textContent = cmd.icon;

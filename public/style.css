@@ -169,6 +169,12 @@ body::after {
     white-space: nowrap;
     min-width: 140px;
     letter-spacing: 0.5px;
+    cursor: pointer;
+}
+
+.nav-logo:focus-visible {
+    outline: 1px solid var(--blue);
+    outline-offset: 0.35rem;
 }
 
 .bracket { color: #3a3a3a; }
@@ -1553,6 +1559,11 @@ body.cli-mode .vignette {
 .cmd-palette-results li:hover,
 .cmd-palette-results li.active {
     color: var(--blue);
+}
+
+.cmd-palette-results li[aria-disabled="true"] {
+    color: #555;
+    cursor: default;
 }
 
 .cmd-palette-results li .cmd-icon { font-size: 0.85rem; width: 1.2rem; text-align: center; }

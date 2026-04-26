@@ -31,7 +31,7 @@
     <meta name="twitter:image" content="https://somestr.github.io/Somestr-Portfolio/og-image.svg">
     <meta name="twitter:image:alt" content="somestr IT and cybersecurity portfolio preview">
 
-    <link rel="stylesheet" href="style.css?v=14.2">
+    <link rel="stylesheet" href="style.css?v=14.3">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛡️</text></svg>">
 </head>
 <body>
@@ -54,7 +54,7 @@
             <div class="cmd-palette-header">
                 <h2 class="sr-only" id="cmd-palette-title">Command palette</h2>
                 <span class="prompt">root@kali:~$</span>
-                <input type="text" class="cmd-palette-input" id="cmd-palette-input" aria-label="Search commands" placeholder="Type a command..." autocomplete="off" spellcheck="false">
+                <input type="text" class="cmd-palette-input" id="cmd-palette-input" aria-label="Search commands" aria-controls="cmd-palette-results" placeholder="Type a command..." autocomplete="off" spellcheck="false">
             </div>
             <ul class="cmd-palette-results" id="cmd-palette-results" role="listbox"></ul>
             <div class="cmd-palette-footer">
@@ -74,7 +74,7 @@
 
     <!-- Navigation -->
     <nav class="terminal-nav" id="main-nav">
-        <div class="nav-logo">
+        <div class="nav-logo" id="logo-btn" role="button" tabindex="0" aria-label="Back to top">
             <span class="bracket">[</span>
             <span class="logo-text" id="logo-type"></span>
             <span class="cursor-blink">_</span>
@@ -636,13 +636,13 @@
     </footer>
 
     <script src="i18n.js?v=4.3"></script>
-    <script src="app-utils.js?v=2"></script>
-    <script src="feature-command-palette.js?v=3"></script>
+    <script src="app-utils.js?v=3"></script>
+    <script src="feature-command-palette.js?v=4"></script>
     <script src="feature-contact.js?v=2"></script>
     <script src="feature-theme.js?v=1"></script>
     <script src="feature-scroll-ui.js?v=1"></script>
     <script src="feature-server-stats.js?v=1"></script>
     <script src="feature-toast.js?v=1"></script>
-    <script src="script.js?v=13.9"></script>
+    <script src="script.js?v=14.0"></script>
 </body>
 </html>

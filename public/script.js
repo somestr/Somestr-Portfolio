@@ -15,6 +15,7 @@ const clearElementContent = AppUtils.clearElementContent || ((element) => {
     }
 });
 const getModePath = AppUtils.getModePath || ((mode) => `/${mode === 'cli' || mode === 'entry' ? mode : 'gui'}`);
+const getHomePath = AppUtils.getHomePath || (() => '/');
 const getRoutedPathname = AppUtils.getRoutedPathname || ((pathname) => pathname || '/');
 const isSupportedThemeName = AppUtils.isSupportedThemeName || ((themeName) => ['kali', 'green', 'red'].includes(themeName));
 const scrollElementToBottom = AppUtils.scrollElementToBottom || ((element) => {
@@ -878,9 +879,18 @@ function initFullscreenTerminal() {
 (function initLogoButton() {
     const btn = document.getElementById('logo-btn');
     if (!btn) return;
-    btn.addEventListener('click', () => {
+
+    function goHome() {
         window.scrollTo({ top: 0, behavior: 'smooth' });
-        window.history.replaceState(null, '', '/');
+        window.history.replaceState(null, '', getHomePath(window.location));
+    }
+
+    btn.addEventListener('click', goHome);
+    btn.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter' || event.key === ' ') {
+            event.preventDefault();
+            goHome();
+        }
     });
 })();
 

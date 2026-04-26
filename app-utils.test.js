@@ -5,6 +5,7 @@ const {
     applySiteTheme,
     formatUptimeSeconds,
     getGitHubPagesBasePath,
+    getHomePath,
     getModePath,
     getRoutedPathname,
     getStoredThemeName,
@@ -104,9 +105,11 @@ test('GitHub Pages route helpers preserve project base paths', () => {
 
     assert.equal(getGitHubPagesBasePath(pagesLocation), '/Somestr-Portfolio');
     assert.equal(getRoutedPathname('/Somestr-Portfolio/cli', pagesLocation), '/cli');
+    assert.equal(getHomePath(pagesLocation), '/Somestr-Portfolio/');
     assert.equal(getModePath('gui', pagesLocation), '/Somestr-Portfolio/gui');
     assert.equal(getModePath('cli', pagesLocation), '/Somestr-Portfolio/cli');
     assert.equal(getGitHubPagesBasePath(localLocation), '');
+    assert.equal(getHomePath(localLocation), '/');
     assert.equal(getRoutedPathname('/gui', localLocation), '/gui');
     assert.equal(getModePath('entry', localLocation), '/entry');
 });
