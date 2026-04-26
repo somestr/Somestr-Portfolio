@@ -14,6 +14,8 @@ const clearElementContent = AppUtils.clearElementContent || ((element) => {
         element.textContent = '';
     }
 });
+const getModePath = AppUtils.getModePath || ((mode) => `/${mode === 'cli' || mode === 'entry' ? mode : 'gui'}`);
+const getRoutedPathname = AppUtils.getRoutedPathname || ((pathname) => pathname || '/');
 const isSupportedThemeName = AppUtils.isSupportedThemeName || ((themeName) => ['kali', 'green', 'red'].includes(themeName));
 const scrollElementToBottom = AppUtils.scrollElementToBottom || ((element) => {
     if (element) {
@@ -23,7 +25,7 @@ const scrollElementToBottom = AppUtils.scrollElementToBottom || ((element) => {
 const sequencesEqual = AppUtils.sequencesEqual || ((left, right) => JSON.stringify(left) === JSON.stringify(right));
 
 function syncModeUrl(mode) {
-    const target = mode === 'cli' ? '/cli' : '/gui';
+    const target = getModePath(mode, window.location);
     if (window.location.pathname !== target) {
         window.history.replaceState(null, '', target);
     }
@@ -33,10 +35,11 @@ function syncModeUrl(mode) {
 (function initIntroTerminal() {
     const overlay = document.getElementById('intro-overlay');
     const screen  = document.getElementById('intro-body');
+    const skipButton = document.getElementById('intro-skip');
     if (!overlay || !screen) return;
 
     // /entry route: always show intro (clear previous session)
-    const path = window.location.pathname;
+    const path = getRoutedPathname(window.location.pathname, window.location);
     const isEntry = path === '/entry';
     const isGuiRoute = path === '/gui';
     const isCliRoute = path === '/cli';
@@ -126,10 +129,13 @@ function syncModeUrl(mode) {
 
     let canEnter = false;
     let selectedMode = null;
+    let hasEntered = false;
 
-    function enterSite(mode) {
-        if (!canEnter) return;
+    function enterSite(mode, options = {}) {
+        if (hasEntered || (!canEnter && !options.force)) return;
+        hasEntered = true;
         canEnter = false;
+        document.removeEventListener('keydown', skipIntroOnEscape);
         sessionStorage.setItem('intro_done', '1');
         const selected = mode || 'gui';
         sessionStorage.setItem('portfolio_mode', selected);
@@ -148,6 +154,15 @@ function syncModeUrl(mode) {
             setTimeout(() => overlay.remove(), 700);
         }
     }
+
+    function skipIntroOnEscape(event) {
+        if (event.key === 'Escape') {
+            enterSite('gui', { force: true });
+        }
+    }
+
+    skipButton?.addEventListener('click', () => enterSite('gui', { force: true }));
+    document.addEventListener('keydown', skipIntroOnEscape);
 
     function appendLine(html) {
         const p = document.createElement('p');
@@ -367,11 +382,11 @@ function initFullscreenTerminal() {
         '~/experience/01_soc_analyst.log': [
             { text: '  ┌─ SOC Analyst Jr. ──────────────────────────────┐', cls: 'success' },
             { text: '  │  Period  : Jan 2024 — Present                  │', cls: '' },
-            { text: '  │  Company : CyberWatch GmbH — Berlin, Germany    │', cls: '' },
+            { text: '  │  Company : Confidential / lab SOC simulation    │', cls: '' },
             { text: '  ├──────────────────────────────────────────────┤', cls: 'success' },
-            { text: '  │  Monitoring network traffic and performing     │', cls: '' },
-            { text: '  │  daily incident triage. Investigating SIEM     │', cls: '' },
-            { text: '  │  alerts and reporting security events.         │', cls: '' },
+            { text: '  │  Triaged simulated SIEM alerts and built      │', cls: '' },
+            { text: '  │  detection notes for phishing and suspicious  │', cls: '' },
+            { text: '  │  PowerShell activity in a lab environment.    │', cls: '' },
             { text: '  ├─ Tags ────────────────────────────────────────┤', cls: 'success' },
             { text: '  │  #SOC  #SIEM  #IncidentTriage  #BlueTeam     │', cls: 'info' },
             { text: '  └──────────────────────────────────────────────┘', cls: 'success' },
@@ -379,7 +394,7 @@ function initFullscreenTerminal() {
         '~/experience/02_it_support.log': [
             { text: '  ┌─ IT Support Specialist ───────────────────────┐', cls: 'success' },
             { text: '  │  Period  : Mar 2021 — Dec 2023                 │', cls: '' },
-            { text: '  │  Company : NordNet AS — Oslo, Norway            │', cls: '' },
+            { text: '  │  Company : Private company — IT operations      │', cls: '' },
             { text: '  ├──────────────────────────────────────────────┤', cls: 'success' },
             { text: '  │  Resolving end-user issues at tier 1 and 2.   │', cls: '' },
             { text: '  │  Maintaining network infrastructure and         │', cls: '' },
@@ -391,7 +406,7 @@ function initFullscreenTerminal() {
         '~/experience/03_security_intern.log': [
             { text: '  ┌─ Security Intern ──────────────────────────────┐', cls: 'success' },
             { text: '  │  Period  : Sep 2020 — Feb 2021                 │', cls: '' },
-            { text: '  │  Company : DataShield Lab — Helsinki, Finland   │', cls: '' },
+            { text: '  │  Company : Personal security lab                │', cls: '' },
             { text: '  ├──────────────────────────────────────────────┤', cls: 'success' },
             { text: '  │  Assisted with vulnerability assessments and   │', cls: '' },
             { text: '  │  penetration testing support. Prepared         │', cls: '' },
@@ -404,7 +419,7 @@ function initFullscreenTerminal() {
         '~/experience/04_helpdesk.log': [
             { text: '  ┌─ Help Desk Technician ─────────────────────────┐', cls: 'success' },
             { text: '  │  Period  : Jan 2019 — Aug 2020                 │', cls: '' },
-            { text: '  │  Company : TechPoint BV — Amsterdam, NL        │', cls: '' },
+            { text: '  │  Company : Private company                     │', cls: '' },
             { text: '  ├──────────────────────────────────────────────┤', cls: 'success' },
             { text: '  │  Hardware and software installation, debug and  │', cls: '' },
             { text: '  │  user support. Assisted with small business     │', cls: '' },
@@ -414,10 +429,10 @@ function initFullscreenTerminal() {
             { text: '  └──────────────────────────────────────────────┘', cls: 'success' },
         ],
         '~/education/01_infosec_bsc.txt': [
-            { text: '  ┌─ B.Sc. Information Security ───────────────────┐', cls: 'success' },
+            { text: '  ┌─ Cybersecurity Training Path ──────────────────┐', cls: 'success' },
             { text: '  │  Year   : 2023                                 │', cls: '' },
-            { text: '  │  School : Nordia University — Oslo, Norway    │', cls: '' },
-            { text: '  │  Desc   : B.Sc. in Information Security         │', cls: '' },
+            { text: '  │  School : Self-directed / lab-based learning  │', cls: '' },
+            { text: '  │  Desc   : Network security and IR lab work     │', cls: '' },
             { text: '  └──────────────────────────────────────────────┘', cls: 'success' },
         ],
         '~/education/02_network_diploma.txt': [
@@ -432,11 +447,11 @@ function initFullscreenTerminal() {
             { text: '  │  Type : Offense                                │', cls: '' },
             { text: '  │  Tech : Python, Nmap, CVE-DB                   │', cls: 'info' },
             { text: '  ├────────────────────────────────────────────────┤', cls: 'success' },
-            { text: '  │  Custom-built network scanner and vulnerability │', cls: '' },
-            { text: '  │  detection tool. Analyzes Nmap outputs for     │', cls: '' },
-            { text: '  │  automatic CVE matching.                       │', cls: '' },
-            { text: '  ├─ Findings ─────────────────────────────────────┤', cls: 'success' },
-            { text: '  │  CRITICAL: 3   HIGH: 12                        │', cls: 'error' },
+            { text: '  │  Lab-built network scanning prototype that     │', cls: '' },
+            { text: '  │  turns Nmap output into service inventory and  │', cls: '' },
+            { text: '  │  basic risk notes.                             │', cls: '' },
+            { text: '  ├─ Status ───────────────────────────────────────┤', cls: 'success' },
+            { text: '  │  LAB   PROTOTYPE                               │', cls: 'info' },
             { text: '  └────────────────────────────────────────────────┘', cls: 'success' },
         ],
         '~/projects/webcrawl_pro.py': [
@@ -444,11 +459,11 @@ function initFullscreenTerminal() {
             { text: '  │  Type : Offense                                │', cls: '' },
             { text: '  │  Tech : Python, Selenium, OWASP                │', cls: 'info' },
             { text: '  ├────────────────────────────────────────────────┤', cls: 'success' },
-            { text: '  │  Web application security scanner. Detects     │', cls: '' },
-            { text: '  │  XSS, SQL injection, CSRF and IDOR vulns.     │', cls: '' },
-            { text: '  │  Full OWASP Top 10 coverage.                   │', cls: '' },
-            { text: '  ├─ Findings ─────────────────────────────────────┤', cls: 'success' },
-            { text: '  │  CRITICAL: 7   HIGH: 24                        │', cls: 'error' },
+            { text: '  │  Web security lab prototype for OWASP Top 10  │', cls: '' },
+            { text: '  │  practice, test flow documentation and        │', cls: '' },
+            { text: '  │  finding writeups.                             │', cls: '' },
+            { text: '  ├─ Status ───────────────────────────────────────┤', cls: 'success' },
+            { text: '  │  LAB   OWASP PRACTICE                          │', cls: 'info' },
             { text: '  └────────────────────────────────────────────────┘', cls: 'success' },
         ],
         '~/projects/cryptovault.cpp': [
@@ -456,11 +471,11 @@ function initFullscreenTerminal() {
             { text: '  │  Type : Tool                                   │', cls: '' },
             { text: '  │  Tech : C++, OpenSSL, Crypto                   │', cls: 'info' },
             { text: '  ├────────────────────────────────────────────────┤', cls: 'success' },
-            { text: '  │  Cryptographic algorithm analysis platform.    │', cls: '' },
-            { text: '  │  Detects weak implementations and recommends  │', cls: '' },
-            { text: '  │  modern alternatives.                          │', cls: '' },
-            { text: '  ├─ Findings ─────────────────────────────────────┤', cls: 'success' },
-            { text: '  │  HIGH: 8   MEDIUM: 31                          │', cls: 'warn' },
+            { text: '  │  Cryptography prototype for local file         │', cls: '' },
+            { text: '  │  encryption and key-handling experiments.      │', cls: '' },
+            { text: '  │  Case study pending.                           │', cls: '' },
+            { text: '  ├─ Status ───────────────────────────────────────┤', cls: 'success' },
+            { text: '  │  LOCAL   PROTOTYPE                             │', cls: 'info' },
             { text: '  └────────────────────────────────────────────────┘', cls: 'success' },
         ],
         '~/projects/malsandbox.docker': [
@@ -468,11 +483,11 @@ function initFullscreenTerminal() {
             { text: '  │  Type : Defense                                │', cls: '' },
             { text: '  │  Tech : Docker, Python, YARA                   │', cls: 'info' },
             { text: '  ├────────────────────────────────────────────────┤', cls: 'success' },
-            { text: '  │  Malware analysis platform in isolated sandbox │', cls: '' },
-            { text: '  │  environment. Behavior-based detection and     │', cls: '' },
-            { text: '  │  reporting system.                             │', cls: '' },
-            { text: '  ├─ Stats ────────────────────────────────────────┤', cls: 'success' },
-            { text: '  │  Malware Analyzed: 500+                        │', cls: 'error' },
+            { text: '  │  Malware analysis notes for isolated lab       │', cls: '' },
+            { text: '  │  behavior review and YARA rule practice.       │', cls: '' },
+            { text: '  │  Public samples are not included.              │', cls: '' },
+            { text: '  ├─ Status ───────────────────────────────────────┤', cls: 'success' },
+            { text: '  │  LAB SAMPLES                                   │', cls: 'info' },
             { text: '  └────────────────────────────────────────────────┘', cls: 'success' },
         ],
         '~/projects/packetprowler.py': [
@@ -480,11 +495,11 @@ function initFullscreenTerminal() {
             { text: '  │  Type : Defense                                │', cls: '' },
             { text: '  │  Tech : Python, Scapy, ML                      │', cls: 'info' },
             { text: '  ├────────────────────────────────────────────────┤', cls: 'success' },
-            { text: '  │  Real-time network packet analysis and anomaly │', cls: '' },
-            { text: '  │  detection system. Uses machine learning to    │', cls: '' },
-            { text: '  │  recognize attack patterns.                    │', cls: '' },
-            { text: '  ├─ Stats ────────────────────────────────────────┤', cls: 'success' },
-            { text: '  │  Detection Rate: 98.7%                         │', cls: 'success' },
+            { text: '  │  Network analysis prototype using Scapy for    │', cls: '' },
+            { text: '  │  packet inspection and basic anomaly scoring.  │', cls: '' },
+            { text: '  │  No public benchmark claim yet.                │', cls: '' },
+            { text: '  ├─ Status ───────────────────────────────────────┤', cls: 'success' },
+            { text: '  │  ANOMALY SCORING                               │', cls: 'info' },
             { text: '  └────────────────────────────────────────────────┘', cls: 'success' },
         ],
         '~/projects/ctf_writeups.md': [
@@ -492,11 +507,11 @@ function initFullscreenTerminal() {
             { text: '  │  Type : Offense                                │', cls: '' },
             { text: '  │  Tech : HackTheBox, CTF, Writeup               │', cls: 'info' },
             { text: '  ├────────────────────────────────────────────────┤', cls: 'success' },
-            { text: '  │  Detailed writeup collection of challenges     │', cls: '' },
-            { text: '  │  solved on HackTheBox, TryHackMe and           │', cls: '' },
-            { text: '  │  international CTF competitions.               │', cls: '' },
-            { text: '  ├─ Stats ────────────────────────────────────────┤', cls: 'success' },
-            { text: '  │  Solved: 200+ Challenges                       │', cls: 'success' },
+            { text: '  │  CTF learning notes and writeup drafts.        │', cls: '' },
+            { text: '  │  Public writeups will be added after           │', cls: '' },
+            { text: '  │  verification.                                 │', cls: '' },
+            { text: '  ├─ Status ───────────────────────────────────────┤', cls: 'success' },
+            { text: '  │  WRITEUPS PENDING                              │', cls: 'info' },
             { text: '  └────────────────────────────────────────────────┘', cls: 'success' },
         ],
     };

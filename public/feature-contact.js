@@ -30,6 +30,13 @@
 
         let hideStatusTimer = null;
 
+        if (isStaticHost() || typeof globalScope.fetch !== 'function') {
+            btn.disabled = true;
+            btn.setAttribute('aria-disabled', 'true');
+            showStatus('error', getTranslation('form_static'), { persist: true });
+            return;
+        }
+
         form.addEventListener('submit', async (event) => {
             event.preventDefault();
 
@@ -39,11 +46,6 @@
 
             if (!name || !email || !message || !isValidEmail(email)) {
                 showStatus('error', getTranslation('form_err'));
-                return;
-            }
-
-            if (isStaticHost() || typeof globalScope.fetch !== 'function') {
-                showStatus('error', getTranslation('form_static'));
                 return;
             }
 
@@ -76,7 +78,7 @@
             }
         });
 
-        function showStatus(type, msg) {
+        function showStatus(type, msg, options = {}) {
             if (hideStatusTimer) {
                 clearTimeout(hideStatusTimer);
             }
@@ -84,6 +86,10 @@
             status.textContent = msg;
             status.className = 'form-status ' + type;
             status.style.display = 'block';
+            if (options.persist) {
+                hideStatusTimer = null;
+                return;
+            }
             hideStatusTimer = setTimeout(() => {
                 status.style.display = 'none';
                 hideStatusTimer = null;

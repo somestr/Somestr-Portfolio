@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">somestr IT and cybersecurity portfolio</title>
+  <desc id="desc">Terminal-inspired preview image for somestr portfolio.</desc>
+  <rect width="1200" height="630" fill="#020303"/>
+  <rect x="76" y="76" width="1048" height="478" fill="#050707" stroke="#1f5f8f" stroke-width="3"/>
+  <rect x="76" y="76" width="1048" height="54" fill="#081018"/>
+  <circle cx="112" cy="103" r="9" fill="#ff5555"/>
+  <circle cx="142" cy="103" r="9" fill="#ffcc66"/>
+  <circle cx="172" cy="103" r="9" fill="#00ff41"/>
+  <text x="104" y="214" fill="#5294e2" font-family="Consolas, monospace" font-size="44">root@portfolio:~$ whoami</text>
+  <text x="104" y="292" fill="#e8f1f2" font-family="Consolas, monospace" font-size="76" font-weight="700">somestr</text>
+  <text x="104" y="362" fill="#9fb6c0" font-family="Consolas, monospace" font-size="34">IT Support | Cybersecurity | SOC Labs</text>
+  <text x="104" y="438" fill="#00ff41" font-family="Consolas, monospace" font-size="32">GitHub Pages + optional hardened Node backend</text>
+  <text x="104" y="500" fill="#5294e2" font-family="Consolas, monospace" font-size="30">github.com/somestr/Somestr-Portfolio</text>
+</svg>

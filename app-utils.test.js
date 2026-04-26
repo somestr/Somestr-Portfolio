@@ -4,6 +4,9 @@ const assert = require('node:assert/strict');
 const {
     applySiteTheme,
     formatUptimeSeconds,
+    getGitHubPagesBasePath,
+    getModePath,
+    getRoutedPathname,
     getStoredThemeName,
     isSupportedThemeName,
     isValidEmail,
@@ -87,4 +90,23 @@ test('formatUptimeSeconds and sequencesEqual handle common utility cases', () =>
     assert.equal(sequencesEqual(['ArrowUp', 'ArrowDown'], ['ArrowUp', 'ArrowDown']), true);
     assert.equal(sequencesEqual(['ArrowUp'], ['ArrowDown']), false);
     assert.equal(sequencesEqual(['ArrowUp'], ['ArrowUp', 'ArrowDown']), false);
+});
+
+test('GitHub Pages route helpers preserve project base paths', () => {
+    const pagesLocation = {
+        hostname: 'somestr.github.io',
+        pathname: '/Somestr-Portfolio/gui',
+    };
+    const localLocation = {
+        hostname: 'localhost',
+        pathname: '/gui',
+    };
+
+    assert.equal(getGitHubPagesBasePath(pagesLocation), '/Somestr-Portfolio');
+    assert.equal(getRoutedPathname('/Somestr-Portfolio/cli', pagesLocation), '/cli');
+    assert.equal(getModePath('gui', pagesLocation), '/Somestr-Portfolio/gui');
+    assert.equal(getModePath('cli', pagesLocation), '/Somestr-Portfolio/cli');
+    assert.equal(getGitHubPagesBasePath(localLocation), '');
+    assert.equal(getRoutedPathname('/gui', localLocation), '/gui');
+    assert.equal(getModePath('entry', localLocation), '/entry');
 });

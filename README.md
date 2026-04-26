@@ -95,6 +95,8 @@ Static mode limitations:
 - `/api/contact`, `/api/stats`, security event logging, webhook alerts, and decoy routes do not run on GitHub Pages.
 - The contact form shows a static-mode notice instead of pretending the message was sent.
 - The server status card shows `STATIC`.
+- Static routing is handled under the project base path, for example `/Somestr-Portfolio/gui` and `/Somestr-Portfolio/cli`.
+- `public/404.html` redirects GitHub Pages deep links back through the SPA entry point so `/Somestr-Portfolio/gui` and `/Somestr-Portfolio/cli` remain shareable.
 
 ### Local / optional Node backend
 
@@ -105,6 +107,16 @@ npm run dev
 ```
 
 If you later want live contact storage, IP-based security logging, or webhook alerts on the public site, use a Node-capable host and persistent storage. When the app is behind a reverse proxy, set `TRUST_PROXY` to match the proxy topology. Do not set it blindly if the proxy does not overwrite `X-Forwarded-*` headers.
+
+Backend state notes:
+
+- Contact messages are stored in the configured JSON file by default; use external storage for production.
+- Visitor count, rate limits, suspicious activity counters, and quarantine state are in-memory and reset when the Node process restarts.
+- GitHub Pages cannot run the backend, so those backend-only counters and logs do not exist on the public static site.
+
+## Repository Layout
+
+GitHub Pages deploys the `public/` directory. Treat files under `public/` as the source of the public website. Root-level HTML/CSS/JS files are legacy snapshots and are not used by the Pages workflow.
 
 ## Security Event Report
 

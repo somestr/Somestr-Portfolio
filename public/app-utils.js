@@ -60,6 +60,38 @@
         return EMAIL_PATTERN.test(String(value || '').trim());
     }
 
+    function getGitHubPagesBasePath(locationRef = globalScope.location) {
+        const hostname = String(locationRef?.hostname || '');
+        const pathname = String(locationRef?.pathname || '/');
+
+        if (!/\.github\.io$/i.test(hostname)) {
+            return '';
+        }
+
+        const firstSegment = pathname.split('/').filter(Boolean)[0] || '';
+        if (!firstSegment || ['cli', 'entry', 'gui'].includes(firstSegment)) {
+            return '';
+        }
+
+        return `/${firstSegment}`;
+    }
+
+    function getRoutedPathname(pathname = globalScope.location?.pathname || '/', locationRef = globalScope.location) {
+        const basePath = getGitHubPagesBasePath(locationRef);
+        const safePathname = String(pathname || '/');
+
+        if (basePath && (safePathname === basePath || safePathname.startsWith(basePath + '/'))) {
+            return safePathname.slice(basePath.length) || '/';
+        }
+
+        return safePathname;
+    }
+
+    function getModePath(mode, locationRef = globalScope.location) {
+        const route = mode === 'cli' || mode === 'entry' ? mode : 'gui';
+        return `${getGitHubPagesBasePath(locationRef)}/${route}`;
+    }
+
     function scrollElementToBottom(element) {
         if (!element) {
             return;
@@ -100,6 +132,9 @@
         applySiteTheme,
         clearElementContent,
         formatUptimeSeconds,
+        getGitHubPagesBasePath,
+        getModePath,
+        getRoutedPathname,
         getStoredThemeName,
         isSupportedThemeName,
         isValidEmail,

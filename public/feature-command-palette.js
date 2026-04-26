@@ -14,7 +14,7 @@
         if (!overlay || !input || !results) return;
 
         const commands = [
-            { icon: '🏠', label: 'Home', action: () => scrollToSection('hero') },
+            { icon: '🏠', label: 'Home', action: () => scrollToSection('home') },
             { icon: '👤', label: 'About', action: () => scrollToSection('about') },
             { icon: '🔗', label: 'Experience', action: () => scrollToSection('experience') },
             { icon: '⚡', label: 'Skills', action: () => scrollToSection('skills') },
@@ -38,6 +38,7 @@
 
         let activeIdx = 0;
         let filtered = [...commands];
+        let previousFocus = null;
 
         function scrollToSection(id) {
             const el = globalScope.document.getElementById(id);
@@ -54,6 +55,8 @@
             filtered.forEach((cmd, i) => {
                 const li = globalScope.document.createElement('li');
                 if (i === activeIdx) li.classList.add('active');
+                li.setAttribute('role', 'option');
+                li.setAttribute('aria-selected', String(i === activeIdx));
                 const iconSpan = globalScope.document.createElement('span');
                 iconSpan.className = 'cmd-icon';
                 iconSpan.textContent = cmd.icon;
@@ -71,7 +74,9 @@
         }
 
         function openPalette() {
+            previousFocus = globalScope.document.activeElement;
             overlay.classList.add('active');
+            overlay.setAttribute('aria-hidden', 'false');
             input.value = '';
             activeIdx = 0;
             filtered = [...commands];
@@ -81,11 +86,16 @@
 
         function closePalette() {
             overlay.classList.remove('active');
+            overlay.setAttribute('aria-hidden', 'true');
             input.value = '';
+            if (previousFocus && typeof previousFocus.focus === 'function') {
+                previousFocus.focus();
+            }
+            previousFocus = null;
         }
 
         globalScope.document.addEventListener('keydown', (e) => {
-            if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+            if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k') {
                 e.preventDefault();
                 if (overlay.classList.contains('active')) {
                     closePalette();
@@ -128,6 +138,9 @@
                     closePalette();
                     filtered[activeIdx].action();
                 }
+            } else if (e.key === 'Tab') {
+                e.preventDefault();
+                input.focus();
             }
         });
     }

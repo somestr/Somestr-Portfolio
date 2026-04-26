@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="robots" content="noindex">
+    <title>Redirecting...</title>
+</head>
+<body>
+    <script>
+        (function redirectGitHubPagesRoute() {
+            'use strict';
+
+            const modeRoutes = new Set(['cli', 'entry', 'gui']);
+            const segments = window.location.pathname.split('/').filter(Boolean);
+            const hasProjectBase = segments.length > 1 && !modeRoutes.has(segments[0]);
+            const basePath = hasProjectBase ? '/' + segments[0] : '';
+            const routeSegments = hasProjectBase ? segments.slice(1) : segments;
+            const route = routeSegments.length > 0 ? '/' + routeSegments.join('/') : '/';
+
+            if (route === '/cli' || route === '/gui') {
+                window.sessionStorage.setItem('intro_done', '1');
+                window.sessionStorage.setItem('portfolio_mode', route.slice(1));
+            } else if (route === '/entry') {
+                window.sessionStorage.removeItem('intro_done');
+                window.sessionStorage.removeItem('portfolio_mode');
+            }
+
+            window.location.replace(basePath + '/' + window.location.search + window.location.hash);
+        }());
+    </script>
+</body>
+</html>
