@@ -8,6 +8,8 @@ const test = require('node:test');
 const PUBLIC_DIR = path.join(__dirname, 'public');
 const INDEX_HTML = path.join(PUBLIC_DIR, 'index.html');
 const NOT_FOUND_HTML = path.join(PUBLIC_DIR, '404.html');
+const ROUTE_REDIRECT_JS = path.join(PUBLIC_DIR, 'route-redirect.js');
+const ROUTE_REDIRECTS = ['cli', 'entry', 'gui'];
 const LOCAL_ASSET_PATTERN = /\.(?:css|js|png|jpg|jpeg|gif|svg|webp|ico)(?:\?|$)/i;
 
 function readIndexHtml() {
@@ -74,4 +76,19 @@ test('GitHub Pages 404 fallback preserves client-side mode routes', () => {
     assert.match(notFoundHtml, /portfolio_mode/);
     assert.match(notFoundHtml, /route === '\/cli'/);
     assert.match(notFoundHtml, /route === '\/gui'/);
+});
+
+test('GitHub Pages mode routes have static redirect entries', () => {
+    const routeRedirectJs = fs.readFileSync(ROUTE_REDIRECT_JS, 'utf8');
+
+    assert.match(routeRedirectJs, /sessionStorage\.setItem\('portfolio_mode'/);
+    assert.match(routeRedirectJs, /sessionStorage\.removeItem\('intro_done'\)/);
+
+    for (const route of ROUTE_REDIRECTS) {
+        const routeHtmlPath = path.join(PUBLIC_DIR, route, 'index.html');
+        const routeHtml = fs.readFileSync(routeHtmlPath, 'utf8');
+
+        assert.match(routeHtml, new RegExp(`data-route-mode="${route}"`));
+        assert.match(routeHtml, /src="\.\.\/route-redirect\.js\?v=1"/);
+    }
 });
